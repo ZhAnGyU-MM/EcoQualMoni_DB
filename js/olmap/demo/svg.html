@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>svg样式</title>
+    <!--<meta http-equiv="content-type" content="text/html; charset=UTF-8">-->
+    <!--<link rel="stylesheet" href="../js/openlayers/css/ol.css" type="text/css"></link>-->
+    <!--<link rel="stylesheet" href="../res/css/demo.css" type="text/css"></link>-->
+    <!--<script type="text/javascript" src="../js/openlayers/build/ol.js"></script>-->
+  </head>
+  <body>
+    <div id="map" class="map"></div>
+  </body>
+</html>
+<script>
+	
+	var vectorPoints1 = new ol.layer.Vector(
+			{
+				source : new ol.source.Vector(
+						{
+							url : 'https://openlayers.org/en/v3.20.1/examples/data/geojson/point-samples.geojson',
+							format : new ol.format.GeoJSON()
+						}),
+				style : function(feature) {
+					return new ol.style.Style({
+						image : new ol.style.Circle({
+							radius : 5,
+							fill : new ol.style.Fill({
+								color : 'rgba(255, 0, 0, 0.1)'
+							}),
+							stroke : new ol.style.Stroke({
+								color : 'red',
+								width : 1
+							})
+						})
+					});
+				}
+			});
+
+//	//svg转为图片
+//    var draw = SVG(document.createElement("svg-draw"));
+//    var path = draw.path('m119.4375,220l25,-95l25,95l-50,0zm25,-120l0,55l0,-55z');
+//    path.fill('#25ff53');
+//    path.stroke({ color: '#ED1C24', width: 1});
+//    var src = draw.svg();
+//    var img = new Image();
+//    img.src = "data:image/svg+xml;charset=utf-8," + src;
+//    img.onload = function (evt) {
+//        console.log("onload");
+//    };
+//    img.onerror = function (evt) {
+//        console.log("onerror");
+//    };
+
+//    	//测试请求svg
+//        Tajax();
+//        function Tajax(url) {
+//            url = 'http://192.168.3.222:18080/common-bx-gis/models/olmap/data/location-icon.svg';
+//            var req = new XMLHttpRequest();
+//            if(req){
+//                req.open('GET',url,false);
+//                req.send(null);
+//                return req.responseText;
+//            }
+//            return null;
+//        }
+
+	//SVG样式
+	var vectorPoints2 = new ol.layer.Vector(
+			{
+				source : new ol.source.Vector(
+						{
+							url : 'https://openlayers.org/en/v3.20.1/examples/data/geojson/point-samples.geojson',
+							format : new ol.format.GeoJSON()
+						}),
+				style : new ol.style.Style(
+						{
+							image : new ol.style.Icon(
+									{
+										src : 'http://www.williambuck.com/portals/0/Skins/WilliamBuck2014/images/location-icon.svg'
+									})
+						})
+			});
+
+    var map = new ol.Map({
+		layers : [ new ol.layer.Tile({
+			source : new ol.source.OSM()
+		}), vectorPoints2, vectorPoints1 ],
+		target : 'map',
+		view : new ol.View({
+			center : [ -8161939, 6095025 ],
+			zoom : 8
+		})
+	});
+</script>

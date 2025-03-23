@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>水深点抽稀注记展示</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <div id="map" class="map"></div>
+    <input id="unprocess" type="button" value="显示/隐藏未抽稀图层" style="height: 30px;width: 100px;">
+  </body>
+</html>
+<script>
+
+    var tilegrid = new ol.tilegrid.TileGrid({
+        "origin" : [ -2.0037508342787E7,2.0037508342787E7],
+     	"resolutions" : [156543.03392800014,78271.51696399994,39135.75848200009,19567.87924099992,9783.93962049996,4891.96981024998,2445.98490512499,1222.992452562495,611.4962262813797,305.74811314055756,152.87405657041106,76.43702828507324,38.21851414253662,19.10925707126831,9.554628535634155,4.77731426794937,2.388657133974685,1.1943285668550503,0.5971642835598172,0.29858214164761665],
+     	"tileSize" : [256,256]
+    });
+
+    var layer = new ol.layer.Tile({
+        source : new ol.source.TileWMS({
+            projection : "EPSG:3857",
+            url : "http://gisserver:18081/geoserver/gwc/service/wms",
+            params: {
+                "LAYERS" : "GD:SeaMap",
+                "TILED" : true,
+                "VERSION" : "1.1.0",
+                "FORMAT": "image/jpeg"
+            },
+            tileGrid : tilegrid
+        })
+    });
+
+    var map = new ol.Map({
+        layers: [layer
+//            new ol.layer.Tile({
+//                source: new ol.source.XYZ({
+//                    url : "http://t{0-7}.tianditu.com/DataServer?T=vec_w&x={x}&y={y}&l={z}"
+//                })
+//            }),
+//            new ol.layer.Tile({
+//                source: new ol.source.XYZ({
+//                    url : "http://t2.tianditu.com/DataServer?T=cva_w&x={x}&y={y}&l={z}"
+//                })
+//            })
+        ],
+        target: 'map',
+        view: new ol.View({
+            projection: "EPSG:4326",
+            center: [109.0612, 19.8104],//ol.proj.transform([12364207.65032, 2448803.70418], 'EPSG:3785','EPSG:3857'),
+            zoom: 9
+        })
+    });
+
+    //点数据
+    var source = new ol.source.Vector();
+    var wfs = new bxmap.protocol.WFS({
+        "url": "http://192.168.3.197:8080/geoserver/wfs",
+        "featureNS" : "http://www.test.com/",
+        "srsName":"EPSG:4326",
+        "featurePrefix":"TEST",
+        "featureTypes":["ssd"],
+        "outputFormat" :"application/json",
+        "geometryName":"SHAPE"
+    });
+
+    //获取features
+    wfs.read({
+        //maxFeatures: 50,
+        callback : function(features) {
+            source.addFeatures(features);
+        }
+    });
+
+    //水深点
+    var labelLayer = createlabelLayer();
+    map.addLayer(labelLayer);
+
+    var wmsLayer = new ol.layer.Tile({
+        source: new ol.source.TileWMS({
+            url: 'http://192.168.3.197:8080/geoserver/TEST/wms',
+            params: {'LAYERS': 'TEST:ssd', 'TILED': true},
+            serverType: 'geoserver',
+            crossOrigin: 'anonymous'
+        }),
+        visible: false
+    });
+    map.addLayer(wmsLayer);
+
+    //水深点标注
+    function createlabelLayer() {
+        var clusterSource = new ol.source.Cluster({
+            distance: 80,
+            source: source
+        });
+
+        var clusters = new ol.layer.Vector({
+            source: clusterSource,
+            style: function(feature) {
+                debugger;
+                var features = feature.get('features');
+                var target = features[0];
+                //水深点样式
+                var styles = bxmap.common.getWaterDepthLabelStyles(target.get('ss'));
+                return styles;
+            }
+        });
+        return clusters;
+    }
+
+    document.getElementById("unprocess").onclick = function() {
+        wmsLayer.setVisible(!wmsLayer.getVisible());
+    };
+</script>

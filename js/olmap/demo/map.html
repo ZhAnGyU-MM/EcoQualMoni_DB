@@ -1,0 +1,76 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta http-equiv="x-ua-compatible" content="IE=11,10">
+    <link rel="stylesheet" href="../js/openlayers/css/ol.css" type="text/css">
+    <link rel="stylesheet" href="../js/openlayers/ext/plot/p-ol3.min.css" type="text/css"></link>
+    <link rel="stylesheet" href="../js/plugins/bootstrap/css/bootstrap.min.css" type="text/css"></link>
+    <link rel="stylesheet" href="../res/css/bxmap.css" type="text/css"></link>
+    <link rel="stylesheet" href="../res/css/mapcss.css" type="text/css"></link>
+    <link rel="stylesheet" href="../res/css/map-index.css" type="text/css"></link>
+    <!-- popup 弹框 title文本 -->
+    <!-- <link rel="stylesheet" href="../res/css/popup-title.css" type="text/css"></link> -->
+    <link rel="stylesheet" href="../js/plugins/ztree/zTreeStyle/img/zTreeStyle.css" type="text/css"></link>
+    <style>
+        ul.ztree {
+            background-color: #fff;
+            border: 1px solid #617775;
+            width: 220px;
+            max-height: 360px;
+            overflow-y: auto;
+            overflow-x: auto;
+        }
+
+        .toolBar {
+            left: 30px;
+        }
+    </style>
+
+    <title>ArcGIS瓦片服务</title>
+    <script type="text/javascript" src="../js/openlayers/build/ol.js"></script>
+    <script type="text/javascript" src="../js/openlayers/ext/ol3-obj.js"></script>
+    <script type="text/javascript" src="../js/openlayers/ext/ol3-events.js"></script>
+    <script type="text/javascript" src="../js/openlayers/ext/ol3-ext.js"></script>
+    <!-- <script type="text/javascript" src="../js/openlayers/build/ol-debug.js"></script> -->
+    <script type="text/javascript" src="../js/openlayers/ext/plot/p-ol3.min.js"></script>
+    <script type="text/javascript" src="../js/plugins/jquery/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../js/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../js/plugins/ztree/jquery.ztree.all-3.5.min.js"></script>
+    <script type="text/javascript" src="../js/bxmap/Common.js"></script>
+    <script type="text/javascript" src="../js/bxmap/Config.js"></script>
+    <script type="text/javascript" src="../js/bxmap/Resource.js"></script>
+    <script type="text/javascript" src="../js/bxmap/DataClear.js"></script>
+    <script type="text/javascript" src="../js/bxmap/Reader.js"></script>
+    <script type="text/javascript" src="../js/bxmap/Map.js"></script>
+    <script type="text/javascript" src="../js/bxmap/Symbolizer.js"></script>
+    <script type="text/javascript" src="../js/bxmap/Layer.js"></script>
+    <script type="text/javascript" src="../js/bxmap/Interactions.js"></script>
+    <script type="text/javascript" src="../js/bxmap/Control.js"></script>
+    <script type="text/javascript" src="../js/bxmap/Overlay.js"></script>
+    <script type="text/javascript" src="../js/bxmap/Protocol.js"></script>
+    <script type="text/javascript" src="../js/dom/NavigationToolbar.js"></script>
+    <script type="text/javascript" src="../js/dom/BaseLayerSwitcherToolBar.js"></script>
+    <script type="text/javascript" src="../bus/map2dTool.js"></script>
+    <script type="text/javascript" src="../bus/mapPage.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+                <div id="fullscreendiv" class="fullscreen">
+                    <div id="slider"></div>
+                    <div id="map" class="map" style="border: 1px solid #ccc;" tabindex="-1"></div>
+                    <div id="map2" class="map" style="border: 1px solid #ccc;" tabindex="-1"></div>
+                    <div class="allrttop" id="tool_container"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+	$(function(){
+	    mapPage.init();
+	});
+</script>

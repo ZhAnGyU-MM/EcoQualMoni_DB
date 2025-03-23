@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>弹框示例</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="../js/plugins/bootstrap/css/bootstrap.min.css" type="text/css"></link>
+    <link rel="stylesheet" href="../js/openlayers/css/ol.css" type="text/css"></link>
+    <link rel="stylesheet" href="../res/css/demo.css" type="text/css"></link>
+    <link rel="stylesheet" href="../res/css/map-index.css" type="text/css"></link>
+    <link rel="stylesheet" href="../res/css/bxmap.css" type="text/css"></link>
+    <script type="text/javascript" src="../js/plugins/jquery/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../js/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../js/openlayers/build/ol.js"></script>
+    <script type="text/javascript" src="../js/bxmap/Common.js"></script>
+    <script type="text/javascript" src="../js/bxmap/Interactions.js"></script>
+    <script type="text/javascript" src="../js/bxmap/Overlay.js"></script>
+  </head>
+  <body>
+    <div id="map" class="map"></div>
+    <input id="one" type="button" value="弹出一个" style="height: 30px;width: 70px;">
+  	<input id="multi" type="button" value="弹出多个" style="height: 30px;width: 70px;">
+  </body>
+</html>
+<script>
+	var raster = new ol.layer.Tile({
+        source: new ol.source.OSM()
+      });
+
+      var map = new ol.Map({
+        layers: [raster],
+        target: 'map',
+        view: new ol.View({
+          center: [0, 0],
+          zoom: 2
+        })
+      });
+     
+    //仅弹出一个弹框
+	var over = new bxmap.overlay.Popover({
+		title_text:"测试"
+	});
+	map.addOverlay(over);
+	var html = '<div style="width:500px;height:29px;border-bottom:1px solid #A1ADEA"><div class="alright_top_rt"><ul><li class="view" id="viewQuery"><a href="javascript:void(0)" class="viewbg"><span class="viewlabel"></span>快速定位</a></li><li class="publine"></li><li class="PlotlTool" id="bPlot" data-toggle="collapse" data-target="#Plotdemo"><a href="javascript:void(0);" class="Pointbg"><span class="Plotlabel"></span>应急标绘</a></li><li class="publine"></li><li class="legend" id="legend"><a href="javascript:void(0);" class="legendbg"><span class="legendlabel"></span>图例</a></li><li class="publine"></li><li class="zoomOut" id="zoomOut"><a href="javascript:void(0)" class="zoomOutbg"><span class="zoomOutlabel"></span>放大</a></li><li class="publine"></li><li class="zoomIn" id="zoomIn"><a href="javascript:void(0)" class="zoomInbg"><span class="zoomInlabel"></span>缩小</a></li><li class="publine"></li><li class="panMove" id="panMove"><a href="javascript:void(0)" class="panMovebg"><span class="panMovelabel"></span>漫游</a></li><li class="publine"></li><li class="mapcompare" id="mapCompare"><a href="javascript:void(0)" class="mapcomparebg" id="mapcompareType"><span class="mapcomparelabel"></span><span id="mtext">二维地图</span></a><span class="raang_more" id="toolCur"></span><ul style="display: none;" id="mapcompareDiv"><li id="m2d" style="display:none;"><a href="javascript:void(0)"><span class="mapcomparelabel"></span>二维地图</a></li><li id="m3d"><a href="javascript:void(0)"><span class="mapcomparelabel"></span>三维地图</a></li><li id="m23d"><a href="javascript:void(0)"><span class="mapcomparelabel"></span>二三维地图</a></li></ul></li><li class="publine"></li><li class="tool" id="tLi"><a href="javascript:void(0)" class="toolbg" id="toolType"><span class="toollabel"></span>工具</a><span class="raang_more" id="toolCur"></span><ul style="display: none;" id="toolDiv"><li id="bMeasureLine"><a href="javascript:void(0)"><span class="toolcjlabel"></span>测距</a></li><li id="bMeasureArea"><a href="javascript:void(0)"><span class="toolcmlabel"></span>测面</a></li><li id="bPrint"><a href="javascript:void(0)"><span class="tooldylabel"></span>打印</a></li></ul></li><li class="publine"></li><li class="delete" id="bClear"><a href="javascript:void(0);" class="deletebg"><span class="dellabel"></span>清空</a></li><li class="publine"></li><li class="screen" id="fullScreen"><a href="javascript:void(0);" class="screenbg"><span class="scrlabel"></span>全屏</a></li></ul></div></div>';
+	function one(evt){
+		over.show(evt.coordinate,html);
+	}
+	
+	//弹出多个弹框
+	function multi(evt){
+		var overlay = new bxmap.overlay.Popover({
+			title_text:"测试"
+		});
+		map.addOverlay(overlay);
+		overlay.show(evt.coordinate,html);
+	}
+	
+	$("#one").click(function(){
+		map.un("click",one);
+		map.un("click",multi);
+		map.on("click",one);
+	});
+	
+	$("#multi").click(function(){
+		map.un("click",one);
+		map.un("click",multi);
+		map.on("click",multi);
+	});
+</script>

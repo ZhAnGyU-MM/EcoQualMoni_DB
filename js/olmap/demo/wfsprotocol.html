@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>查询wfs</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<!--    <link rel="stylesheet" href="../js/openlayers/css/ol.css" type="text/css"></link>
+    <link rel="stylesheet" href="../res/css/demo.css" type="text/css"></link>
+    <script type="text/javascript" src="../js/plugins/jquery/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.14/proj4.js"></script>
+    <script type="text/javascript" src="../js/openlayers/build/ol-debug.js"></script>
+    <script type="text/javascript" src="../js/bxmap/Common.js"></script>
+    <script type="text/javascript" src="../js/bxmap/Interactions.js"></script>
+    <script type="text/javascript" src="../js/bxmap/Protocol.js"></script>
+    <script type="text/javascript" src="../js/bxmap/Layer.js"></script>-->
+  </head>
+  <body>
+    <div id="map" class="map"></div>
+  </body>
+</html>
+<script>
+
+	var map = new ol.Map({
+		layers: [
+		    new ol.layer.Tile({
+                source: new ol.source.XYZ({
+                    url : "http://t{0-7}.tianditu.com/DataServer?T=vec_w&x={x}&y={y}&l={z}"
+                })
+            }),
+            new ol.layer.Tile({
+                source: new ol.source.XYZ({
+                    url : "http://t2.tianditu.com/DataServer?T=cva_w&x={x}&y={y}&l={z}"
+                })
+            })
+        ],
+	  	target: 'map',
+	  	view: new ol.View({
+            projection: "EPSG:4326",
+	    	center: [109.0612, 19.8104],//ol.proj.transform([12364207.65032, 2448803.70418], 'EPSG:3785','EPSG:3857'),
+	    	zoom: 9
+	  	})
+	});
+
+    var wfs = new bxmap.protocol.WFS({
+        "url": "http://192.168.3.197:8080/geoserver/TEST/wfs",
+		"featureNS" : "http://www.test.com/",
+		"srsName":"EPSG:4326",
+		"featurePrefix":"TEST",
+		"featureTypes":["ssd"],
+		"outputFormat" :"application/json",
+		"geometryName":"SHAPE"
+    });
+
+//    //获取numberOfFeatures
+//    wfs.read({
+//    	resultType:"hits",
+//    	callback:function(data){
+//    		console.log(data);
+//    	}
+//    });
+
+    var source = new ol.source.Vector();
+    var styles = bxmap.common.getDefaultSelectedStyle();
+    var vector = new ol.layer.Vector({
+        source: source,
+        style: styles["Point"]
+    });
+
+    //获取features
+    wfs.read({
+        maxFeatures: 50,
+		callback : function(features) {
+			source.addFeatures(features);
+		}
+	});
+
+    map.addLayer(vector);
+//	var layer=new bxmap.layer.WFSLayer({wfs:wfs});
+//	map.addLayer(layer);
+</script>

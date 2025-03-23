@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>查询abcd显示</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <!--<link rel="stylesheet" href="../js/openlayers/css/ol.css" type="text/css"></link>
+    <link rel="stylesheet" href="../res/css/demo.css" type="text/css"></link>
+    <script type="text/javascript" src="../js/plugins/jquery/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.14/proj4.js"></script>
+    <script type="text/javascript" src="../js/openlayers/build/ol.js"></script>
+    <script type="text/javascript" src="../js/openlayers/ext/ol3-ext.js"></script>
+    <script type="text/javascript" src="../js/bxmap/Common.js"></script>
+    <script type="text/javascript" src="../js/bxmap/Interactions.js"></script>
+    <script type="text/javascript" src="../js/bxmap/Protocol.js"></script>
+    <script type="text/javascript" src="../js/bxmap/Layer.js"></script>
+    <script type="text/javascript" src="../js/bxmap/Resource.js"></script>
+  	<script type="text/javascript" src="../js/bxmap/Symbolizer.js"></script>
+  	<script type="text/javascript" src="../js/bxmap/Map.js"></script>-->
+  </head>
+  <body>
+    <div id="map" class="map"></div>
+  </body>
+</html>
+<script>
+    bxmap.Resource.setBasePath("http://localhost:18080/common-bx-gis/models/olmap");
+    var map = new ol.Map({
+        layers: [
+            new ol.layer.Tile({
+                source: new ol.source.XYZ({
+                    url : "http://t{0-7}.tianditu.com/DataServer?T=vec_w&x={x}&y={y}&l={z}"
+                })
+            }),
+            new ol.layer.Tile({
+                source: new ol.source.XYZ({
+                    url : "http://t2.tianditu.com/DataServer?T=cva_w&x={x}&y={y}&l={z}"
+                })
+            })
+        ],
+        target: 'map',
+        view: new ol.View({
+            projection: "EPSG:3857",
+            center: [12364207.65032, 2448803.70418],//[111.00975, 21.52027],//ol.proj.transform([12364207.65032, 2448803.70418], 'EPSG:3785','EPSG:3857'),
+            zoom: 14
+        })
+    });
+
+    debugger;
+    var bmap = new bxmap.Map();
+    bmap.map = map;
+    map.set("wrap", bmap);
+
+    var listDialog = new bxmap.TyphoonListDialog();
+    listDialog.setTyphoonMap(bmap);
+    listDialog.show();
+
+//    var typhoonObject = new bxmap.Typhoon({
+//        bmap: bmap
+//    });
+//
+//    typhoonObject.play("201713");
+    
+</script>

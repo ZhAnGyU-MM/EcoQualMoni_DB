@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>shortest path demo</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="../js/openlayers/css/ol.css" type="text/css"></link>
+    <link rel="stylesheet" href="../res/css/demo.css" type="text/css"></link>
+    <script type="text/javascript" src="../js/plugins/jquery/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../js/openlayers/build/ol.js"></script>
+    <script type="text/javascript" src="../js/bxmap/Common.js"></script>
+    <script type="text/javascript" src="../js/bxmap/Interactions.js"></script>
+    <script type="text/javascript" src="../js/plugins/jsonix/Jsonix-min.js"></script>
+    <script type="text/javascript" src="../js/openlayers/ext/wps-gui/wps-gui.min.js"></script>
+  </head>
+  <body>
+    <div id="map" class="map"></div>
+    <form class="form-inline">
+	  <label>Shape type &nbsp;</label>
+	  <select id="type">
+	  	<option value="Point">Point</option>
+	  </select>
+	</form>
+  </body>
+</html>
+<script>
+
+	var raster = new ol.layer.Tile({
+        source: new ol.source.OSM()
+      });
+      
+      var source = new ol.source.Vector();
+      var vector = new ol.layer.Vector({
+         source: source
+      });
+      
+      var shortestLayer = new ol.layer.Vector({
+         source: new ol.source.Vector()//,
+//          style:new ol.style.Style({
+//          	stroke: new ol.style.Stroke({
+//          		color: "#ff0000",
+//          		width: 2
+//          	})
+//          })
+      });
+
+      var map = new ol.Map({
+        layers: [raster, shortestLayer,vector],
+        target: 'map',
+        view: new ol.View({
+          center: [0, 0],
+          zoom: 2
+        })
+      });
+      
+      var networkSource = new ol.source.Vector({
+			url: 'http://gisserver:18081/geoserver/wfs?service=WFS&version=1.0.0&request=GetFeature&typeName=DEGSRPT:GEO_MM_ROAD&outputFormat=application/json',
+	       	format: new ol.format.GeoJSON({geometryName:"Shape"})
+	  });
+		var pathLayer = new ol.layer.Vector({
+	        preload: Infinity,
+	        source: networkSource
+	    });
+	   	map.addLayer(pathLayer);
+    
+      var draw = null,
+      firstPoint,secondPoint;
+      function addInteraction() {
+      	var value = typeSelect.value;
+      	draw = new bxmap.interaction.Draw({
+            source: source,
+            type: value
+        });
+        draw.on("drawend",function(evt){
+         	var geom = evt.feature.getGeometry();
+         	var WKT = new ol.format.WKT();
+         	if(firstPoint == null){
+         		firstPoint = WKT.writeGeometry(geom);
+         	}else if(secondPoint == null){
+         		secondPoint = WKT.writeGeometry(geom);
+         	}
+         	if(firstPoint && secondPoint){
+	         	var client = new wps.client({
+	         		servers:{
+	         			geoserver:"http://gisserver:18081/geoserver/wps"
+	         		}
+	         	});
+				client.execute({
+	         		server:"geoserver",
+	         		process:"gs:ShortestPath",
+			        inputs: {
+			        	features:new wps.process.localWFS({typeName:"DEGSRPT:GEO_MM_ROAD"}),
+			        	from:firstPoint,
+			        	to:secondPoint,
+			        	//speed:"0",
+			        	road:"道路名称"
+			        },
+			        success: function(outputs) {
+			        	var rest = outputs.result;
+			        	var index = 0, linestring;
+			        	for(var i=0;i<rest.length;i++){
+			        		linestring = rest[i].getGeometry();
+			        		addOverlay(linestring.getFirstCoordinate(),index ++);
+			        		//addOverlay(linestring.getLastCoordinate(),index ++);
+			        		//getFirstCoordinate/getLastCoordinate
+			        	}
+			        	
+			        	colors = ["#ED1C24","#FFF200","#22B14C"]
+			        	//设置样式
+			        	for(var i=0;i<rest.length;i++){
+			        		rest[i].setStyle(new ol.style.Style({
+					         	stroke: new ol.style.Stroke({
+					         		color: colors[i%3],
+					         		width: 2
+					         	})
+					         }));
+			        	}
+			        	
+			            shortestLayer.getSource().addFeatures(rest);
+			            firstPoint = null;
+			            secondPoint = null;
+			        }
+			    });
+		    }
+         }
+       );
+      	map.addInteraction(draw);
+      }
+     
+	  var typeSelect = document.getElementById('type');
+	  typeSelect.onchange = function() {
+	   	map.removeInteraction(draw);
+	   	addInteraction();
+      };
+      addInteraction();
+      
+      function addOverlay(position,index){
+      	var element = document.createElement('div');
+      	element.innerHTML = index;
+      	var overlay = new ol.Overlay({
+			element : element,
+			offset : [ 0, 0 ],
+			positioning : 'top-left'
+		});
+		
+		map.addOverlay(overlay);
+		//设置位置
+		overlay.setPosition(position);
+      }
+</script>

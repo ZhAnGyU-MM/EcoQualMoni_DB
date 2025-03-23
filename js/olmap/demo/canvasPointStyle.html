@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>canvas绘制点样式</title>
+    <!--<meta http-equiv="content-type" content="text/html; charset=UTF-8">-->
+    <!--<link rel="stylesheet" href="../js/openlayers/css/ol.css" type="text/css"></link>-->
+    <!--<link rel="stylesheet" href="../res/css/demo.css" type="text/css"></link>-->
+    <!--<script type="text/javascript" src="../js/openlayers/build/ol-debug.js"></script>-->
+    <!--<script type="text/javascript" src="../js/bxmap/Common.js"></script>-->
+    <!--<script type="text/javascript" src="../js/bxmap/Interactions.js"></script>-->
+  </head>
+  <body>
+    <div id="map" class="map"></div>
+    <form class="form-inline">
+	  <label>Shape type &nbsp;</label>
+	  <select id="type">
+	  	<option value="Point">Point</option>
+	  </select>
+	</form>
+  </body>
+</html>
+<script>
+	var raster = new ol.layer.Tile({
+        source: new ol.source.OSM()
+      });
+      
+      var source = new ol.source.Vector({wrapX: false});
+      var vector = new ol.layer.Vector({
+         source: source
+      });
+
+      var map = new ol.Map({
+        layers: [raster, vector],
+        target: 'map',
+        view: new ol.View({
+          center: [0, 0],
+          zoom: 2
+        })
+      });
+
+
+    var bmap = new bxmap.Map();
+    bmap.map = map;
+    map.set("wrap", bmap);
+
+    var feature0 = new ol.Feature(new ol.geom.Point([0,0]));
+    feature0.setStyle([
+        new ol.style.Style({
+            image: new ol.style.IrregularShape({
+                fill :new ol.style.Fill({color:'#8c00ff'}),
+                stroke: new ol.style.Stroke({color:'black',width:1}),
+                size: [11,26],
+                paths: [[[0, 26], [ 5, 26 ],[5,20],[0,0],[10,0],[5,20], [5,26],[0,26]]]//[[0, 30], [ 5, 30 ], [ 5, 20 ], [ 0, 10 ], [ 0, 0 ], [ 5, 5 ], [ 10, 0 ], [ 10, 10 ], [ 5, 20 ], [ 5, 30 ], [0, 30]],
+            })
+        }),
+        new ol.style.Style({
+            image: new ol.style.IrregularShape({
+                //fill :new ol.style.Fill({color:'#8c00ff'}),
+                stroke: new ol.style.Stroke({color:'green',width:4}),
+                size: [50,50],
+                paths: [
+                    [[10,0],[0,0],[0,10]],
+                    [[0,40],[0,50],[10,50]],
+                    [[40,50],[50,50],[50,40]],
+                    [[50,10],[50,0],[40,0]],
+                ],//[[0, 30], [ 5, 30 ], [ 5, 20 ], [ 0, 10 ], [ 0, 0 ], [ 5, 5 ], [ 10, 0 ], [ 10, 10 ], [ 5, 20 ], [ 5, 30 ], [0, 30]],
+                rotation: 0
+            })
+        })
+    ]);
+    source.addFeature(feature0);
+
+    var feature = new ol.Feature(new ol.geom.Point([3522218.263380922, 313086.06785608194]));
+    feature.setStyle(getShipStyle("#ffff00", null, 0));
+    source.addFeature(feature);
+
+    feature = new ol.Feature(new ol.geom.Point([5752956.496855504, 313086.06785608194]));
+    feature.setStyle(getShipStyle("#FFB935", null, 1));
+    source.addFeature(feature);
+
+    feature = new ol.Feature(new ol.geom.Point( [5792092.255337514, -1878516.407136492]));
+    feature.setStyle(getShipStyle("#96FF8A", null, 2));
+    source.addFeature(feature);
+
+    feature = new ol.Feature(new ol.geom.Point([7983694.730330083, -2113330.9580285535]));
+    feature.setStyle(getShipStyle("#FF707C", null, 3));
+    source.addFeature(feature);
+
+    feature = new ol.Feature(new ol.geom.Point([10057889.929876631, -2426417.0258846353]));
+    feature.setStyle(getShipStyle("#9B5CFF", null, 4));
+    source.addFeature(feature);
+
+    //选择要素
+    var select = new ol.interaction.Select();
+    select.on("select", function (evt) {
+        //选中要素
+        if(evt.selected.length){
+            var sel = evt.selected[0];
+            var oImgStyle = sel.getStyle()[0].getImage();
+            var nStyle = new ol.style.Style({
+                image : new ol.style.IrregularShape({
+                    fill : oImgStyle.getFill(),
+                    stroke : new ol.style.Stroke({
+                        color : 'red',
+                        width : 1
+                    }),
+                    size: oImgStyle.getSize(),
+                    paths: oImgStyle.getPaths()
+                })
+            });
+            sel.setStyle([
+                nStyle,sel.getStyle()[1]
+			]);
+		}
+        //取消选中要素
+        if(evt.deselected.length){
+            var sel = evt.deselected[0];
+            var oImgStyle = sel.getStyle()[0].getImage();
+            var nStyle = new ol.style.Style({
+                image : new ol.style.IrregularShape({
+                    fill : oImgStyle.getFill(),
+                    stroke :new ol.style.Stroke({color:'black',width:1}),
+                    size: oImgStyle.getSize(),
+                    paths: oImgStyle.getPaths()
+                })
+            });
+            sel.setStyle([
+                nStyle,sel.getStyle()[1]
+            ]);
+        }
+	});
+    map.addInteraction(select);
+
+
+    /**
+     * @description 获取船舶样式
+     * @param color 颜色
+     * @param cjx 船迹向
+     * @param status：0-静止，1-航行，2-右转，3-左转，4-系泊
+     */
+    function getShipStyle(color, cjx, status) {
+        var shipStyle;
+        var rotation = Math.PI;
+        //var rotation = bxmap.math.azimuthAngle(angle); //转为方位角
+        switch (status) {
+            case 0:
+                shipStyle = new ol.style.Style({
+                    image: new ol.style.IrregularShape({
+                        fill :new ol.style.Fill({color:color}),
+                        stroke: new ol.style.Stroke({color:'black',width:1}),
+                        size: [11,20],
+                        paths: [[[5,20],[0,0],[10,0],[5,20]]],
+                        rotation: rotation
+                    })
+                });
+                break;
+            case 1:
+                shipStyle = new ol.style.Style({
+                    image: new ol.style.IrregularShape({
+                        fill : new ol.style.Fill({color:color}),
+                        stroke: new ol.style.Stroke({color:'black',width:1}),
+                        size: [11,26],
+                        paths: [[[ 5, 26 ], [5,20],[0,0],[10,0],[5,20], [ 5, 26 ]]],
+                        rotation: rotation
+                    })
+                });
+                break;
+            case 2:
+                shipStyle = new ol.style.Style({
+                    image: new ol.style.IrregularShape({
+                        fill :new ol.style.Fill({color:color}),
+                        stroke: new ol.style.Stroke({color:'black',width:1}),
+                        size: [11,26],
+                        paths: [[[0, 26], [ 5, 26 ],[5,20],[0,0],[10,0],[5,20], [5,26],[0,26]]],//[[0, 30], [ 5, 30 ], [ 5, 20 ], [ 0, 10 ], [ 0, 0 ], [ 5, 5 ], [ 10, 0 ], [ 10, 10 ], [ 5, 20 ], [ 5, 30 ], [0, 30]],
+                        rotation: rotation
+                    })
+                });
+                break;
+            case 3:
+                shipStyle = new ol.style.Style({
+                    image: new ol.style.IrregularShape({
+                        fill :new ol.style.Fill({color:color}),
+                        stroke: new ol.style.Stroke({color:'black',width:1}),
+                        size: [11,26],
+                        paths: [[[10,26],[5,26],[5,20],[0,0],[10,0],[5,20],[5,26],[10,26]]],//[[10, 30], [ 5, 30 ], [ 5, 20 ], [ 0, 10 ], [ 0, 0 ], [ 5, 5 ], [ 10, 0 ], [ 10, 10 ], [ 5, 20 ], [ 5, 30 ], [10, 30]],
+                        rotation: rotation
+                    })
+                });
+                break;
+            case 4:
+                shipStyle = new ol.style.Style({
+                    image: new ol.style.IrregularShape({
+                        fill: new ol.style.Fill({color:color}),
+                        stroke: new ol.style.Stroke({color:'black',width:1}),
+                        size: [10,10],
+                        paths: [[[0, 5], [5, 10], [10, 5],[5, 0],[0, 5]]]
+                    })
+                });
+                break;
+        }
+        return shipStyle;
+    }
+</script>

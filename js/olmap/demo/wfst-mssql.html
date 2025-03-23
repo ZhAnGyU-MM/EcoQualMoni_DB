@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>绘制工具demo</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="../js/openlayers/css/ol.css" type="text/css"></link>
+    <link rel="stylesheet" href="../res/css/demo.css" type="text/css"></link>
+    <script type="text/javascript" src="../js/plugins/jquery/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.14/proj4.js"></script>
+    <script type="text/javascript" src="../js/openlayers/build/ol-debug.js"></script>
+    <script type="text/javascript" src="../js/bxmap/Common.js"></script>
+    <script type="text/javascript" src="../js/bxmap/Interactions.js"></script>
+  </head>
+  <body>
+    <div id="map" class="map"></div>
+    <input id="draw-tool" type="button" value="绘制" style="height: 30px;width: 60px;">
+	<input id="save-draw-tool" type="button" value="保存新增" style="height: 30px;width: 60px;">
+  	<input id="modify-tool" type="button" value="编辑" style="height: 30px;width: 60px;">
+  	<input id="save-modify-tool" type="button" value="保存编辑" style="height: 30px;width: 60px;">
+  	<input id="delete-tool" type="button" value="删除" style="height: 30px;width: 60px;">
+  	<input id="save-delete-tool" type="button" value="保存删除" style="height: 30px;width: 60px;">
+  </body>
+</html>
+<script>
+	var map = new ol.Map({
+		layers: [new ol.layer.Tile({
+       		source:  new ol.source.OSM()
+       	})],
+	  	target: 'map',
+	  	view: new ol.View({
+	    	center: [12364097.89510, 2449206.93534],//ol.proj.transform([12364207.65032, 2448803.70418], 'EPSG:3785','EPSG:3857'), 
+	    	zoom: 14
+	  	})
+	});
+	
+    var polygonSource = new ol.source.Vector({
+		url: 'http://localhost:8888/geoserver/wfs?service=WFS&version=1.0.0&request=GetFeature&typeName=MSSQL:MM_CG_PG&outputFormat=application/json',
+       	format: new ol.format.GeoJSON({geometryName:"Shape"})
+    });
+    
+    var polygon = new ol.layer.Vector({
+        preload: Infinity,
+        source: polygonSource
+    });
+   	map.addLayer(polygon);
+   	
+   	var features = [];
+   	var dict = {};
+   	var geomType = "Polygon";
+   	//绘制
+   	var draw = new ol.interaction.Draw({
+  		source: polygonSource,
+      	type: geomType,
+      	geometryName: 'Shape'
+    });
+    map.addInteraction(draw);
+    draw.setActive(false);
+   	$('#draw-tool').click(function () {
+   		features = [];
+        draw.setActive(true);
+        draw.once('drawend', function (e) {
+            var uid = ol.getUid(e.feature);
+            if(dict[uid] == null){
+            	dict[uid] = uid;
+            	features.push(e.feature);
+            }
+        });
+    });
+    $('#save-draw-tool').click(function () {
+   		transact('insert', features)
+    });
+    
+
+    //Modify
+    var select = new ol.interaction.Select();
+    var modify = new ol.interaction.Modify({
+        features: select.getFeatures()
+    });
+    map.addInteraction(select);
+    map.addInteraction(modify);
+    select.setActive(false);
+    modify.setActive(false);
+    $('#modify-tool').click(function () {
+    	features = [];
+    	draw.setActive(false);
+    	select.setActive(true);
+    	modify.setActive(true);
+    	modify.once('modifyend', function (e) {
+	    	var feature =  e.features.getArray()[0];
+	    	var uid = ol.getUid(feature);
+            if(dict[uid] == null){
+            	dict[uid] = uid;
+            	features.push(feature);
+            }
+        });
+    });
+    $('#save-modify-tool').click(function () {
+   		transact('update',features);
+    });
+
+    //Delete
+    $('#delete-tool').click(function () {
+    	draw.setActive(false);
+        select.setActive(true);
+        select.once('select', function (e) {
+            if(select.getFeatures().getArray().length == 0) {
+                console.log('null');
+            } else {
+                var f = e.target.getFeatures().getArray()[0];
+                var uid = ol.getUid(f);
+	            if(dict[uid] == null){
+	            	dict[uid] = uid;
+	            	features.push(f);
+	            }
+                polygonSource.removeFeature(f);
+                e.target.getFeatures().clear();
+            }
+        });
+    });
+    $('#save-delete-tool').click(function () {
+   		 transact('delete', features);
+    });
+/** -------------------------------------------- */
+
+/** TRANSACTION FUNCTION */
+    function transact(transType, feats) {
+        var formatWFS = new ol.format.WFS();
+        var formatGML = new ol.format.GML({
+            featureNS: 'http://localhost:8888/MSSQL', // Your namespace
+            //featurePrefix:'MSSQL',
+            featureType: 'MM_CG_PG',
+            srsName: 'EPSG:3857'
+        });
+        switch (transType) {
+            case 'insert':
+                node = formatWFS.writeTransaction(feats, null, null, formatGML);
+                break;
+            case 'update':
+                node = formatWFS.writeTransaction(null, feats, null, formatGML);
+                break;
+            case 'delete':
+                node = formatWFS.writeTransaction(null, null, feats, formatGML);
+                break;
+        }
+
+        s = new XMLSerializer();
+        str = s.serializeToString(node);
+        console.log(str);
+        $.ajax('http://localhost:8888/geoserver/wfs',{
+            type: 'POST',
+            dataType: 'xml',
+            processData: false,
+            contentType: 'text/xml',
+            data: str
+        }).done();
+    }
+</script>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>查询abcd显示</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <!--<link rel="stylesheet" href="../js/openlayers/css/ol.css" type="text/css"></link>
+    <link rel="stylesheet" href="../res/css/demo.css" type="text/css"></link>
+    <script type="text/javascript" src="../js/plugins/jquery/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.14/proj4.js"></script>
+    <script type="text/javascript" src="../js/openlayers/build/ol.js"></script>
+    <script type="text/javascript" src="../js/openlayers/ext/ol3-ext.js"></script>
+    <script type="text/javascript" src="../js/bxmap/Common.js"></script>
+    <script type="text/javascript" src="../js/bxmap/Interactions.js"></script>
+    <script type="text/javascript" src="../js/bxmap/Protocol.js"></script>
+    <script type="text/javascript" src="../js/bxmap/Layer.js"></script>
+    <script type="text/javascript" src="../js/bxmap/Resource.js"></script>
+  	<script type="text/javascript" src="../js/bxmap/Symbolizer.js"></script>
+  	<script type="text/javascript" src="../js/bxmap/Map.js"></script>-->
+  </head>
+  <body>
+    <div id="map" class="map"></div>
+  </body>
+</html>
+<script>
+    var map = new ol.Map({
+        layers: [
+            new ol.layer.Tile({
+                source: new ol.source.XYZ({
+                    url : "http://t{0-7}.tianditu.com/DataServer?T=vec_w&x={x}&y={y}&l={z}"
+                })
+            }),
+            new ol.layer.Tile({
+                source: new ol.source.XYZ({
+                    url : "http://t2.tianditu.com/DataServer?T=cva_w&x={x}&y={y}&l={z}"
+                })
+            })
+        ],
+        target: 'map',
+        view: new ol.View({
+            projection: "EPSG:4326",
+            center: [111.00975, 21.52027],//ol.proj.transform([12364207.65032, 2448803.70418], 'EPSG:3785','EPSG:3857'),
+            zoom: 14
+        })
+    });
+
+    //测试数据
+    var featureCollection = {
+        "type": "FeatureCollection",
+        "features": [
+            { "type": "Feature", "properties": { "type": "a" }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 110.98839923978187, 21.528438910675277 ], [ 110.99459074979006, 21.529758412808235 ], [ 110.99712825389162, 21.526002906737688 ], [ 110.99702675372765, 21.523972903456297 ], [ 110.99459074979006, 21.523972903456297 ], [ 110.98839923978187, 21.528438910675277 ] ] ] } },
+            { "type": "Feature", "properties": { "type": "b" }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 111.00017325881379, 21.526002906737688 ], [ 111.00829327193901, 21.526307407229865 ], [ 111.01032327522034, 21.524480404276687 ], [ 111.00981577440018, 21.523059401979708 ], [ 111.00677076947801, 21.521130898862509 ], [ 111.00453776586858, 21.521536899518708 ], [ 111.00017325881379, 21.526002906737688 ] ] ] } },
+            { "type": "Feature", "properties": { "type": "c" }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 111.01174427751738, 21.520927898534296 ], [ 111.01986429064272, 21.521130898862509 ], [ 111.02351829654907, 21.51818739410453 ], [ 111.02240179474433, 21.51473638852633 ], [ 111.02047329162713, 21.514533388198117 ], [ 111.01174427751738, 21.520927898534296 ] ] ] } },
+            { "type": "Feature", "properties": { "type": "d" }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 110.98738423814126, 21.517070892299728 ], [ 110.99306824732906, 21.516867891971685 ], [ 110.99448924962604, 21.513315386229351 ], [ 110.99225624601644, 21.510168881143159 ], [ 110.98992174224304, 21.511183882783939 ], [ 110.98738423814126, 21.517070892299728 ] ] ] } },
+            { "type": "Feature", "properties": { "type": "e" }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 110.99946275766524, 21.510473381635336 ], [ 111.00545126734517, 21.51422888770594 ], [ 111.00798877144695, 21.512097384260528 ], [ 111.00809027161097, 21.509052379338527 ], [ 111.00646626898578, 21.508544878518137 ], [ 110.99946275766524, 21.510473381635336 ] ] ] } },
+            { "type": "Feature", "properties": { "type": "f" }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 111.01884928900211, 21.507326876549371 ], [ 111.02321379605689, 21.510067380979137 ], [ 111.03001430704944, 21.506413375072782 ], [ 111.02920230573687, 21.50275936916637 ], [ 111.02412729753348, 21.503571370478767 ], [ 111.01884928900211, 21.507326876549371 ] ] ] } }
+        ]
+    };
+    var data = new ol.format.GeoJSON({geometryName:"geometry"}).readFeatures(featureCollection);
+
+    bxmap.Resource.setBasePath("http://localhost:18080/common-bx-gis/models/olmap");
+    //图层
+    var layer = new bxmap.layer.AbcdSymbolicLayer({
+    	property: "symbol",
+    	context: function(feature){
+    		return feature["symbol"];
+    	}
+    });
+    layer["memory"] = "pwk_vec"; //指定动态内存图层目标，pwk_vec表示MapConfig中layers节点对应的layer_id值
+
+    var bmap = new bxmap.Map();
+    bmap._map = map;
+    map.set("wrap", bmap);
+
+    bmap.addIndexLayer(layer);
+</script>

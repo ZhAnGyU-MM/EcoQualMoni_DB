@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>点聚合效果</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <div id="map" class="map"></div>
+  </body>
+</html>
+<script>
+
+    var map = new ol.Map({
+        layers: [
+            new ol.layer.Tile({
+                source: new ol.source.XYZ({
+                    url : "http://t{0-7}.tianditu.com/DataServer?T=vec_w&x={x}&y={y}&l={z}"
+                })
+            }),
+            new ol.layer.Tile({
+                source: new ol.source.XYZ({
+                    url : "http://t2.tianditu.com/DataServer?T=cva_w&x={x}&y={y}&l={z}"
+                })
+            })
+        ],
+        target: 'map',
+        view: new ol.View({
+            projection: "EPSG:4326",
+            center: [109.0612, 19.8104],//ol.proj.transform([12364207.65032, 2448803.70418], 'EPSG:3785','EPSG:3857'),
+            zoom: 9
+        })
+    });
+
+    //点数据
+    var source = new ol.source.Vector();
+    var wfs = new bxmap.protocol.WFS({
+        "url": "http://192.168.3.197:8080/geoserver/wfs",
+        "featureNS" : "http://www.test.com/",
+        "srsName":"EPSG:4326",
+        "featurePrefix":"TEST",
+        "featureTypes":["ssd"],
+        "outputFormat" :"application/json",
+        "geometryName":"SHAPE"
+    });
+    debugger;
+    //获取features
+    wfs.read({
+        //maxFeatures: 50,
+        callback : function(features) {
+            source.addFeatures(features);
+        }
+    });
+    var clusterSource = new ol.source.Cluster({
+        distance: 50,
+        source: source
+    });
+
+    var styleCache = {};
+    var clusters = new ol.layer.Vector({
+        source: clusterSource,
+        style: function(feature) {
+            var size = feature.get('features').length;
+            var style = styleCache[size];
+            if (!style) {
+                style = new ol.style.Style({
+                    image: new ol.style.Circle({
+                        radius: 10,
+                        stroke: new ol.style.Stroke({
+                            color: '#fff'
+                        }),
+                        fill: new ol.style.Fill({
+                            color: '#3399CC'
+                        })
+                    }),
+                    text: new ol.style.Text({
+                        text: size.toString(),
+                        fill: new ol.style.Fill({
+                            color: '#fff'
+                        })
+                    })
+                });
+                styleCache[size] = style;
+            }
+            return style;
+        }
+    });
+
+    map.addLayer(clusters);
+</script>

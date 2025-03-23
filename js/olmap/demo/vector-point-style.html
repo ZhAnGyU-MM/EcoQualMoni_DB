@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>矢量数据点样式</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <!-- <link rel="stylesheet" href="../js/openlayers/css/ol.css" type="text/css"></link>
+    <link rel="stylesheet" href="../res/css/demo.css" type="text/css"></link>
+    <script type="text/javascript" src="../js/openlayers/build/ol.js"></script>-->
+  </head>
+  <body>
+    <div id="map" class="map"></div>
+	<!-- icon配置 -->
+    <div class="edit-form">
+      <input id="refresh-icon" type="button" value="刷新" />
+      <h2>Icon</h2>
+      <br />
+      <div class="edit-form-elem">
+        <label>anchor: </label>
+        <input type="text" value="0.5,0.96" id="icon-anchor" />
+        <br />
+        <label>anchorOrigin: </label>
+        <select id="icon-anchorOrigin">
+          <option value="top-left" selected="selected">top-left</option>
+          <option value="top-right">top-right</option>
+          <option value="bottom-left">bottom-left</option>
+          <option value="bottom-right">bottom-right</option>
+        </select>
+        <br />
+        <label>anchorXUnits: </label>
+        <select id="icon-anchorXUnits">
+          <option value="fraction" selected="selected">fraction(百分数)</option>
+          <option value="pixels">pixels(像素)</option>
+        </select>
+        <br />
+        <label>anchorYUnits: </label>
+        <select id="icon-anchorYUnits">
+          <option value="fraction" selected="selected">fraction(百分数)</option>
+          <option value="pixels">pixels(像素)</option>
+        </select>
+        <br />
+        <label class="invalid">color: </label>
+        <input type="text" value="" id="icon-color" />
+        <br />
+        <label>img: </label>
+        <input type="text" id="icon-img" value="" />
+        <input id="icon-getimage" type="button" value="getimage" />
+        <br />
+        <label>offset: </label>
+        <input type="text" id="icon-offset" value="0,0" />
+        <br />
+        <label>offsetOrigin: </label>
+        <select id="icon-offsetOrigin">
+          <option value="top-left" selected="selected">top-left</option>
+          <option value="top-right">top-right</option>
+          <option value="bottom-left">bottom-left</option>
+          <option value="bottom-right">bottom-right</option>
+        </select>
+        <br />
+        <label>size: </label>
+        <input type="text" id="icon-size" value="32,48" />
+        <br />
+        <label>opacity: </label>
+        <input type="text" id="icon-opacity" value="1" />
+        <br />
+        <label>scale: </label>
+        <input type="text" id="icon-scale" value="1" />
+        <br />
+        <label>snapToPixel: </label>
+        <select id="icon-snapToPixel">
+          <option value="true" selected="selected">true</option>
+          <option value="false">false</option>
+        </select>
+        <br />
+        <label>rotateWithView: </label>
+        <select id="icon-rotateWithView">
+          <option value="true">true</option>
+          <option value="false" selected="selected">false</option>
+        </select>
+        <br />
+        <label>rotation: </label>
+        <select id="icon-rotation">
+          <option value="0" selected="selected">0°</option>
+          <option value="0.785398164">45°</option>
+          <option value="-0.785398164">-45°</option>
+          <option value="1.570796327">90°</option>
+          <option value="2.356194492">135°</option>
+          <option value="3.92699082">225°</option>
+        </select>
+        <br />
+        <label>src: </label>
+        <input type="text" id="icon-src" style="width:125px;" value="https://openlayers.org/en/v4.6.5/examples/data/icon.png" />
+      </div>
+    </div>
+
+    <!-- RegularShape配置 -->
+	<div class="edit-form">
+      <input id="refresh-shape" type="button" value="刷新" />
+      <h2>RegularShape</h2>
+      <br />
+      <div class="edit-form-elem">
+      	<div style="width:240px;height:70px;border: 1px solid red;">
+      		<label>ShapeType: </label>
+      		<input id="shape-shapetype-chk" type="checkbox" />
+	        <select id="shape-shapetype">
+	          <option value="triangle" selected="selected">三角形</option>
+	          <option value="star">星形</option>
+	          <option value="cross">十字形</option>
+	        </select>
+	        <br />
+      	</div>
+		<label>snapToPixel: </label>
+        <select id="shape-snapToPixel">
+          <option value="true" selected="selected">true</option>
+          <option value="false">false</option>
+        </select>
+        <br />
+        <label>rotation: </label>
+        <select id="shape-rotation">
+          <option value="0" selected="selected">0°</option>
+          <option value="0.785398164">45°</option>
+          <option value="1.570796327">90°</option>
+        </select>
+        <br />
+        <label>rotateWithView: </label>
+        <select id="shape-rotateWithView">
+          <option value="true">true</option>
+          <option value="false" selected="selected">false</option>
+        </select>
+        <label>points: </label>
+        <input type="text" value="3" id="shape-points" />
+        <br />
+        <label>radiusPolygon: </label>
+        <input type="text" value="10" id="shape-polygon-radius" />
+        <br />
+        <label>I.RadiuStar: </label>
+        <input type="text" value="" id="shape-star-radius1" />
+        <br />
+        <label>O.RadiuStar: </label>
+        <input type="text" value="" id="shape-star-radius2" />
+        <br />
+        <label>angle: </label>
+        <select id="shape-star-angle">
+          <option value="0" selected="selected">0°</option>
+          <option value="0.785398164">45°</option>
+          <option value="1.570796327">90°</option>
+        </select>
+      </div>
+	  <h5>Fill</h5>
+      <div class="edit-form-elem">
+        <label>color: </label>
+        <input type="text" value="" id="shape-fill-color" />
+        <br />
+      </div>
+      <div>
+	      <h5>Stroke</h5>
+	      <input id="shape-stroke-chk" type="checkbox" checked />
+      </div>
+      <div class="edit-form-elem">
+        <label>color: </label>
+        <input type="text" value="#8959A8" id="shape-stroke-color" />
+        <br />
+        <label class="invalid">lineCap: </label>
+        <select id="shape-stroke-lineCap">
+          <option value="butt">butt</option>
+          <option value="round" selected="selected">round</option>
+          <option value="square">square</option>
+        </select>
+        <br />
+        <label class="invalid">lineJoin: </label>
+        <select id="shape-stroke-lineJoin">
+          <option value="bevel">bevel</option>
+          <option value="round" selected="selected">round</option>
+          <option value="miter">miter</option>
+        </select>
+        <br />
+        <label title="Line Dash逗号,分隔">lineDash(,) :</label>
+        <input type="text" id="shape-stroke-lineDash" />
+        <br />
+        <label class="invalid">miterLimit :</label>
+        <input type="text" value="10"  id="shape-stroke-miterLimit" />
+        <br />
+        <label >width :</label>
+        <input type="text" value="3"  id="shape-stroke-width" />
+      </div>
+    </div>
+    
+    <!-- Circle配置 -->
+    <div class="edit-form">
+      <input id="refresh-circle" type="button" value="刷新" />
+      <h2>Circle</h2>
+      <br />
+      <div class="edit-form-elem">
+        <label>radius: </label>
+        <input type="text" id="circle-radius" value="10" />
+        <br />
+        <label>snapToPixel: </label>
+        <select id="circle-snapToPixel">
+          <option value="true" selected="selected">true</option>
+          <option value="false">false</option>
+        </select>
+        <h5>Fill</h5>
+      <div class="edit-form-elem">
+        <label>color: </label>
+        <input type="text" value="" id="circle-fill-color" />
+        <br />
+      </div>
+      <div>
+	      <h5>Stroke</h5>
+	      <input id="circle-stroke-chk" type="checkbox" checked />
+      </div>
+      <div class="edit-form-elem">
+	        <label>color: </label>
+	        <input type="text" value="#8959A8" id="circle-stroke-color" />
+	        <br />
+	        <label class="invalid">lineCap: </label>
+	        <select id="circle-stroke-lineCap">
+	          <option value="butt">butt</option>
+	          <option value="round" selected="selected">round</option>
+	          <option value="square">square</option>
+	        </select>
+	        <br />
+	        <label class="invalid">lineJoin: </label>
+	        <select id="circle-stroke-lineJoin">
+	          <option value="bevel">bevel</option>
+	          <option value="round" selected="selected">round</option>
+	          <option value="miter">miter</option>
+	        </select>
+	        <br />
+	        <label title="Line Dash逗号,分隔">lineDash(,) :</label>
+	        <input type="text" id="circle-stroke-lineDash" />
+	        <br />
+	        <label class="invalid">miterLimit :</label>
+	        <input type="text" value="10"  id="circle-stroke-miterLimit" />
+	        <br />
+	        <label >width :</label>
+	        <input type="text" value="3"  id="circle-stroke-width" />
+        </div>
+      </div>
+    </div>
+    
+    <div class="edit-form" style="border:1px solid red;font-weight: 700;">
+      <h4>配置参数(点击刷新显示参数)</h4>
+      <div id="config-result"></div>
+    </div>
+    <div class="clearall"></div>
+  </body>
+</html>
+<script>
+	var vectorPoints = new ol.layer.Vector(
+			{
+				source : new ol.source.Vector(
+						{
+							url : 'https://openlayers.org/en/v3.20.1/examples/data/geojson/point-samples.geojson',
+							format : new ol.format.GeoJSON()
+						}),
+				style : iconStyleFunction
+			});
+
+	var vectorPoints1 = new ol.layer.Vector(
+			{
+				source : new ol.source.Vector(
+						{
+							url : 'https://openlayers.org/en/v3.20.1/examples/data/geojson/point-samples.geojson',
+							format : new ol.format.GeoJSON()
+						}),
+				style : function(feature) {
+					return new ol.style.Style({
+						image : new ol.style.Circle({
+							radius : 5,
+							fill : new ol.style.Fill({
+								color : 'rgba(255, 0, 0, 0.1)'
+							}),
+							stroke : new ol.style.Stroke({
+								color : 'red',
+								width : 1
+							})
+						})
+					});
+				}
+			});
+			
+	var map = new ol.Map({
+		layers : [ new ol.layer.Tile({
+			source : new ol.source.OSM()
+		}), vectorPoints1,vectorPoints ],
+		target : 'map',
+		view : new ol.View({
+			center : [ -8161939, 6095025 ],
+			zoom : 8
+		})
+	});
+	
+	/******************************************************/
+	/*                         公用变量                                                                */
+	/******************************************************/
+	var myDom = {
+		icons : {
+			anchor : document.getElementById("icon-anchor"),
+			anchorOrigin : document.getElementById("icon-anchorOrigin"),
+			anchorXUnits : document.getElementById("icon-anchorXUnits"),
+			anchorYUnits : document.getElementById("icon-anchorYUnits"),
+			color : document.getElementById("icon-color"),
+			img : document.getElementById("icon-img"),
+			offset : document.getElementById("icon-offset"),
+			offsetOrigin : document.getElementById("icon-offsetOrigin"),
+			opacity : document.getElementById("icon-opacity"),
+			scale : document.getElementById("icon-scale"),
+			snapToPixel : document.getElementById("icon-snapToPixel"),
+			rotateWithView : document.getElementById("icon-rotateWithView"),
+			rotation : document.getElementById("icon-rotation"),
+			size : document.getElementById("icon-size"),
+			src : document.getElementById("icon-src"),
+			cavansImage: null
+		},
+		regularShapes : {
+			points : document.getElementById("shape-points"),
+			polygonRadius : document.getElementById("shape-polygon-radius"),
+			innerRadiuStar : document.getElementById("shape-star-radius1"),
+			outerRadiuStar : document.getElementById("shape-star-radius2"),
+			angle : document.getElementById("shape-star-angle"),
+			snapToPixel : document.getElementById("shape-snapToPixel"),
+			rotation : document.getElementById("shape-rotation"),
+			rotateWithView : document.getElementById("shape-rotateWithView"),
+			fillColor : document.getElementById("shape-fill-color"),
+			strokeColor : document.getElementById("shape-stroke-color"),
+			lineCap : document.getElementById("shape-stroke-lineCap"),
+			lineJoin : document.getElementById("shape-stroke-lineJoin"),
+			lineDash : document.getElementById("shape-stroke-lineDash"),
+			width : document.getElementById("shape-stroke-width"),
+			miterLimit : document.getElementById("shape-stroke-miterLimit"),
+			strokeCheck: document.getElementById("shape-stroke-chk"),
+			shapeTypeCheck: document.getElementById("shape-shapetype-chk")
+		},
+		circle:{
+			radius: document.getElementById("circle-radius"),
+			snapToPixel : document.getElementById("circle-snapToPixel"),
+			fillColor : document.getElementById("circle-fill-color"),
+			strokeColor : document.getElementById("circle-stroke-color"),
+			lineCap : document.getElementById("circle-stroke-lineCap"),
+			lineJoin : document.getElementById("circle-stroke-lineJoin"),
+			lineDash : document.getElementById("circle-stroke-lineDash"),
+			width : document.getElementById("circle-stroke-width"),
+			miterLimit : document.getElementById("circle-stroke-miterLimit"),
+			strokeCheck: document.getElementById("circle-stroke-chk")
+		}
+	};
+	
+	var pointStyleOptions = {
+		Icon:{},
+		RegularShape:{},
+		Circle:{}
+	}
+
+	/******************************************************/
+	/*                 Icon                               */
+	/******************************************************/
+	function iconStyleFunction() {
+		var icon = pointStyleOptions.Icon;
+		var dom = myDom.icons;
+		var anchors = dom.anchor.value.split(",");
+		icon.anchor = [parseFloat(anchors[0]),parseFloat(anchors[1])];
+		icon.anchorOrigin = dom.anchorOrigin.value;
+		icon.anchorXUnits = dom.anchorXUnits.value;
+		icon.anchorYUnits = dom.anchorYUnits.value;
+ 		icon.color = dom.color.value == ""? undefined:dom.color.value;
+		icon.img = dom.img.value == "" ? undefined : dom.img.value;
+		if(icon.img){
+			var image = icon.cavansImage;
+			//示例1image对象
+			icon.img = image;
+			icon.imgSize =[image.width, image.height];
+			//示例2cavas对象
+			//var cavans = convertImageToCanvas(image);
+			//icon.img = cavans;
+			//icon.imgSize =[cavans.width, cavans.height];
+		}
+		var offsetXY = dom.offset.value.split(",");
+		icon.offset = [parseInt(offsetXY[0], 10),parseInt(offsetXY[1], 10)];
+		icon.offsetOrigin = dom.offsetOrigin.value;
+		icon.opacity = parseFloat(dom.opacity.value);
+		icon.scale = parseFloat(dom.scale.value);
+		icon.snapToPixel = dom.snapToPixel.value == "true" ? true:false;
+		icon.rotateWithView = dom.rotateWithView.value == "true" ? true:false;
+		icon.rotation = parseFloat(dom.rotation.value);
+		var sizes = dom.size.value.split(",");
+		icon.size = sizes =="" ? undefined:[parseInt(sizes[0], 10),parseInt(sizes[1], 10)];
+		icon.src = dom.src.value == ""? undefined : dom.src.value;
+		icon.crossOrigin = 'anonymous';
+
+		return new ol.style.Style({
+          image: new ol.style.Icon(icon)
+        });
+	}
+	
+	//ICONS
+	document.getElementById('icon-img').addEventListener('click',
+			function() {
+				pointStyleOptions.Icon.src = undefined;
+				
+				this.value ="https://openlayers.org/en/v3.19.0/examples/data/dot.png";
+				myDom.icons.src.value="";
+			});
+	document.getElementById('icon-src').addEventListener('click',
+			function() {
+				pointStyleOptions.Icon.img = undefined;
+				pointStyleOptions.Icon.imgSize = undefined;
+				
+				pointStyleOptions.Icon.src = this.value="https://openlayers.org/en/v4.6.5/examples/data/icon.png";
+				myDom.icons.img.value="";
+			});
+	document.getElementById('icon-getimage').addEventListener('click',
+			function() {
+				var icon = pointStyleOptions.Icon;
+				icon.cavansImage = urlToImage(myDom.icons.img.value);
+			});
+	document.getElementById('refresh-icon').addEventListener('click',
+			function() {
+				var style = iconStyleFunction();
+				vectorPoints.setStyle(style);
+				WriteIconConfigHtml();
+			});
+			
+	// 从 canvas 提取图片 image  
+	function convertCanvasToImage(canvas) {  
+	    //新Image对象，可以理解为DOM  
+	    var image = new Image();  
+	    // canvas.toDataURL 返回的是一串Base64编码的URL，当然,浏览器自己肯定支持  
+	    // 指定格式 PNG  
+	    image.src = canvas.toDataURL("image/png");  
+	    return image;  
+	}
+	
+	// 把image 转换为 canvas对象  
+	function convertImageToCanvas(image) {  
+	    // 创建canvas DOM元素，并设置其宽高和图片一样   
+	    var canvas = document.createElement("canvas");  
+	    canvas.width = image.width;  
+	    canvas.height = image.height;  
+	    // 坐标(0,0) 表示从此处开始绘制，相当于偏移。  
+	    canvas.getContext("2d").drawImage(image, 0, 0);  
+	  
+	    return canvas;  
+	} 
+	
+	//url转为image对象
+	function urlToImage(url){
+		var image = new Image();
+		image.src = url;
+		image.onload = function(){};
+	    return image;
+	}
+	
+	function WriteIconConfigHtml(){
+		var icon = pointStyleOptions.Icon;
+		var str = '<pre>new ol.style.Style({<br />';
+        str +='  image: new ol.style.Icon({<br />';
+        if(icon.size){
+        	str +='  	size:['+icon.size+'],<br />';
+        }
+        if(icon.src){
+        	str +='  	src:"'+icon.src+'",<br />';
+        }
+        str +='  	anchor:['+icon.anchor+'],<br />';
+        str +='  	anchorOrigin:"'+icon.anchorOrigin+'",<br />';
+        str +='  	anchorXUnits:"'+icon.anchorXUnits+'",<br />';
+		str +='  	anchorYUnits:"'+icon.anchorYUnits+'",<br />';
+		if(icon.img){
+			str +='  	img:"image对象或cavas对象，具体请参考代码中urlToImage/convertImageToCanvas方法",<br />';
+			str +='  	imgSize:'+icon.imgSize+',<br />';	
+		}
+		str +='  	offset:['+icon.offset+'],<br />';
+		str +='  	offsetOrigin:"'+icon.offsetOrigin+'",<br />';
+		str +='  	opacity:'+icon.opacity+',<br />';
+		str +='  	scale:'+icon.scale+',<br />';
+		str +='  	snapToPixel:'+icon.snapToPixel+',<br />';
+		str +='  	rotateWithView:'+icon.rotateWithView+',<br />';
+		str +='  	rotation:'+icon.rotation+'<br />';
+        str +='  })<br />';
+        str +='})</pre>';
+        
+        var element = document.getElementById("config-result");
+		element.innerHTML = str;
+	}
+	
+	/******************************************************/
+	/*                 RegularShape                       */
+	/******************************************************/
+	//RegularShape
+	function regularShapeStyleFunction() {
+		var regularShape = pointStyleOptions.RegularShape = {};
+		var dom = myDom.regularShapes;
+		regularShape.points = parseInt(dom.points.value,10);
+		if(dom.polygonRadius.value != ""){
+			regularShape.radius = parseInt(dom.polygonRadius.value,10);
+		}
+		if(dom.innerRadiuStar.value != ""){
+			regularShape.radius1 = parseInt(dom.innerRadiuStar.value,10);
+		}
+		if(dom.outerRadiuStar.value != ""){
+			regularShape.radius2 = parseInt(dom.outerRadiuStar.value,10);
+		}
+		regularShape.angle = parseFloat(dom.angle.value);
+		regularShape.snapToPixel = dom.snapToPixel.value == "true" ? true:false;
+		regularShape.rotation = parseFloat(dom.rotation.value);
+		regularShape.rotateWithView = dom.rotateWithView.value == "true" ? true:false;
+		if(dom.fillColor.value != ""){
+			regularShape.fillColor=dom.fillColor.value;
+			regularShape.fill = new ol.style.Fill({
+				color: regularShape.fillColor
+			});
+		}
+		if(dom.strokeCheck.checked){
+			regularShape.strokeColor = dom.strokeColor.value == "" ? undefined:dom.strokeColor.value;
+			regularShape.strokeLineCap = dom.lineCap.value;
+			regularShape.strokeLineJoin = dom.lineJoin.value;
+			regularShape.strokeWidth = parseInt(dom.width.value,10);
+			regularShape.strokeMiter = parseInt(dom.miterLimit.value,10);
+			regularShape.strokeLineDash = undefined;
+			if(dom.lineDash.value != ""){
+				var dashes = dom.lineDash.value.split(",");
+				var arr = [];
+				for(var i=0;i<dashes.length;i++){
+					arr.push(parseInt(dashes[i], 10));
+				}
+				regularShape.strokeLineDash = arr;
+			}
+			var options = {
+				color: regularShape.strokeColor,
+				lineCap:regularShape.strokeLineCap,
+				lineJoin:regularShape.strokeLineJoin,
+				lineDash:regularShape.strokeLineDash,
+				miterLimit:regularShape.strokeMiter,
+				width:regularShape.strokeWidth
+			};
+
+			regularShape.stroke = new ol.style.Stroke(options);
+		}
+		return new ol.style.Style({
+          image: new ol.style.RegularShape(regularShape)
+        });
+	}
+	
+	document.getElementById('shape-shapetype').addEventListener('change',
+			function() {
+				var dom = myDom.regularShapes;
+				if(dom.shapeTypeCheck.checked){
+					dom.points.value="";
+					dom.polygonRadius.value="";
+					dom.innerRadiuStar.value="";
+					dom.outerRadiuStar.value="";
+					
+					switch(this.value){
+						case "star":
+						dom.points.value="5";
+						dom.innerRadiuStar.value="10";
+						dom.outerRadiuStar.value="4";
+						break;
+						case "triangle":
+						dom.points.value="3";
+						dom.polygonRadius.value="10";
+						break;
+						case "cross":
+						dom.points.value="4";
+						dom.innerRadiuStar.value="10";
+						dom.outerRadiuStar.value="0";
+						break;
+						default:
+						break;
+					}
+				}
+			});
+	document.getElementById('refresh-shape').addEventListener('click',
+			function() {
+				var style = regularShapeStyleFunction();
+				vectorPoints.setStyle(style);
+				WriteRegularShapeConfigHtml();
+			});
+	
+	function WriteRegularShapeConfigHtml(){
+		var regularShape = pointStyleOptions.RegularShape;
+		var str = '<pre>new ol.style.Style({<br />';
+        str +='  image: new ol.style.RegularShape({<br />';
+        str +='  	points:'+regularShape.points+',<br />';
+        if(regularShape.radius){
+        	str +='  	radius:'+regularShape.radius+',<br />';
+        }
+        if(regularShape.radius1){
+        	str +='  	radius1:'+regularShape.radius1+',<br />';
+        }
+        if(regularShape.radius2){
+        	str +='  	radius2:'+regularShape.radius2+',<br />';
+        }
+        str +='  	angle: '+regularShape.angle+',<br />';
+        str +='  	snapToPixel:'+regularShape.snapToPixel+',<br />';
+        str +='  	rotation:'+regularShape.rotation+',<br />';
+        str +='  	rotateWithView:'+regularShape.rotateWithView;
+        if(regularShape.fill){
+        	str +=',<br />';
+        	str +='  	fill:new ol.style.Fill({<br />';
+			str +='		color: "'+regularShape.fillColor+'"<br />';
+			str +='	  })';
+        }
+        if(regularShape.stroke){
+        	str +=',<br />';
+        	str +='	stroke:new ol.style.Stroke({<br />';
+			str +='		color: "'+regularShape.strokeColor+'",<br />';
+			if(regularShape.strokeLineDash){
+				str +='		lineDash:'+regularShape.strokeLineDash+',<br />';	
+			}
+			str +='		width:'+regularShape.strokeWidth+'<br />';
+			str +='	  })<br />';
+        }
+
+        str +='  })<br />';
+        str +='})</pre>';
+        
+        var element = document.getElementById("config-result");
+		element.innerHTML = str;
+	}
+			
+	/******************************************************/
+	/*                 Circle                             */
+	/******************************************************/		
+	function circleStyleFunction() {
+		var circleOptions = pointStyleOptions.Circle = {};
+		var dom = myDom.circle;
+		
+		circleOptions.radius = parseInt(dom.radius.value,10);
+		circleOptions.snapToPixel = dom.snapToPixel.value == "true" ? true:false;
+		
+		if(dom.fillColor.value != ""){
+			circleOptions.fillColor = dom.fillColor.value;
+			circleOptions.fill = new ol.style.Fill({
+				color: circleOptions.fillColor
+			});
+		}
+		if(dom.strokeCheck.checked){
+			circleOptions.strokeColor = dom.strokeColor.value == "" ? undefined:dom.strokeColor.value;
+			circleOptions.strokeLineCap = dom.lineCap.value;
+			circleOptions.strokeLineJoin = dom.lineJoin.value;
+			circleOptions.strokeWidth = parseInt(dom.width.value,10);
+			circleOptions.strokeMiter = parseInt(dom.miterLimit.value,10);
+			circleOptions.strokeLineDash = undefined;
+			if(dom.lineDash.value != ""){
+				var dashes = dom.lineDash.value.split(",");
+				var arr = [];
+				for(var i=0;i<dashes.length;i++){
+					arr.push(parseInt(dashes[i], 10));
+				}
+				circleOptions.strokeLineDash = arr;
+			}
+			var options = {
+				color: circleOptions.strokeColor,
+				lineCap:circleOptions.strokeLineCap,
+				lineJoin:circleOptions.strokeLineJoin,
+				lineDash:circleOptions.strokeLineDash,
+				miterLimit:circleOptions.strokeMiter,
+				width:circleOptions.strokeWidth
+			};
+
+			circleOptions.stroke = new ol.style.Stroke(options);
+		}
+		return new ol.style.Style({
+          image: new ol.style.Circle(circleOptions)
+        });
+	}
+	
+	document.getElementById('refresh-circle').addEventListener('click',
+			function() {
+				var style = circleStyleFunction();
+				vectorPoints.setStyle(style);
+				WriteCircleConfigHtml();
+			});
+	
+	
+	function WriteCircleConfigHtml(){
+		var circleOptions = pointStyleOptions.Circle;
+		var str = '<pre>new ol.style.Style({<br />';
+        str +='  image: new ol.style.Circle({<br />';
+        str +='  	radius: '+circleOptions.radius+',<br />';
+		str +='	snapToPixel: '+circleOptions.snapToPixel;
+		if(circleOptions.fill){
+			str +=',<br />',
+			str +='	fill: new ol.style.Fill({<br />';
+			str +='		color: "'+circleOptions.fillColor+'"<br />';
+			str +='	})';
+		}
+		if(circleOptions.stroke){
+			str +=',<br />',
+			str +='	stroke = new ol.style.Stroke({<br />';
+			str +='		color: "'+circleOptions.strokeColor+'",<br />';
+			if(circleOptions.strokeLineDash){
+				str +='		lineDash:'+circleOptions.strokeLineDash+',<br />';	
+			}
+			str +='		width:'+circleOptions.strokeWidth+'<br />';
+			str +='	})<br />';
+		}
+        str +='  })<br />';
+        str +='})</pre>';
+        
+        var element = document.getElementById("config-result");
+		element.innerHTML = str;
+	}
+</script>

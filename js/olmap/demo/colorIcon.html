@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<div id="map" class="map"></div>
+<script>
+
+//    var vp = new ol.layer.Vector(
+//        {
+//            source : new ol.source.Vector(
+//                {
+//                    url : 'https://openlayers.org/en/v3.20.1/examples/data/geojson/point-samples.geojson',
+//                    format : new ol.format.GeoJSON()
+//                }),
+//            style : new ol.style.Style({
+//                image : new ol.style.Circle({
+//                    radius : 5,
+//                    fill : new ol.style.Fill({
+//                        color : 'rgba(255, 0, 0, 0.1)'
+//                    }),
+//                    stroke : new ol.style.Stroke({
+//                        color : 'red',
+//                        width : 1
+//                    })
+//                })
+//            })
+//        });
+
+    debugger;
+    var vectorPoints1 = new ol.layer.Vector(
+        {
+            source : new ol.source.Vector(
+                {
+                    url : 'https://openlayers.org/en/v3.20.1/examples/data/geojson/point-samples.geojson',
+                    format : new ol.format.GeoJSON()
+                }),
+            style : function(feature) {
+                return new ol.style.Style({
+                    image: new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({
+                        color: "#ED1C24",
+                        crossOrigin: 'anonymous',
+                        //src: 'https://openlayers.org/en/v4.6.5/examples/data/dot.png'
+                        src: 'http://192.168.3.222:18080/common-bx-gis/models/olmap/res/images/bmap/toolbox/d2dmap.jpg'
+                    }))
+                });
+            }
+        });
+
+    var map = new ol.Map({
+        layers : [ new ol.layer.Tile({
+            source : new ol.source.OSM()
+        }), vectorPoints1 ],
+        target : 'map',
+        view : new ol.View({
+            center : [ -8161939, 6095025 ],
+            zoom : 8
+        })
+    });
+</script>
+</body>
+</html>

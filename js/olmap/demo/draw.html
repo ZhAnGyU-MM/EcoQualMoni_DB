@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>绘制工具demo</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="../js/openlayers/css/ol.css" type="text/css"></link>
+    <link rel="stylesheet" href="../res/css/demo.css" type="text/css"></link>
+    <script type="text/javascript" src="../js/openlayers/build/ol-debug.js"></script>
+    <script type="text/javascript" src="../js/bxmap/Common.js"></script>
+    <script type="text/javascript" src="../js/bxmap/Interactions.js"></script>
+  </head>
+  <body>
+    <div id="map" class="map"></div>
+    <form class="form-inline">
+	  <label>Shape type &nbsp;</label>
+	  <select id="type">
+	  	<option value="Point">Point</option>
+	    <option value="LineString">LineString</option>
+	    <option value="Polygon">Polygon</option>
+	    <option value="Circle">Circle</option>
+	    <option value="Square">Square</option>
+	    <option value="Box">Box</option>
+	    <option value="Star">Star</option>
+	  </select>
+	</form>
+  </body>
+</html>
+<script>
+	var raster = new ol.layer.Tile({
+        source: new ol.source.OSM()
+      });
+      
+      var source = new ol.source.Vector({wrapX: false});
+      var vector = new ol.layer.Vector({
+         source: source
+      });
+
+      var map = new ol.Map({
+        layers: [raster, vector],
+        target: 'map',
+        view: new ol.View({
+          center: [0, 0],
+          zoom: 2
+        })
+      });
+      
+      var draw = null;
+      function addInteraction() {
+      	var value = typeSelect.value;
+      	draw = new bxmap.interaction.Draw({
+            source: source,
+            type: value
+        });
+      	map.addInteraction(draw);
+      }
+     
+      
+	  var typeSelect = document.getElementById('type');
+	  typeSelect.onchange = function() {
+	   	map.removeInteraction(draw);
+	   	addInteraction();
+      };
+      addInteraction();
+</script>

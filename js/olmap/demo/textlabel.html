@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>文本标注DEMO</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="../js/plugins/bootstrap/css/bootstrap.min.css" type="text/css"></link>
+    <link rel="stylesheet" href="../js/openlayers/css/ol.css" type="text/css"></link>
+    <link rel="stylesheet" href="../res/css/demo.css" type="text/css"></link>
+    <link rel="stylesheet" href="../res/css/bxmap.css" type="text/css"></link>
+    <script type="text/javascript" src="../js/plugins/jquery/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../js/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../js/openlayers/build/ol.js"></script>
+    <script type="text/javascript" src="../js/bxmap/Common.js"></script>
+    <script type="text/javascript" src="../js/bxmap/Interactions.js"></script>
+  </head>
+  <body>
+    <div id="map" class="map"></div>
+  </body>
+    <input id="start" type="button" value="active" style="height: 30px;width: 70px;">
+  	<input id="end" type="button" value="deactive" style="height: 30px;width: 70px;">
+</html>
+<script>
+	var raster = new ol.layer.Tile({
+        source: new ol.source.OSM()
+      });
+
+      var map = new ol.Map({
+        layers: [raster],
+        target: 'map',
+        view: new ol.View({
+          center: [0, 0],
+          zoom: 2
+        })
+      });
+      
+      var tool = new bxmap.interaction.TextLabel();
+      map.addInteraction(tool);
+      
+      $("#start").on("click",function(){
+      	tool.setActive(true);
+      });
+      $("#end").on("click",function(){
+      	tool.setActive(false);
+      });
+</script>

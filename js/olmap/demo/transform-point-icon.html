@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>矢量数据文本样式</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="../js/openlayers/css/ol.css" type="text/css"></link>
+    <link rel="stylesheet" href="../res/css/demo.css" type="text/css"></link>
+    <script type="text/javascript" src="../js/openlayers/build/ol.js"></script>
+    <script type="text/javascript" src="../js/bxmap/Common.js"></script>
+    <script type="text/javascript" src="../js/bxmap/Interactions.js"></script>
+    <script type="text/javascript" src="../js/plugins/jquery/jquery-1.9.1.min.js"></script>
+  </head>
+  <body>
+    <div id="map" class="map"></div>
+    <div style="background:white; padding:0 0.45em;"><span id="info"></span>&nbsp;</div>
+  </body>
+</html>
+<script>
+	var raster = new ol.layer.Tile({
+        source: new ol.source.OSM()
+      });
+
+      var vector = new ol.layer.Vector({
+        source: new ol.source.Vector({
+          url : "../data/demo-label-style-point.geojson",
+          format: new ol.format.GeoJSON()
+        }),
+        style: function(feature){
+        	var rotation = feature.get("opt") ? (feature.get("opt").rotation||0) : 0 ;
+	        return new ol.style.Style({
+			  image: new ol.style.Icon({
+			  	size:[32,48],
+			  	src:"https://openlayers.org/en/v3.19.0/examples/data/icon.png",
+			  	anchor:[0.5,0.96],
+			  	anchorOrigin:"top-left",
+			  	anchorXUnits:"fraction",
+			  	anchorYUnits:"fraction",
+			  	offset:[0,0],
+			  	offsetOrigin:"top-left",
+			  	opacity:1,
+			  	scale:1,
+			  	snapToPixel:true,
+			  	rotateWithView:false,
+			  	rotation:rotation
+			  })
+			})
+		}
+      });
+      
+      var transform = new bxmap.interaction.Transform();
+
+      var map = new ol.Map({
+        interactions: ol.interaction.defaults().extend([ transform]),
+        layers: [raster, vector],
+        target: 'map',
+        view: new ol.View({
+          	center : [ -8161939, 6095025 ],
+			zoom : 8
+        })
+      });
+      
+      setTimeout(function(){
+      //0,1,2
+      	var feature0 = vector.getSource().getFeatures()[0];
+      	var feature1 = vector.getSource().getFeatures()[1];
+      	var feature2 = vector.getSource().getFeatures()[2];
+      	
+      	transform.select([feature0]);
+      },2000);
+      
+		var d=[0,0];
+		//绑定rotatestart事件
+		transform.on ('rotatestart', function(e){
+			// Rotation
+			var startangle = e.feature.get('angle');
+			console.log("rotatestart: " + startangle);
+		});
+		//绑定translatestart事件
+		transform.on ('translatestart', function(e){	
+			// Translation
+			d=[0,0];
+		});
+		//绑定rotating事件
+		transform.on('rotating', function (e){	
+			$('#info').text("rotate: "+((e.angle*180/Math.PI -180)%360+180).toFixed(2)); 
+		});
+		//绑定translating事件
+		transform.on('translating', function (e){
+			d[0]+=e.delta[0];
+			d[1]+=e.delta[1];
+			$('#info').text("translate: "+d[0].toFixed(2)+","+d[1].toFixed(2)); 
+		});
+		//绑定scaling事件
+		transform.on('scaling', function (e){
+			$('#info').text("scale: "+e.scale[0].toFixed(2)+","+e.scale[1].toFixed(2)); 
+		});
+		//绑定end事件
+		transform.on(['rotateend', 'translateend', 'scaleend'], function (e) { $('#info').text(""); });
+</script>

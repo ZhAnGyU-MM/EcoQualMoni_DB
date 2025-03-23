@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>查询abcd显示</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="../js/openlayers/css/ol.css" type="text/css"></link>
+    <link rel="stylesheet" href="../res/css/demo.css" type="text/css"></link>
+    <script type="text/javascript" src="../js/plugins/jquery/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.14/proj4.js"></script>
+    <script type="text/javascript" src="../js/openlayers/build/ol-debug.js"></script>
+    <script type="text/javascript" src="../js/openlayers/ext/ol3-ext.js"></script>
+    <script type="text/javascript" src="../js/bxmap/Common.js"></script>
+    <script type="text/javascript" src="../js/bxmap/Interactions.js"></script>
+    <script type="text/javascript" src="../js/bxmap/Protocol.js"></script>
+    <script type="text/javascript" src="../js/bxmap/Layer.js"></script>
+    <script type="text/javascript" src="../js/bxmap/Resource.js"></script>
+  	<script type="text/javascript" src="../js/bxmap/Symbolizer.js"></script>
+  	<script type="text/javascript" src="../js/bxmap/Map.js"></script>
+  </head>
+  <body>
+    <div id="map" class="map"></div>
+    <input id="startDetect" type="button" value="开始检测要素" style="height: 30px;width: 60px;">
+	<input id="stopDetect" type="button" value="结束检测要素" style="height: 30px;width: 60px;">
+  </body>
+</html>
+<script>
+	var map = new ol.Map({
+		layers: [new ol.layer.Tile({
+       		source:  new ol.source.OSM()
+       	})],
+	  	target: 'map',
+	  	view: new ol.View({
+	    	center: [12364097.89510, 2449206.93534],//ol.proj.transform([12364207.65032, 2448803.70418], 'EPSG:3785','EPSG:3857'), 
+	    	zoom: 14
+	  	})
+	});
+	
+   	bxmap.Resource.ResourcePath = "http://localhost:18081/DEGS_RPT/js/map/olmap/res/images/bmap/";
+    var wfs=new bxmap.protocol.WFS({
+        "url": "http://gisserver:18081/geoserver/DEGSRPT/wfs",
+		"featureNS" : "http://GISSERVER:18081/geoserver/DEGSRPT",
+		"srsName":"EPSG:3857",
+		"featurePrefix":"DEGSRPT",
+		"featureTypes":["GEO_MM_ZGQ"],
+		"outputFormat" :"application/json",
+		"geometryName":"Shape"
+    });
+    
+    var defLayers = new bxmap.layer.Defaults();
+    var layer = defLayers.get("image_abcd");
+    var source = layer.getSource();
+    
+    //获取numberOfFeatures 
+    wfs.read({
+    	//resultType:"hits",
+    	maxFeatures: 10,
+    	callback:function(data){
+    		var feature;
+    		var features = [];
+    		for(var i = 0; i < data.length; i++){
+    			feature = data[i].clone();
+    			var polygon = data[i].getGeometry();
+    			var point = polygon.getType() == "Polygon" ? polygon.getInteriorPoint() : polygon.getInteriorPoints();
+    			feature.setGeometry(point);
+    			if(i%2 == 0){
+    				feature.setSymbolRuleName("selected");
+    			}else{
+    				feature.setSymbolRuleName("unselected");
+    			}
+    			feature["symbolValue"] = i;
+    			features.push(feature);
+    			//source.addFeature(feature);
+    		}
+    		source.addFeatures(features);
+    		layer.setFeaturesSymbolRuleName([features[9]], null);
+    	}
+    });
+	
+	map.addLayer(layer);
+	
+	var bmap = new bxmap.Map();
+	bmap._map = map;
+	map.set("wrap", bmap);
+	
+	document.getElementById("startDetect").onclick = function() {
+		function handleFeature(feature, lastFeature){
+			if(feature){
+   				layer.setFeaturesSymbolRuleName([feature], "selected");
+   			}
+			if(lastFeature){
+				var event = bxmap.common.getFeatureDetectedParams(lastFeature);
+				if(!event["click"]){
+					layer.setFeaturesSymbolRuleName([lastFeature], "unselected");
+				}
+   			}
+    	}
+	
+		bmap.setFeatureDetectingActive({
+			type: "pointermove",
+    		active : true,
+    		callback : function(evt){
+    			console.log("pointermove");
+    			var feature = evt.currentFeature;
+    			var lastFeature = evt.lastFeature;
+    			handleFeature(feature, lastFeature);
+    		}
+		});
+		bmap.setFeatureDetectingActive({
+			type: "click",
+    		active : true,
+    		callback : function(evt){
+    			console.log("click");
+    			var feature = evt.currentFeature;
+    			var lastFeature = evt.lastFeature;
+    			handleFeature(feature, lastFeature);
+    		}
+		});
+    };
+    document.getElementById("stopDetect").onclick = function() {
+    	bmap.setFeatureDetectingActive({
+    		type: ["pointermove","click"],
+    		active : false
+    	});
+    };
+</script>

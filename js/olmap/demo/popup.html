@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>弹框示例</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<meta name="description" content="styled popup for OL3" />
+	<meta name="keywords" content="ol3, popup, overlay, jQuery, style" />
+
+	<!--&lt;!&ndash; jQuery &ndash;&gt;-->
+	<!--<script type="text/javascript" src="../js/plugins/jquery/jquery-1.9.1.min.js"></script>-->
+
+    <!--&lt;!&ndash; OL3 &ndash;&gt;-->
+    <!--<link rel="stylesheet" href="../js/openlayers/css/ol.css" type="text/css"></link>-->
+    <!--<script type="text/javascript" src="../js/openlayers/build/ol.js"></script>-->
+
+	<!--<link rel="stylesheet" href="../res/css/popupoverlay.css" type="text/css"></link>-->
+	<!--<script type="text/javascript" src="../js/bxmap/Common.js"></script>-->
+	<!--<script type="text/javascript" src="../js/bxmap/Overlay.js"></script>-->
+  </head>
+<body >
+	<!-- DIV pour la carte -->
+	<div id="map" style="width:600px; height:400px;"></div>
+
+	<div class="options">
+		<h2>Options:</h2>
+		位置:
+		<select onchange="popup.setPositioning(this.value); map.renderSync();">
+			<option value="auto">auto</option>
+			<option value="bottom-auto">bottom-auto</option>
+			<option value="bottom-left">bottom-left</option>
+			<option value="bottom-center">bottom-center</option>
+			<option value="bottom-right">bottom-right</option>
+			<option value="top-auto">top-auto</option>
+			<option value="top-left">top-left</option>
+			<option value="top-center">top-center</option>
+			<option value="top-right">top-right</option>
+			<option value="center-auto">center-auto</option>
+			<option value="center-left">center-left</option>
+			<option value="center-right">center-right</option>
+		</select>
+		<br />
+		样式:
+		<select onchange="popup.setPopupClass(this.value); if($('#ck').prop('checked')) popup.addPopupClass('shadow'); ">
+			<option value="default">default</option>
+			<option value="default orange">orange</option>
+			<option value="black">black</option>
+			<option value="tips">green tips</option>
+			<option value="tips orange">orange tips</option>
+			<option value="warning">warning</option>
+			<option value="tooltips">tooltips</option>
+		</select>
+		<br />
+		<input id="ck" type="checkbox" onchange="if (this.checked) popup.addPopupClass('shadow'); else popup.removePopupClass('shadow');" />
+		<label for="ck">阴影效果</label>
+		<br />
+		<input id="cb" type="checkbox" checked onchange="popup.showClose(this.checked);" />
+		<label for="cb">是否显示关闭按钮</label>
+		<br />
+		<input id="ct" type="checkbox" checked onchange="popup.showTitle(this.checked);" />
+		<label for="ct">是否显示标题</label>
+	</div>
+</body>
+</html>
+
+<script type="text/javascript">
+	var layers = [
+		new ol.layer.Tile({
+			name: "Natural Earth", 
+			minResolution: 306,
+    		source: new ol.source.XYZ({
+				url: 'http://{a-d}.tiles.mapbox.com/v3/mapbox.natural-earth-hypso-bathy/{z}/{x}/{y}.png',
+				attributions: [new ol.Attribution({ html: '&copy; <a href="https://www.mapbox.com/map-feedback/">Mapbox</a> ' })] 
+    		})
+		})
+	]
+
+	// Popup overlay
+	var popup = new bxmap.overlay.Popup ({
+		//popupClass: "default", //"tooltips", "warning" "black" "default", "tips", "shadow",
+		showClose: true,
+		onclose: function(){ console.log("You close the box"); },
+		positioning: "auto",
+        panToCenter: false
+	});
+		
+	// The map
+	var map = new ol.Map({
+		target: 'map',
+		view: new ol.View({
+			zoom: 5,
+			center: [166326, 5992663]
+		}),
+		layers: layers,
+		overlays: [popup]
+	});
+
+	// GeoJSON layer
+	var vectorSource = new ol.source.Vector({
+		//url: "../data/fond_guerre.geojson",
+		url: "http://localhost:18080/common-bx-gis/models/olmap/data/fond_guerre.geojson",
+		projection: 'EPSG:3857',
+		format: new ol.format.GeoJSON(),
+		attributions: [new ol.Attribution({ html: "&copy; <a href='https://www.data.gouv.fr/fr/datasets/fonds-de-la-guerre-14-18-extrait-de-la-base-memoire/'>data.gouv.fr</a>" })],
+		logo:"https://www.data.gouv.fr/s/avatars/37/e56718abd4465985ddde68b33be1ef.jpg" 
+	});
+
+	map.addLayer(new ol.layer.Vector({
+		name: 'Fonds de guerre 14-18',
+		source: vectorSource
+	}));
+
+	// Control Select 
+	var select = new ol.interaction.Select({});
+	map.addInteraction(select);
+
+	// On selected => show/hide popup
+	select.getFeatures().on(['add'], function(e) {
+	    var feature = e.element;
+		var content = '<div style="width: 200px;">';
+		content += "<img src='"+feature.get("img")+"'/>";
+		content += feature.get("text");
+		content += '</div>';
+		popup.show(feature.getGeometry().getCoordinates(), content); 
+	})
+	select.getFeatures().on(['remove'], function(e) {
+	    popup.close();
+	})
+
+</script>
