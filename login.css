@@ -1,0 +1,89 @@
+<style>
+.title-box h1{
+  font-size: 40px;
+  text-align: center;
+  margin: auto;
+}
+ 
+  label {
+    font-size: 15px;
+  }
+ 
+  input {
+    height: 25px;
+    width: 250px;
+    margin-top: 5px;
+  }
+ 
+  .sel {
+    margin-top: 10px;
+    display: block;
+    font-size: 13px;
+  }
+ 
+  .sel input {
+    width: 10px;
+    height: 10px;
+    margin: 2px;
+  }
+ 
+  a {
+    color: blue;
+    text-decoration: none;
+  }
+ 
+  a:hover {
+    cursor: pointer;
+    color: rgb(55, 85, 138);
+  }
+ 
+  button {
+    width: 200px;
+    height: 45px;
+    margin-left: 70px;
+    font-size: large;
+    background-color: rgb(88, 84, 156);
+    color: #fff;
+  }
+ 
+  button:hover {
+    cursor: pointer;
+    background-color: rgb(94, 123, 174);
+  }
+ 
+  #vcode {
+    height: 35px;
+    width: 150px;
+    font-size: 15px;
+    border-radius: 5px;
+    border: 1;
+    padding-left: 8px;
+  }
+ 
+  #code {
+    color: #ffffff;
+    background-color: #000000f7;
+    font-size: 20px;
+    padding: 5px 35px 10px 35px;
+    margin-left: 5%;
+    cursor: pointer;
+  }
+ 
+  #search_pass_link {
+    width: 70%;
+    text-align: right;
+    margin: 0 auto;
+    padding: 5px;
+  }
+ 
+  .btns {
+    width: 30%;
+    margin-left: 13%;
+    height: 40px;
+    border: 0;
+    font-size: 14pt;
+    cursor: pointer;
+    border-radius: 20px;
+    border: 0;
+  }
+</style>

@@ -1,0 +1,3262 @@
+ <!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>生态质量监测信息查询系统</title>
+    <script type="text/javascript" src="./js/jquery/jquery-1.9.1.min.js"></script>
+    <link href="./Content/map/map-index.css" rel="stylesheet" type="text/css" />
+    <link href="./Content/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="./Content/site.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="./js/main/utils.js"></script>
+    <script type="text/javascript" src="./js/main/map.js"></script>
+    <script type="text/javascript" src="./js/main/map.catalog.js"></script>
+    <script type="text/javascript" src="./js/main/map.spatialquery.js"></script>
+    <script type="text/javascript" src="./js/main/map.thematicmap.js"></script>
+    <script type="text/javascript" src="./js/main/map.map2dPanel.js"></script>
+    <script type="text/javascript" src="./js/main/MtrSearchZTree.js"></script>
+    <!--鼠标滚动条-->
+    <link rel='stylesheet' href='./js/plugins/jquerymCustomScrollbar/jquery.mCustomScrollbar.css' />
+    <script src='./js/plugins/jquerymCustomScrollbar/jquery.mousewheel.js' type='text/javascript'></script>
+    <script src='./js/plugins/jquerymCustomScrollbar/jquery.mCustomScrollbar.js' type='text/javascript'></script>
+    <!-- Ztree控件css以及js -->
+    <link href="./js/plugins/ztree/zTreeStyle/img/zTreeStyle.css" rel="stylesheet" />
+    <script src="./js/plugins/ztree/jquery.ztree.min.js"></script>
+    <script src="./js/plugins/ztree/jquery-migrate-1.2.1.js" type="text/javascript"></script>
+	<script src="./js/plugins/ztree/jquery.ztree.all-3.5.min.js" type="text/javascript"></script>
+	<script src="./js/plugins/ztree/jquery.ztree.exhide-3.5.min.js" type="text/javascript"></script>
+
+    <!--对话框-->
+    <link rel='stylesheet' href="./js/plugins/jqueryDialog/jDialog/jDialog.css"/>
+    <script src="./js/plugins/jqueryDialog/jDialog.js" type='text/javascript'></script>
+    <!-- bootstrap控件css以及js -->
+    <link href="./js/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <script src='./js/plugins/bootstrap/js/bootstrap.min.js' type='text/javascript'></script>
+    
+    <!-- olmap样式文件 -->
+    <link href="./js/olmap/res/css/mapcss.css" rel="stylesheet" />
+    <link href="./js/olmap/js/openlayers/css/ol.css" rel="stylesheet" />
+    <link href="./js/olmap/res/css/bxmap.css" rel="stylesheet" />
+    <link href="./js/olmap/res/css/popupoverlay.css" rel="stylesheet" />
+    <link href="./js/olmap/res/css/swipecontrol.css" rel="stylesheet" type="text/css"></link>
+<!--     <link href="js/olmap/res/css/infowindow.css" rel="stylesheet" /> -->
+    <link href="./js/olmap/js/openlayers/ext/plot/p-ol3.min.css" rel="stylesheet" />
+    <!-- olmap JS文件 -->
+    <script src="./js/olmap/js/openlayers/build/ol.js"></script>
+    <script src="./js/olmap/js/plugins/proj4/proj4.js"></script>
+    <script src="./js/olmap/js/openlayers/ext/ol3-ext.js"></script>
+    <script src="./js/olmap/js/openlayers/ext/plot/p-ol3.min.js"></script>
+    <script src="./js/olmap/js/bxmap/Common.js"></script>
+   <script src="./js/olmap/js/bxmap/Config.js"></script>
+    <script src="./js/olmap/js/bxmap/Math.js"></script>
+    <script src="./js/olmap/js/bxmap/Resource.js"></script>
+    <script src="./js/olmap/js/bxmap/Utils.js"></script>
+    <script src="./js/olmap/js/bxmap/Reader.js"></script>
+    <script src="./js/olmap/js/bxmap/Map.js"></script>
+    <script src="./js/olmap/js/bxmap/Symbolizer.js"></script>
+    <script src="./js/olmap/js/bxmap/Layer.js"></script>
+    <script src="./js/olmap/js/bxmap/Interactions.js"></script>
+    <!--<script src="./js/olmap/js/bxmap/Control.js"></script>-->
+    <script src="./js/olmap/js/bxmap/Overlay.js"></script>
+    <script src="./js/olmap/js/bxmap/Protocol.js"></script>
+    <script src="./js/olmap/js/dom/NavigationToolbar.js"></script>
+    <script src="./js/olmap/js/dom/Toolbox.js"></script>
+    <script src="./js/olmap/js/dom/BaseLayerSwitcherToolBar.js"></script>
+    <script src="./js/olmap/js/dom/MutexClickManager.js"></script>
+    <script src="./js/olmap/js/dom/Window.js"></script>
+    <script src="./js/olmap/bus/MapTool.js"></script>
+   <script src="./js/olmap/bus/WFSEditor.js"></script>
+   <script src="./js/olmap/js/plugins/jsonix/Jsonix-min.js"></script>
+    <script src="./js/olmap/js/openlayers/ext/wps-gui/wps-gui.min.js"></script>
+       
+    <script src="./js/olmap/bus/FileSaver.min.js"></script> 
+   <style>
+    .ol-popup {
+        position: absolute;
+        background-color: white;
+        -webkit-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+        filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+        padding: 15px;
+        border-radius: 10px;
+        border: 1px solid #cccccc;
+        bottom: 45px;
+        left: -50px;
+        width:600px;
+        height:400px;
+        overflow:auto;
+    }
+
+    .ol-popup:after, .ol-popup:before {
+        top: 100%;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+    }
+
+    .ol-popup:after {
+        border-top-color: white;
+        border-width: 10px;
+        left: 48px;
+        margin-left: -10px;
+    }
+
+    .ol-popup:before {
+        border-top-color: #cccccc;
+        border-width: 11px;
+        left: 48px;
+        margin-left: -11px;
+    }
+
+    .ol-popup-closer {
+        text-decoration: none;
+        position: absolute;
+        top: 2px;
+        right: 8px;
+    }
+
+    .ol-popup-closer:after {
+        content: "✖";
+    }
+
+    #popup-content {
+        font-size: 12px;
+        font-family: "微软雅黑";
+    }
+
+    #popup-content .markerInfo {
+        font-weight: bold;
+    }
+    #popup-content .markerImg {
+        position: absolute;
+         max-width: 98%;
+          max-height: 100%;
+    }
+</style>
+</head>
+<body>
+    <div id="header">
+        <div id="header_left"><br>生态质量监测信息查询系统</div>
+    </div>
+    <div class="main-container" id="main-container">
+        <div class="main-content">
+                <div class="allleft" id="sidebar">
+                </div>
+                <div class="allright" id="content" style="position:relative;">
+                    <div class="allrttop" id="tool_container"></div>
+                    <div id="centerPanel">
+                    <div id="map" class="mapone">
+                        <div id="popup" class="ol-popup">
+                            <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+                            <div id="popup-content">
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    <!--图例面板公用-->
+                    <!--<div id="map_tl" style="position: absolute;bottom:35px;left:5px;"><img src="" style="height:300px;"/></div> -->
+                    <!--地图界面伸缩控件-->
+                    <div id="mapSpread"></div>
+                </div>
+                <!-- 标绘面板 -->
+                <div style="position:absolute;right:180px;top:80px;display:none;" id="map_toolbar_plot">
+                  <ul class="map_toolbar_list_more map_toolbar_list_more-float  clearfix">
+       <li plottype="freehandline">自由线<span class="map_toolbar_list_more_icon map_toolbar_list_more_icon-toolbar28"></span></li>
+       <li plottype="polyline">折线<span class="map_toolbar_list_more_icon map_toolbar_list_more_icon-toolbar29"></span></li>
+       <li plottype="arc">弧线<span class="map_toolbar_list_more_icon map_toolbar_list_more_icon-toolbar30"></span></li>
+       <li plottype="curve">曲线<span class="map_toolbar_list_more_icon map_toolbar_list_more_icon-toolbar31"></span></li>
+       <li plottype="freehandpolygon">手绘<span class="map_toolbar_list_more_icon map_toolbar_list_more_icon-toolbar32"></span></li>
+       <li plottype="polygon">多边形<span class="map_toolbar_list_more_icon map_toolbar_list_more_icon-toolbar33"></span></li>
+       <li plottype="rectangle">矩形<span class="map_toolbar_list_more_icon map_toolbar_list_more_icon-toolbar34"></span></li>
+       <li plottype="circle">圆形<span class="map_toolbar_list_more_icon map_toolbar_list_more_icon-toolbar35"></span></li>
+       <li plottype="assaultdirection">直角<span class="map_toolbar_list_more_icon map_toolbar_list_more_icon-toolbar36"></span></li>
+       <li plottype="squadcombat">简单<span class="map_toolbar_list_more_icon map_toolbar_list_more_icon-toolbar37"></span></li>
+       <li plottype="tailedsquadcombat">燕尾<span class="map_toolbar_list_more_icon map_toolbar_list_more_icon-toolbar38"></span></li>
+       <li plottype="gatheringplace">集结地<span class="map_toolbar_list_more_icon map_toolbar_list_more_icon-toolbar39"></span></li>
+                  </ul>
+              </div>
+              <!--图例面板
+                <div id="legendPanel" style="position:absolute !important;z-index:100;border-radius:6px;bottom:40px;left:20px;width:200px;background: white;display:none;">
+                </div>-->
+                <!--引用伸缩展开的js-->
+              <script type="text/javascript" src="./js/main/mapspread.js"></script>
+        </div>
+    </div>
+    <script type="text/javascript">
+
+        var bbSamp = ol.proj.fromLonLat([106.365347, 29.816536]);
+        var spbSamp=ol.proj.fromLonLat([106.30526, 29.715008]);
+        var p2=ol.proj.fromLonLat([106.351768,28.638925]);
+        var p3=ol.proj.fromLonLat([107.110751,29.045051]);
+        var p4=ol.proj.fromLonLat([106.287,29.626507]);
+        var p6=ol.proj.fromLonLat([106.558174,28.870145]);
+        var p7=ol.proj.fromLonLat([106.924862,28.869706]);
+        var p8=ol.proj.fromLonLat([107.295608,28.862915]);
+        var p9=ol.proj.fromLonLat([105.995186,29.0423]);
+        var p10=ol.proj.fromLonLat([106.368534,29.038472]);
+        var p11=ol.proj.fromLonLat([106.745125,29.194142]);
+        var p12=ol.proj.fromLonLat([108.056985,29.166996]);
+        var p13=ol.proj.fromLonLat([108.240573,29.161863]);
+        var p14=ol.proj.fromLonLat([108.429837,29.160161]);
+        var p15=ol.proj.fromLonLat([108.799886,29.141793]);
+        var p16=ol.proj.fromLonLat([105.624158,29.36631]);
+        var p17=ol.proj.fromLonLat([105.812894,29.363264]);
+        var p18=ol.proj.fromLonLat([107.314716,29.343999]);
+        var p19=ol.proj.fromLonLat([108.433879,29.317059]);
+        var p20=ol.proj.fromLonLat([108.808191,29.305342]);
+        var p21=ol.proj.fromLonLat([105.814362,29.524621]);
+        var p22=ol.proj.fromLonLat([105.99583,29.526079]);
+        var p23=ol.proj.fromLonLat([106.751724,29.515388]);
+        var p24=ol.proj.fromLonLat([107.314766,29.505521]);
+        var p25=ol.proj.fromLonLat([106.002729,29.684847]);
+        var p26=ol.proj.fromLonLat([106.946781,29.833422]);
+        var p27=ol.proj.fromLonLat([107.323552,29.826519]);
+        var p28=ol.proj.fromLonLat([107.886226,29.817229]);
+        var p29=ol.proj.fromLonLat([108.64564,29.790889]);
+        var p30=ol.proj.fromLonLat([106.8554,28.95831]);
+        var p31=ol.proj.fromLonLat([106.68285,30.03749]);
+        var p32=ol.proj.fromLonLat([106.944341,29.606237]);
+        var p33=ol.proj.fromLonLat([106.944833,29.209483]);
+        var p34=ol.proj.fromLonLat([106.769562,29.245261]);
+        var p35=ol.proj.fromLonLat([106.59657,29.24608]);
+        var p36=ol.proj.fromLonLat([108.805126,29.565368]);
+        var p37=ol.proj.fromLonLat([108.622261,29.282193]);
+        var p38=ol.proj.fromLonLat([108.619288,29.712823]);
+        var p39=ol.proj.fromLonLat([107.191443,29.820594]);
+        var p40=ol.proj.fromLonLat([106.40151,28.71204]);
+        var p41=ol.proj.fromLonLat([106.534478,30.056935]);
+        var p42=ol.proj.fromLonLat([106.542767,29.955373]);
+        var p43=ol.proj.fromLonLat([106.946491,29.095492]);
+        var p44=ol.proj.fromLonLat([106.934042,29.398816]);
+        var p45=ol.proj.fromLonLat([107.63191,29.82166]);
+        var p46=ol.proj.fromLonLat([107.935726,29.714887]);
+        var p47=ol.proj.fromLonLat([108.069333,30.395789]);
+        var p48=ol.proj.fromLonLat([108.445133,29.547639]);
+        var p49=ol.proj.fromLonLat([108.286212,29.282367]);
+        var p50=ol.proj.fromLonLat([108.274043,29.700144]);
+        var p51=ol.proj.fromLonLat([108.109352,29.570751]);
+        var p52=ol.proj.fromLonLat([108.10643,29.42596]);
+        var p53=ol.proj.fromLonLat([106.761937,29.389371]);
+        var p54=ol.proj.fromLonLat([107.966308,30.469255]);
+        var p55=ol.proj.fromLonLat([106.850695,29.353462]);
+        var p56=ol.proj.fromLonLat([106.854823,29.102348]);
+        var p57=ol.proj.fromLonLat([105.833765,30.182104]);
+        var p58=ol.proj.fromLonLat([106.261869,30.001764]);
+        var p59=ol.proj.fromLonLat([105.745319,29.696142]);
+        var p60=ol.proj.fromLonLat([105.587941,29.4151]);
+        var p61=ol.proj.fromLonLat([105.89661,29.360287]);
+        var p62=ol.proj.fromLonLat([106.049487,29.831831]);
+        var p63=ol.proj.fromLonLat([106.438381,29.831007]);
+        var p64=ol.proj.fromLonLat([106.626175,29.715364]);
+        var p65=ol.proj.fromLonLat([106.211625,29.586537]);
+        var p66=ol.proj.fromLonLat([106.481881,29.513876]);
+        var p67=ol.proj.fromLonLat([106.484972,29.480262]);
+        var p68=ol.proj.fromLonLat([106.529019,29.386294]);
+        var p69=ol.proj.fromLonLat([106.272746,29.264552]);
+        var p70=ol.proj.fromLonLat([106.642146,29.028543]);
+        var p71=ol.proj.fromLonLat([107.72309,29.867472]);
+        var p72=ol.proj.fromLonLat([107.062458,29.83159]);
+        var p73=ol.proj.fromLonLat([107.392401,29.69625]);
+        var p74=ol.proj.fromLonLat([107.10468,29.168348]);
+        var p75=ol.proj.fromLonLat([108.031257,30.303299]);
+        var p76=ol.proj.fromLonLat([108.801452,29.484649]);
+        var p77=ol.proj.fromLonLat([108.163778,29.292519]);
+        var p78=ol.proj.fromLonLat([106.522365,29.5502]);
+        var p79=ol.proj.fromLonLat([106.504445,29.568819]);
+        var p80=ol.proj.fromLonLat([106.30112,29.60762]);
+        var p81=ol.proj.fromLonLat([106.652333,29.500225]);
+        var p82=ol.proj.fromLonLat([107.148291,29.698966]);
+        var p83=ol.proj.fromLonLat([108.089275,30.295826]);
+        //示例标注点北碚样地的信息对象
+        var featuerInfo = {
+            geo: bbSamp,
+            att: {
+                //标注信息的标题内容
+                title: "12887",
+                //标注的图片
+                imgURL: "./image/12887.png"
+            }
+        }
+        var featuerInfo1 = {
+            geo: spbSamp,
+            att: {
+                //标注信息的标题内容
+                title: "7563",
+               //标注内容简介
+                //text: "1、啮齿目/Rodentia > 鼠科/Muridae 形态特征：鼠科动物是哺乳类最大的1个科。为适应不同的环境，形态变异很大。一般来讲，鼠科动物有1条长的、单色、覆盖鳞片、毛较少的尾；但有些种类的尾也较短毛很多，或在尾端形成毛束的尾，有时为上、下双色，背面深色，腹面淡色。鼠科动物一般个体较小，主要为夜行性，所以有大大的眼睛，还有长长的触须，它们的指端绝大多数为爪，但树栖的通常为指甲。鼠科物种脑颅较平坦，上、下领门齿终生生长。生态学资料：广泛分布于平原、丘陵及中高山区域的森林、灌丛及耕地生境。植食性为主，食果实、嫩叶、农作物，也食小型无脊椎动物、昆虫等。日夜均有活动，以夜间为主，能攀登。地理分布：全国均有分布，亦包括四川重庆等地。",
+                //标注的图片
+                 imgURL: "./image/7563.png"
+            }
+        }
+        var featuerInfop2 = {
+            geo: p2,
+            att: {
+                //标注信息的标题内容
+                title: "12842",
+               //标注的图片
+                imgURL: "./image/12842.png"
+            }
+        }
+       var featuerInfop3 = {
+            geo: p3,
+            att: {
+                //标注信息的标题内容
+                title: "12851",
+                //标注的图片
+                imgURL: "./image/12851.png"
+            }
+        }
+      var featuerInfop4 = {
+            geo: p4,
+            att: {
+                //标注信息的标题内容
+                title: "12878",
+                //标注的图片
+                imgURL: "./image/12878.png"
+            }
+        }
+     var featuerInfop6 = {
+            geo: p6,
+            att: {
+                //标注信息的标题内容
+                title: "14764",
+                //标注内容简介
+                imgURL: "./image/14764.png"
+            }
+        }
+        var featuerInfop7 = {
+            geo: p7,
+            att: {
+                //标注信息的标题内容
+                title: "14765",
+                //标注内容简介
+                imgURL: "./image/14765.png"
+            }
+        }
+        var featuerInfop8 = {
+            geo: p8,
+            att: {
+                //标注信息的标题内容
+                title: "14766",
+                //标注内容简介
+                imgURL: "./image/14766.png"
+            }
+        }
+        var featuerInfop9 = {
+            geo: p9,
+            att: {
+                //标注信息的标题内容
+                title: "14807",
+                //标注内容简介
+                imgURL: "./image/14807.png"
+            }
+        }
+        var featuerInfop10 = {
+            geo: p10,
+            att: {
+                //标注信息的标题内容
+                title: "14808",
+                //标注内容简介
+                imgURL: "./image/14807.png"
+            }
+        }
+        var featuerInfop11 = {
+            geo: p11,
+            att: {
+                //标注信息的标题内容
+                title: "14849",
+                //标注内容简介
+                imgURL: "./image/14849.png"
+            }
+        }
+        var featuerInfop12 = {
+            geo: p12,
+            att: {
+                //标注信息的标题内容
+                title: "14852",
+                //标注内容简介
+                imgURL: "./image/14852.png"
+            }
+        }
+        var featuerInfop13 = {
+            geo: p13,
+            att: {
+                //标注信息的标题内容
+                title: "14853",
+                //标注内容简介
+                imgURL: "./image/14853.png"
+            }
+        }
+        var featuerInfop14 = {
+            geo: p14,
+            att: {
+                //标注信息的标题内容
+                title: "14854",
+                //标注内容简介
+                imgURL: "./image/14853.png"
+            }
+        }
+        var featuerInfop15 = {
+            geo: p15,
+            att: {
+                //标注信息的标题内容
+                title: "14855",
+                //标注内容简介
+                imgURL: "./image/14855.png"
+            }
+        }
+        var featuerInfop16 = {
+            geo: p16,
+            att: {
+                //标注信息的标题内容
+                title: "14901",
+                //标注内容简介
+                imgURL: "./image/14901.png"
+            }
+        }
+        var featuerInfop17 = {
+            geo: p17,
+            att: {
+                //标注信息的标题内容
+                title: "14902",
+                //标注内容简介
+                imgURL: "./image/14902.png"
+            }
+        }
+        var featuerInfop18 = {
+            geo: p18,
+            att: {
+                //标注信息的标题内容
+                title: "14903",
+                //标注内容简介
+                imgURL: "./image/14903.png"
+            }
+        }
+        var featuerInfop19 = {
+            geo: p19,
+            att: {
+                //标注信息的标题内容
+                title: "14905",
+                //标注内容简介
+                imgURL: "./image/14905.png"
+            }
+        }
+        var featuerInfop20 = {
+            geo: p20,
+            att: {
+                //标注信息的标题内容
+                title: "14906",
+                //标注内容简介
+                imgURL: "./image/14906.png"
+            }
+        }
+        var featuerInfop21 = {
+            geo: p21,
+            att: {
+                //标注信息的标题内容
+                title: "14943",
+                //标注内容简介
+                imgURL: "./image/14943.png"
+            }
+        }
+        var featuerInfop22 = {
+            geo: p22,
+            att: {
+                //标注信息的标题内容
+                title: "14944",
+                //标注内容简介
+                imgURL: "./image/14944.png"
+            }
+        }
+        var featuerInfop23 = {
+            geo: p23,
+            att: {
+                //标注信息的标题内容
+                title: "14945",
+                //标注内容简介
+                imgURL: "./image/14945.png"
+            }
+        }
+        var featuerInfop24 = {
+            geo: p24,
+            att: {
+                //标注信息的标题内容
+                title: "14946",
+                //标注内容简介
+                imgURL: "./image/14946.png"
+            }
+        }
+        var featuerInfop25 = {
+            geo: p25,
+            att: {
+                //标注信息的标题内容
+                title: "14991",
+                //标注内容简介
+                imgURL: "./image/14991.png"
+            }
+        }
+        var featuerInfop26 = {
+            geo: p26,
+            att: {
+                //标注信息的标题内容
+                title: "15026",
+                //标注内容简介
+                imgURL: "./image/15026.png"
+            }
+        }
+        var featuerInfop27 = {
+            geo: p27,
+            att: {
+                //标注信息的标题内容
+                title: "15027",
+                //标注内容简介
+                imgURL: "./image/15027.png"
+            }
+        }
+        var featuerInfop28 = {
+            geo: p28,
+            att: {
+                //标注信息的标题内容
+                title: "15028",
+                //标注内容简介
+                imgURL: "./image/15028.png"
+            }
+        }
+        var featuerInfop29 = {
+            geo: p29,
+            att: {
+                //标注信息的标题内容
+                title: "15030",
+                //标注内容简介
+                imgURL: "./image/15030.png"
+            }
+        }
+        var featuerInfop30 = {
+            geo: p30,
+            att: {
+                //标注信息的标题内容
+                title: "17254",
+                //标注内容简介
+                imgURL: "./image/17254.png"
+            }
+        }
+        var featuerInfop31 = {
+            geo: p31,
+            att: {
+                //标注信息的标题内容
+                title: "17255",
+                //标注内容简介
+                imgURL: "./image/17255.png"
+            }
+        }
+        var featuerInfop32 = {
+            geo: p32,
+            att: {
+                //标注信息的标题内容
+                title: "17256",
+                //标注内容简介
+                imgURL: "./image/17256.png"
+            }
+        }
+        var featuerInfop33 = {
+            geo: p33,
+            att: {
+                //标注信息的标题内容
+                title: "17257",
+                //标注内容简介
+                imgURL: "./image/17257.png"
+            }
+        }
+        var featuerInfop34 = {
+            geo: p34,
+            att: {
+                //标注信息的标题内容
+                title: "17258",
+                //标注内容简介
+                imgURL: "./image/17258.png"
+            }
+        }
+        var featuerInfop35 = {
+            geo: p35,
+            att: {
+                //标注信息的标题内容
+                title: "17259",
+                //标注内容简介
+                imgURL: "./image/17259.png"
+            }
+        }
+        var featuerInfop36 = {
+            geo: p36,
+            att: {
+                //标注信息的标题内容
+                title: "17260",
+                //标注内容简介
+                imgURL: "./image/17260.png"
+            }
+        }
+        var featuerInfop37 = {
+            geo: p37,
+            att: {
+                //标注信息的标题内容
+                title: "17261",
+                //标注内容简介
+                imgURL: "./image/17261.png"
+            }
+        }
+        var featuerInfop38 = {
+            geo: p38,
+            att: {
+                //标注信息的标题内容
+                title: "17262",
+                //标注内容简介
+                imgURL: "./image/17262.png"
+            }
+        }
+        var featuerInfop39 = {
+            geo: p39             ,
+            att: {
+                //标注信息的标题内容
+                title: "17263",
+                //标注内容简介
+                imgURL: "./image/17263.png"
+            }
+        }
+        var featuerInfop40 = {
+            geo: p38,
+            att: {
+                //标注信息的标题内容
+                title: "17264",
+                //标注内容简介
+                imgURL: "./image/17264.png"
+            }
+        }
+        var featuerInfop41 = {
+            geo: p38,
+            att: {
+                //标注信息的标题内容
+                title: "17265",
+                //标注内容简介
+                imgURL: "./image/17265.png"
+            }
+        }
+        var featuerInfop42 = {
+            geo: p42,
+            att: {
+                //标注信息的标题内容
+                title: "17266",
+                //标注内容简介
+                imgURL: "./image/17266.png"
+            }
+        }
+        var featuerInfop43 = {
+            geo: p43,
+            att: {
+                //标注信息的标题内容
+                title: "17267",
+                //标注内容简介
+                imgURL: "./image/17267.png"
+            }
+        }
+        var featuerInfop44 = {
+            geo: p44,
+            att: {
+                //标注信息的标题内容
+                title: "17268",
+                //标注内容简介
+                imgURL: "./image/17268.png"
+            }
+        }
+        var featuerInfop45 = {
+            geo: p45,
+            att: {
+                //标注信息的标题内容
+                title: "17272",
+                //标注内容简介
+                imgURL: "./image/17272.png"
+            }
+        }
+        var featuerInfop46 = {
+            geo: p46,
+            att: {
+                //标注信息的标题内容
+                title: "17273",
+                //标注内容简介
+                imgURL: "./image/17273.png"
+            }
+        }
+        var featuerInfop47 = {
+            geo: p47,
+            att: {
+                //标注信息的标题内容
+                title: "17275",
+                //标注内容简介
+                imgURL: "./image/17275.png"
+            }
+        }
+        var featuerInfop48 = {
+            geo: p48,
+            att: {
+                //标注信息的标题内容
+                title: "17303",
+                //标注内容简介
+                imgURL: "./image/17303.png"
+            }
+        }
+        var featuerInfop49 = {
+            geo: p49,
+            att: {
+                //标注信息的标题内容
+                title: "17304",
+                //标注内容简介
+                imgURL: "./image/17304.png"
+            }
+        }
+        var featuerInfop50 = {
+            geo: p50,
+            att: {
+                //标注信息的标题内容
+                title: "17305",
+                //标注内容简介
+                imgURL: "./image/17305.png"
+            }
+        }
+        var featuerInfop51 = {
+            geo: p51,
+            att: {
+                //标注信息的标题内容
+                title: "17306",
+                //标注内容简介
+                imgURL: "./image/17306.png"
+            }
+        }
+        var featuerInfop52 = {
+            geo: p52,
+            att: {
+                //标注信息的标题内容
+                title: "17307",
+                //标注内容简介
+                imgURL: "./image/17307.png"
+            }
+        }
+        var featuerInfop53 = {
+            geo: p53,
+            att: {
+                //标注信息的标题内容
+                title: "18680",
+                //标注内容简介
+                imgURL: "./image/18680.png"
+            }
+        }
+        var featuerInfop54 = {
+            geo: p54,
+            att: {
+                //标注信息的标题内容
+                title: "18681",
+                //标注内容简介
+                imgURL: "./image/18681.png"
+            }
+        }
+        var featuerInfop55 = {
+            geo: p55,
+            att: {
+                //标注信息的标题内容
+                title: "186701",
+                //标注内容简介
+                imgURL: "./image/18701.png"
+            }
+        }
+        var featuerInfop56= {
+            geo: p56,
+            att: {
+                //标注信息的标题内容
+                title: "186702",
+                //标注内容简介
+                imgURL: "./image/18702.png"
+            }
+        }
+        var featuerInfop57= {
+            geo: p57,
+            att: {
+                //标注信息的标题内容
+                title: "4775",
+                //标注内容简介
+                imgURL: "./image/4775.png"
+            }
+        }
+        var featuerInfop58= {
+            geo: p58,
+            att: {
+                //标注信息的标题内容
+                title: "4783",
+                //标注内容简介
+                imgURL: "./image/4783.png"
+            }
+        }
+        var featuerInfop59= {
+            geo: p59,
+            att: {
+                //标注信息的标题内容
+                title: "4805",
+                //标注内容简介
+                imgURL: "./image/4805.png"
+            }
+        }
+        var featuerInfop60= {
+            geo: p60,
+            att: {
+                //标注信息的标题内容
+                title: "4807",
+                //标注内容简介
+                imgURL: "./image/4807.png"
+            }
+        }
+        var featuerInfop61= {
+            geo: p61,
+            att: {
+                //标注信息的标题内容
+                title: "4808",
+                //标注内容简介
+                imgURL: "./image/4808.png"
+            }
+        }
+        var featuerInfop62= {
+            geo: p62,
+            att: {
+                //标注信息的标题内容
+                title: "4810",
+                //标注内容简介
+                imgURL: "./image/4810.png"
+            }
+        }
+        var featuerInfop63= {
+            geo: p63,
+            att: {
+                //标注信息的标题内容
+                title: "4811",
+                //标注内容简介
+                imgURL: "./image/4811.png"
+            }
+        }
+        var featuerInfop64= {
+            geo: p64,
+            att: {
+                //标注信息的标题内容
+                title: "4812",
+                //标注内容简介
+                imgURL: "./image/4812.png"
+            }
+        }
+        var featuerInfop65= {
+            geo: p65,
+            att: {
+                //标注信息的标题内容
+                title: "4813",
+                //标注内容简介
+                imgURL: "./image/4813.png"
+            }
+        }
+        var featuerInfop66= {
+            geo: p66,
+            att: {
+                //标注信息的标题内容
+                title: "4814",
+                //标注内容简介
+                imgURL: "./image/4814.png"
+            }
+        }
+        var featuerInfop67= {
+            geo: p67,
+            att: {
+                //标注信息的标题内容
+                title: "4815",
+                //标注内容简介
+                imgURL: "./image/4815.png"
+            }
+        }
+        var featuerInfop68= {
+            geo: p68,
+            att: {
+                //标注信息的标题内容
+                title: "4816",
+                //标注内容简介
+                imgURL: "./image/4816.png"
+            }
+        }
+        var featuerInfop69= {
+            geo: p69,
+            att: {
+                //标注信息的标题内容
+                title: "4817",
+                //标注内容简介
+                imgURL: "./image/4817.png"
+            }
+        }
+        var featuerInfop70= {
+            geo: p70,
+            att: {
+                //标注信息的标题内容
+                title: "4818",
+                //标注内容简介
+                imgURL: "./image/4818.png"
+            }
+        }
+        var featuerInfop71= {
+            geo: p71,
+            att: {
+                //标注信息的标题内容
+                title: "4819",
+                //标注内容简介
+                imgURL: "./image/4819.png"
+            }
+        }
+        var featuerInfop72= {
+            geo: p72,
+            att: {
+                //标注信息的标题内容
+                title: "4820",
+                //标注内容简介
+                imgURL: "./image/4820.png"
+            }
+        }
+        var featuerInfop73= {
+            geo: p73,
+            att: {
+                //标注信息的标题内容
+                title: "4821",
+                //标注内容简介
+                imgURL: "./image/4821.png"
+            }
+        }
+        var featuerInfop74= {
+            geo: p74,
+            att: {
+                //标注信息的标题内容
+                title: "4823",
+                //标注内容简介
+                imgURL: "./image/4823.png"
+            }
+        }
+        var featuerInfop75= {
+            geo: p75,
+            att: {
+                //标注信息的标题内容
+                title: "4882",
+                //标注内容简介
+                imgURL: "./image/4882.png"
+            }
+        }
+        var featuerInfop76= {
+            geo: p76,
+            att: {
+                //标注信息的标题内容
+                title: "4901",
+                //标注内容简介
+                imgURL: "./image/4901.png"
+            }
+        }
+        var featuerInfop77= {
+            geo: p77,
+            att: {
+                //标注信息的标题内容
+                title: "4902",
+                //标注内容简介
+                imgURL: "./image/4902.png"
+            }
+        }
+        var featuerInfop78= {
+            geo: p78,
+            att: {
+                //标注信息的标题内容
+                title: "500103003",
+                //标注内容简介
+                imgURL: "./image/500103003.png"
+            }
+        }
+        var featuerInfop79= {
+            geo: p79,
+            att: {
+                //标注信息的标题内容
+                title: "500105002",
+                //标注内容简介
+                imgURL: "./image/500105002.png"
+            }
+        }
+        var featuerInfop80= {
+            geo: p80,
+            att: {
+                //标注信息的标题内容
+                title: "500106001",
+                //标注内容简介
+                imgURL: "./image/500106001.png"
+            }
+        }
+        var featuerInfop81= {
+            geo: p81,
+            att: {
+                //标注信息的标题内容
+                title: "500108004",
+                //标注内容简介
+                imgURL: "./image/500108004.png"
+            }
+        }
+        /**
+         * 实例化Map对象加载地图,默认底图加高德地图
+         */
+            //地图设置中心，设置为重庆
+        var center=ol.proj.transform([106.33, 29.35],'EPSG:4326','EPSG:3857');
+        //创建地图
+        var map=new ol.Map({
+            view:new ol.View({
+                center:center,
+                minZoom:8,//设置缩放的最大和最小级别
+                maxZoom:24,
+                zoom:8//设置默认加载的级别
+            }),
+            target:'map'//要显示地图的DIV的ID
+        });
+    
+        //添加一个使用离线瓦片地图的层
+        var offLineMap=new ol.layer.Tile({
+            source: new ol.source.XYZ({
+                        url:'http://webst0{1-4}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=7&x={x}&y={y}&z={z}'
+                    })
+        });
+        map.addLayer(offLineMap);
+    
+        /**
+         * 创建标注样式函数,设置image为图标ol.style.Icon
+         * @param {ol.Feature} feature 要素
+         */
+        var createLabelStyle = function (feature) {
+            return new ol.style.Style({
+                image: new ol.style.Icon(
+                    /** @type {olx.style.IconOptions} */
+                    {
+                        //设置图标点
+                        anchor: [0.5, 60],
+                        //图标起点
+                        anchorOrigin: 'top-right',
+                        //指定x值为图标点的x值
+                        anchorXUnits: 'fraction',
+                        //指定Y值为像素的值
+                        anchorYUnits: 'pixels',
+                        //偏移
+                        offsetOrigin: 'top-right',
+                        // offset:[0,10],
+                        //图标缩放比例
+                        scale:0.2,
+                        //透明度
+                        opacity: 0.75,
+                        //图标的url
+                        src: './image/point.png'
+                    }),
+                text: new ol.style.Text({
+                    //位置
+                    textAlign: 'center',
+                    //基准线
+                    textBaseline: 'middle',
+                    //文字样式
+                    font: 'normal 14px 微软雅黑',
+                    //文本内容
+                    text: feature.get('name'),
+                    //文本填充样式（即文字颜色）
+                    fill: new ol.style.Fill({ color: '#aa3300' }),
+                    stroke: new ol.style.Stroke({ color: '#ffcc33', width: 2 })
+                })
+            });
+        }
+    
+        //实例化Vector要素，通过矢量图层添加到地图容器中
+        var iconFeature = new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(bbSamp),
+            //名称属性
+            name: '12887',
+            //大概人口数（万）
+           // population:
+        });
+        iconFeature.setId('beibeiSamp');
+        var iconFeature1 = new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(spbSamp),
+            //名称属性
+            name: '7563',
+            //大概人口数（万）
+           // population: 
+        });
+      var iconFeaturep2 = new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p2),
+            //名称属性
+            name: '12842',
+        });
+       var iconFeaturep3 = new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p3),
+            //名称属性
+            name: '12851',
+        });
+       var iconFeaturep4 = new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p4),
+            //名称属性
+            name: '12878',
+        });
+      var iconFeaturep6= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p6),
+            //名称属性
+            name: '14764',
+        });
+        var iconFeaturep6= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p6),
+            //名称属性
+            name: '14764',
+        });
+        var iconFeaturep7= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p7),
+            //名称属性
+            name: '14765',
+        });
+        var iconFeaturep8= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p8),
+            //名称属性
+            name: '14766',
+        });
+        var iconFeaturep9= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p9),
+            //名称属性
+            name: '14807',
+        });
+        var iconFeaturep10= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p10),
+            //名称属性
+            name: '14808',
+        });
+        var iconFeaturep11= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p11),
+            //名称属性
+            name: '14849',
+        });
+        var iconFeaturep12= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p12),
+            //名称属性
+            name: '14852',
+        });
+        var iconFeaturep13= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p13),
+            //名称属性
+            name: '14853',
+        });
+        var iconFeaturep14= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p14),
+            //名称属性
+            name: '14854',
+        });
+        var iconFeaturep15= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p15),
+            //名称属性
+            name: '14855',
+        });
+        var iconFeaturep16= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p16),
+            //名称属性
+            name: '14901',
+        });
+        var iconFeaturep17= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p17),
+            //名称属性
+            name: '14902',
+        });
+        var iconFeaturep18= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p18),
+            //名称属性
+            name: '14903',
+        });
+        var iconFeaturep19= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p19),
+            //名称属性
+            name: '14905',
+        });
+        var iconFeaturep20= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p20),
+            //名称属性
+            name: '14906',
+        });
+        var iconFeaturep21= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p21),
+            //名称属性
+            name: '14943',
+        });
+        var iconFeaturep22= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p22),
+            //名称属性
+            name: '14944',
+        });
+        var iconFeaturep23= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p23),
+            //名称属性
+            name: '14945',
+        });
+        var iconFeaturep24= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p24),
+            //名称属性
+            name: '14946',
+        });
+        var iconFeaturep25= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p25),
+            //名称属性
+            name: '14991',
+        });
+        var iconFeaturep26= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p26),
+            //名称属性
+            name: '15026',
+        });
+        var iconFeaturep27= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p27),
+            //名称属性
+            name: '15027',
+        });
+        var iconFeaturep28= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p28),
+            //名称属性
+            name: '15028',
+        });
+        var iconFeaturep29= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p29),
+            //名称属性
+            name: '15030',
+        });
+        var iconFeaturep30= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p30),
+            //名称属性
+            name: '17254',
+        });
+        var iconFeaturep31= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p31),
+            //名称属性
+            name: '17255',
+        });
+        var iconFeaturep32= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p32),
+            //名称属性
+            name: '17256',
+        });
+        var iconFeaturep33= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p33),
+            //名称属性
+            name: '17257',
+        });
+        var iconFeaturep34= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p34),
+            //名称属性
+            name: '17258',
+        });
+        var iconFeaturep35= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p35),
+            //名称属性
+            name: '17259',
+        });
+        var iconFeaturep36= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p36),
+            //名称属性
+            name: '17260',
+        });
+        var iconFeaturep37= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p37),
+            //名称属性
+            name: '17261',
+        });
+        var iconFeaturep38= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p38),
+            //名称属性
+            name: '17262',
+        });
+        var iconFeaturep39= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p39),
+            //名称属性
+            name: '17263',
+        });
+        var iconFeaturep40= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p40),
+            //名称属性
+            name: '17264',
+        });
+        var iconFeaturep41= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p41),
+            //名称属性
+            name: '17265',
+        });
+        var iconFeaturep42= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p42),
+            //名称属性
+            name: '17266',
+        });
+        var iconFeaturep43= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p43),
+            //名称属性
+            name: '17267',
+        });
+        var iconFeaturep44= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p44),
+            //名称属性
+            name: '17268',
+        });
+        var iconFeaturep45= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p45),
+            //名称属性
+            name: '17272',
+        });
+        var iconFeaturep46= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p46),
+            //名称属性
+            name: '17273',
+        });
+        var iconFeaturep47= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p47),
+            //名称属性
+            name: '17275',
+        });
+        var iconFeaturep48= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p48),
+            //名称属性
+            name: '17303',
+        });
+        var iconFeaturep49= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p49),
+            //名称属性
+            name: '17304',
+        });
+        var iconFeaturep50= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p50),
+            //名称属性
+            name: '17305',
+        });
+        var iconFeaturep51= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p51),
+            //名称属性
+            name: '17306',
+        });
+        var iconFeaturep52= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p52),
+            //名称属性
+            name: '17307',
+        });
+        var iconFeaturep53= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p53),
+            //名称属性
+            name: '18680',
+        });
+        var iconFeaturep54= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p54),
+            //名称属性
+            name: '18681',
+        });
+        var iconFeaturep55= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p55),
+            //名称属性
+            name: '18701',
+        });
+        var iconFeaturep56= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p56),
+            //名称属性
+            name: '18702',
+        });
+        var iconFeaturep57= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p57),
+            //名称属性
+            name: '4775',
+        });
+        var iconFeaturep58= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p58),
+            //名称属性
+            name: '4783',
+        });
+        var iconFeaturep59= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p59),
+            //名称属性
+            name: '4805',
+        });
+        var iconFeaturep60= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p60),
+            //名称属性
+            name: '4807',
+        });
+        var iconFeaturep61= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p61),
+            //名称属性
+            name: '4808',
+        });
+        var iconFeaturep62= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p62),
+            //名称属性
+            name: '4810',
+        });
+        var iconFeaturep63= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p63),
+            //名称属性
+            name: '4811',
+        });
+        var iconFeaturep64= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p64),
+            //名称属性
+            name: '4812',
+        });
+        var iconFeaturep65= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p65),
+            //名称属性
+            name: '4813',
+        });
+        var iconFeaturep66= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p66),
+            //名称属性
+            name: '4814',
+        });
+        var iconFeaturep67= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p67),
+            //名称属性
+            name: '4815',
+        });
+        var iconFeaturep68= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p68),
+            //名称属性
+            name: '4816',
+        });
+        var iconFeaturep69= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p69),
+            //名称属性
+            name: '4817',
+        });
+        var iconFeaturep70= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p70),
+            //名称属性
+            name: '4818',
+        });
+        var iconFeaturep71= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p71),
+            //名称属性
+            name: '4819',
+        });
+        var iconFeaturep72= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p72),
+            //名称属性
+            name: '4820',
+        });
+        var iconFeaturep73= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p73),
+            //名称属性
+            name: '4821',
+        });
+        var iconFeaturep74= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p74),
+            //名称属性
+            name: '4823',
+        });
+        var iconFeaturep75= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p75),
+            //名称属性
+            name: '4882',
+        });
+        var iconFeaturep76= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p76),
+            //名称属性
+            name: '4901',
+        });
+        var iconFeaturep77= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p77),
+            //名称属性
+            name: '4902',
+        });
+        var iconFeaturep78= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p78),
+            //名称属性
+            name: '4500103003',
+        });
+        var iconFeaturep79= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p79),
+            //名称属性
+            name: '500105002',
+        });
+        var iconFeaturep80= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p80),
+            //名称属性
+            name: '500106001',
+        });
+        var iconFeaturep81= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p81),
+            //名称属性
+            name: '500108004',
+        });
+        var iconFeaturep82= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p82),
+            //名称属性
+            name: '500102007(湿地)',
+        });
+        var iconFeaturep83= new ol.Feature({
+            //坐标点
+            geometry: new ol.geom.Point(p83),
+            //名称属性
+            name: '500233006（湿地）',
+        });
+        iconFeature1.setId('shapingbaSamp');
+        iconFeaturep2.setId('p2');
+        iconFeaturep3.setId('p3');
+        iconFeaturep4.setId('p4');
+        iconFeaturep6.setId('p6');
+        iconFeaturep7.setId('p7');
+        iconFeaturep8.setId('p8');
+        iconFeaturep9.setId('p9');
+        iconFeaturep10.setId('p10');
+        iconFeaturep11.setId('p11');
+        iconFeaturep12.setId('p12');
+        iconFeaturep13.setId('p13');
+        iconFeaturep14.setId('p14');
+        iconFeaturep15.setId('p15');
+        iconFeaturep16.setId('p16');
+        iconFeaturep17.setId('p17');
+        iconFeaturep18.setId('p18');
+        iconFeaturep19.setId('p19');
+        iconFeaturep20.setId('p20');
+        iconFeaturep21.setId('p21');
+        iconFeaturep22.setId('p22');
+        iconFeaturep23.setId('p23');
+        iconFeaturep24.setId('p24');
+        iconFeaturep25.setId('p25');
+        iconFeaturep26.setId('p26');
+        iconFeaturep27.setId('p27');
+        iconFeaturep28.setId('p28');
+        iconFeaturep29.setId('p29');
+        iconFeaturep30.setId('p30');
+        iconFeaturep31.setId('p31');
+        iconFeaturep32.setId('p32');
+        iconFeaturep33.setId('p33');
+        iconFeaturep34.setId('p34');
+        iconFeaturep35.setId('p35');
+        iconFeaturep36.setId('p36');
+        iconFeaturep37.setId('p37');
+        iconFeaturep38.setId('p38');
+        iconFeaturep39.setId('p39');
+        iconFeaturep40.setId('p40');
+        iconFeaturep41.setId('p41');
+        iconFeaturep42.setId('p42');
+        iconFeaturep43.setId('p43');
+        iconFeaturep44.setId('p44');
+        iconFeaturep45.setId('p45');
+        iconFeaturep46.setId('p46');
+        iconFeaturep47.setId('p47');
+        iconFeaturep48.setId('p48');
+        iconFeaturep49.setId('p49');
+        iconFeaturep50.setId('p50');
+        iconFeaturep51.setId('p51');
+        iconFeaturep52.setId('p52');
+        iconFeaturep53.setId('p53');
+        iconFeaturep54.setId('p54');
+        iconFeaturep55.setId('p55');
+        iconFeaturep56.setId('p56');
+        iconFeaturep57.setId('p57');
+        iconFeaturep58.setId('p58');
+        iconFeaturep59.setId('p59');
+        iconFeaturep60.setId('p60');
+        iconFeaturep61.setId('p61');
+        iconFeaturep62.setId('p62');
+        iconFeaturep63.setId('p63');
+        iconFeaturep64.setId('p64');
+        iconFeaturep65.setId('p65');
+        iconFeaturep66.setId('p66');
+        iconFeaturep67.setId('p67');
+        iconFeaturep68.setId('p68');
+        iconFeaturep69.setId('p69');
+        iconFeaturep70.setId('p70');
+        iconFeaturep71.setId('p71');
+        iconFeaturep72.setId('p72');
+        iconFeaturep73.setId('p73');
+        iconFeaturep74.setId('p74');
+        iconFeaturep75.setId('p75');
+        iconFeaturep76.setId('p76');
+        iconFeaturep77.setId('p77');
+        iconFeaturep78.setId('p78');
+        iconFeaturep79.setId('p79');
+        iconFeaturep80.setId('p80');
+        iconFeaturep81.setId('p81');
+        iconFeaturep82.setId('p82');
+        iconFeaturep83.setId('p83');
+        iconFeature.setStyle(createLabelStyle(iconFeature));
+        iconFeature1.setStyle(createLabelStyle(iconFeature1));
+        iconFeaturep2.setStyle(createLabelStyle(iconFeaturep2));
+        iconFeaturep3.setStyle(createLabelStyle(iconFeaturep3));
+        iconFeaturep4.setStyle(createLabelStyle(iconFeaturep4));
+        iconFeaturep6.setStyle(createLabelStyle(iconFeaturep6));
+        iconFeaturep7.setStyle(createLabelStyle(iconFeaturep7));
+        iconFeaturep8.setStyle(createLabelStyle(iconFeaturep8));
+        iconFeaturep9.setStyle(createLabelStyle(iconFeaturep9));
+        iconFeaturep10.setStyle(createLabelStyle(iconFeaturep10));
+        iconFeaturep11.setStyle(createLabelStyle(iconFeaturep11));
+        iconFeaturep12.setStyle(createLabelStyle(iconFeaturep12));
+        iconFeaturep13.setStyle(createLabelStyle(iconFeaturep13));
+        iconFeaturep14.setStyle(createLabelStyle(iconFeaturep14));
+        iconFeaturep15.setStyle(createLabelStyle(iconFeaturep15));
+        iconFeaturep16.setStyle(createLabelStyle(iconFeaturep16));
+        iconFeaturep17.setStyle(createLabelStyle(iconFeaturep17));
+        iconFeaturep18.setStyle(createLabelStyle(iconFeaturep18));
+        iconFeaturep19.setStyle(createLabelStyle(iconFeaturep19));
+        iconFeaturep20.setStyle(createLabelStyle(iconFeaturep20));
+        iconFeaturep21.setStyle(createLabelStyle(iconFeaturep21));
+        iconFeaturep22.setStyle(createLabelStyle(iconFeaturep22));
+        iconFeaturep23.setStyle(createLabelStyle(iconFeaturep23));
+        iconFeaturep24.setStyle(createLabelStyle(iconFeaturep24));
+        iconFeaturep25.setStyle(createLabelStyle(iconFeaturep25));
+        iconFeaturep26.setStyle(createLabelStyle(iconFeaturep26));
+        iconFeaturep27.setStyle(createLabelStyle(iconFeaturep27));
+        iconFeaturep28.setStyle(createLabelStyle(iconFeaturep28));
+        iconFeaturep29.setStyle(createLabelStyle(iconFeaturep29));
+        iconFeaturep30.setStyle(createLabelStyle(iconFeaturep30));
+        iconFeaturep31.setStyle(createLabelStyle(iconFeaturep31));
+        iconFeaturep32.setStyle(createLabelStyle(iconFeaturep32));
+        iconFeaturep33.setStyle(createLabelStyle(iconFeaturep33));
+        iconFeaturep34.setStyle(createLabelStyle(iconFeaturep34));
+        iconFeaturep35.setStyle(createLabelStyle(iconFeaturep35));
+        iconFeaturep36.setStyle(createLabelStyle(iconFeaturep36));
+        iconFeaturep37.setStyle(createLabelStyle(iconFeaturep37));
+        iconFeaturep38.setStyle(createLabelStyle(iconFeaturep38));
+        iconFeaturep39.setStyle(createLabelStyle(iconFeaturep39));
+        iconFeaturep40.setStyle(createLabelStyle(iconFeaturep40));
+        iconFeaturep41.setStyle(createLabelStyle(iconFeaturep41));
+        iconFeaturep42.setStyle(createLabelStyle(iconFeaturep42));
+        iconFeaturep43.setStyle(createLabelStyle(iconFeaturep43));
+        iconFeaturep44.setStyle(createLabelStyle(iconFeaturep44));
+        iconFeaturep45.setStyle(createLabelStyle(iconFeaturep45));
+        iconFeaturep46.setStyle(createLabelStyle(iconFeaturep46));
+        iconFeaturep47.setStyle(createLabelStyle(iconFeaturep47));
+        iconFeaturep48.setStyle(createLabelStyle(iconFeaturep48));
+        iconFeaturep49.setStyle(createLabelStyle(iconFeaturep49));
+        iconFeaturep50.setStyle(createLabelStyle(iconFeaturep50));
+        iconFeaturep51.setStyle(createLabelStyle(iconFeaturep51));
+        iconFeaturep52.setStyle(createLabelStyle(iconFeaturep52));
+        iconFeaturep53.setStyle(createLabelStyle(iconFeaturep53));
+        iconFeaturep54.setStyle(createLabelStyle(iconFeaturep54));
+        iconFeaturep55.setStyle(createLabelStyle(iconFeaturep55));
+        iconFeaturep56.setStyle(createLabelStyle(iconFeaturep56));
+        iconFeaturep57.setStyle(createLabelStyle(iconFeaturep57));
+        iconFeaturep58.setStyle(createLabelStyle(iconFeaturep58));
+        iconFeaturep59.setStyle(createLabelStyle(iconFeaturep59));
+        iconFeaturep60.setStyle(createLabelStyle(iconFeaturep60));
+        iconFeaturep61.setStyle(createLabelStyle(iconFeaturep61));
+        iconFeaturep62.setStyle(createLabelStyle(iconFeaturep62));
+        iconFeaturep63.setStyle(createLabelStyle(iconFeaturep63));
+        iconFeaturep64.setStyle(createLabelStyle(iconFeaturep64));
+        iconFeaturep65.setStyle(createLabelStyle(iconFeaturep65));
+        iconFeaturep66.setStyle(createLabelStyle(iconFeaturep66));
+        iconFeaturep67.setStyle(createLabelStyle(iconFeaturep67));
+        iconFeaturep68.setStyle(createLabelStyle(iconFeaturep68));
+        iconFeaturep69.setStyle(createLabelStyle(iconFeaturep69));
+        iconFeaturep70.setStyle(createLabelStyle(iconFeaturep70));
+        iconFeaturep71.setStyle(createLabelStyle(iconFeaturep71));
+        iconFeaturep72.setStyle(createLabelStyle(iconFeaturep72));
+        iconFeaturep73.setStyle(createLabelStyle(iconFeaturep73));
+        iconFeaturep74.setStyle(createLabelStyle(iconFeaturep74));
+        iconFeaturep75.setStyle(createLabelStyle(iconFeaturep75));
+        iconFeaturep76.setStyle(createLabelStyle(iconFeaturep76));
+        iconFeaturep77.setStyle(createLabelStyle(iconFeaturep77));
+        iconFeaturep78.setStyle(createLabelStyle(iconFeaturep78));
+        iconFeaturep79.setStyle(createLabelStyle(iconFeaturep79));
+        iconFeaturep80.setStyle(createLabelStyle(iconFeaturep80));
+        iconFeaturep81.setStyle(createLabelStyle(iconFeaturep81));
+        iconFeaturep82.setStyle(createLabelStyle(iconFeaturep82));
+        iconFeaturep83.setStyle(createLabelStyle(iconFeaturep83));
+        //矢量标注的数据源
+        var vectorSource = new ol.source.Vector({
+            features: [iconFeature]
+
+        });
+        //矢量标注的数据源
+        var vectorSource1 = new ol.source.Vector({
+            features: [iconFeature1]
+        });
+        var vectorSourcep2 = new ol.source.Vector({
+            features: [iconFeaturep2]
+        });
+        var vectorSourcep3 = new ol.source.Vector({
+            features: [iconFeaturep3]
+        });
+        var vectorSourcep4 = new ol.source.Vector({
+            features: [iconFeaturep4]
+        });
+        var vectorSourcep6 = new ol.source.Vector({
+            features: [iconFeaturep6]
+        });
+        var vectorSourcep7 = new ol.source.Vector({
+            features: [iconFeaturep7]
+        });
+        var vectorSourcep8 = new ol.source.Vector({
+            features: [iconFeaturep8]
+        });
+        var vectorSourcep9 = new ol.source.Vector({
+            features: [iconFeaturep9]
+        });
+        var vectorSourcep10 = new ol.source.Vector({
+            features: [iconFeaturep10]
+        });
+        var vectorSourcep11 = new ol.source.Vector({
+            features: [iconFeaturep11]
+        });
+        var vectorSourcep12 = new ol.source.Vector({
+            features: [iconFeaturep12]
+        });
+        var vectorSourcep13 = new ol.source.Vector({
+            features: [iconFeaturep13]
+        });
+        var vectorSourcep14 = new ol.source.Vector({
+            features: [iconFeaturep14]
+        });
+        var vectorSourcep15 = new ol.source.Vector({
+            features: [iconFeaturep15]
+        });
+        var vectorSourcep16 = new ol.source.Vector({
+            features: [iconFeaturep16]
+        });
+        var vectorSourcep17 = new ol.source.Vector({
+            features: [iconFeaturep17]
+        });
+        var vectorSourcep18 = new ol.source.Vector({
+            features: [iconFeaturep18]
+        });
+        var vectorSourcep19 = new ol.source.Vector({
+            features: [iconFeaturep19]
+        });
+        var vectorSourcep20 = new ol.source.Vector({
+            features: [iconFeaturep20]
+        });
+        var vectorSourcep21 = new ol.source.Vector({
+            features: [iconFeaturep21]
+        });
+        var vectorSourcep22 = new ol.source.Vector({
+            features: [iconFeaturep22]
+        });
+        var vectorSourcep23 = new ol.source.Vector({
+            features: [iconFeaturep23]
+        });
+        var vectorSourcep24 = new ol.source.Vector({
+            features: [iconFeaturep24]
+        });
+        var vectorSourcep25 = new ol.source.Vector({
+            features: [iconFeaturep25]
+        });
+        var vectorSourcep26 = new ol.source.Vector({
+            features: [iconFeaturep26]
+        });
+        var vectorSourcep27 = new ol.source.Vector({
+            features: [iconFeaturep27]
+        });
+        var vectorSourcep28 = new ol.source.Vector({
+            features: [iconFeaturep28]
+        });
+        var vectorSourcep29 = new ol.source.Vector({
+            features: [iconFeaturep29]
+        });
+        var vectorSourcep30 = new ol.source.Vector({
+            features: [iconFeaturep30]
+        });
+        var vectorSourcep31 = new ol.source.Vector({
+            features: [iconFeaturep31]
+        });
+        var vectorSourcep32 = new ol.source.Vector({
+            features: [iconFeaturep32]
+        });
+        var vectorSourcep33 = new ol.source.Vector({
+            features: [iconFeaturep33]
+        });
+        var vectorSourcep34 = new ol.source.Vector({
+            features: [iconFeaturep34]
+        });
+        var vectorSourcep35 = new ol.source.Vector({
+            features: [iconFeaturep35]
+        });
+        var vectorSourcep36 = new ol.source.Vector({
+            features: [iconFeaturep36]
+        });
+        var vectorSourcep37 = new ol.source.Vector({
+            features: [iconFeaturep38]
+        });
+        var vectorSourcep38 = new ol.source.Vector({
+            features: [iconFeaturep38]
+        });
+        var vectorSourcep39 = new ol.source.Vector({
+            features: [iconFeaturep39]
+        });
+        var vectorSourcep40 = new ol.source.Vector({
+            features: [iconFeaturep40]
+        });
+        var vectorSourcep41 = new ol.source.Vector({
+            features: [iconFeaturep41]
+        });
+        var vectorSourcep42 = new ol.source.Vector({
+            features: [iconFeaturep42]
+        });
+        var vectorSourcep43 = new ol.source.Vector({
+            features: [iconFeaturep43]
+        });
+        var vectorSourcep44 = new ol.source.Vector({
+            features: [iconFeaturep44]
+        });
+        var vectorSourcep45 = new ol.source.Vector({
+            features: [iconFeaturep45]
+        });
+        var vectorSourcep46 = new ol.source.Vector({
+            features: [iconFeaturep46]
+        });
+        var vectorSourcep47 = new ol.source.Vector({
+            features: [iconFeaturep47]
+        });
+        var vectorSourcep48 = new ol.source.Vector({
+            features: [iconFeaturep48]
+        });
+        var vectorSourcep49 = new ol.source.Vector({
+            features: [iconFeaturep49]
+        });
+        var vectorSourcep50 = new ol.source.Vector({
+            features: [iconFeaturep50]
+        });
+        var vectorSourcep51 = new ol.source.Vector({
+            features: [iconFeaturep51]
+        });
+        var vectorSourcep52 = new ol.source.Vector({
+            features: [iconFeaturep52]
+        });
+        var vectorSourcep53 = new ol.source.Vector({
+            features: [iconFeaturep53]
+        });
+        var vectorSourcep54 = new ol.source.Vector({
+            features: [iconFeaturep54]
+        });
+        var vectorSourcep55 = new ol.source.Vector({
+            features: [iconFeaturep55]
+        });
+        var vectorSourcep56 = new ol.source.Vector({
+            features: [iconFeaturep56]
+        });
+        var vectorSourcep57 = new ol.source.Vector({
+            features: [iconFeaturep57]
+        });
+        var vectorSourcep58 = new ol.source.Vector({
+            features: [iconFeaturep58]
+        });
+        var vectorSourcep59 = new ol.source.Vector({
+            features: [iconFeaturep59]
+        });
+        var vectorSourcep60 = new ol.source.Vector({
+            features: [iconFeaturep60]
+        });
+        var vectorSourcep61 = new ol.source.Vector({
+            features: [iconFeaturep61]
+        });
+        var vectorSourcep62 = new ol.source.Vector({
+            features: [iconFeaturep62]
+        });
+        var vectorSourcep63 = new ol.source.Vector({
+            features: [iconFeaturep63]
+        });
+        var vectorSourcep64 = new ol.source.Vector({
+            features: [iconFeaturep64]
+        });
+        var vectorSourcep65 = new ol.source.Vector({
+            features: [iconFeaturep65]
+        });
+        var vectorSourcep66 = new ol.source.Vector({
+            features: [iconFeaturep66]
+        });
+        var vectorSourcep67 = new ol.source.Vector({
+            features: [iconFeaturep67]
+        });
+        var vectorSourcep68 = new ol.source.Vector({
+            features: [iconFeaturep68]
+        });
+        var vectorSourcep69 = new ol.source.Vector({
+            features: [iconFeaturep69]
+        });
+        var vectorSourcep70 = new ol.source.Vector({
+            features: [iconFeaturep70]
+        });
+        var vectorSourcep71 = new ol.source.Vector({
+            features: [iconFeaturep71]
+        });
+        var vectorSourcep72 = new ol.source.Vector({
+            features: [iconFeaturep72]
+        });
+        var vectorSourcep73 = new ol.source.Vector({
+            features: [iconFeaturep73]
+        });
+        var vectorSourcep74 = new ol.source.Vector({
+            features: [iconFeaturep74]
+        });
+        var vectorSourcep75 = new ol.source.Vector({
+            features: [iconFeaturep75]
+        });
+        var vectorSourcep76 = new ol.source.Vector({
+            features: [iconFeaturep76]
+        });
+        var vectorSourcep77 = new ol.source.Vector({
+            features: [iconFeaturep77]
+        });
+        var vectorSourcep78 = new ol.source.Vector({
+            features: [iconFeaturep78]
+        });
+        var vectorSourcep79 = new ol.source.Vector({
+            features: [iconFeaturep79]
+        });
+        var vectorSourcep80 = new ol.source.Vector({
+            features: [iconFeaturep80]
+        });
+        var vectorSourcep81 = new ol.source.Vector({
+            features: [iconFeaturep81]
+        });
+        var vectorSourcep82 = new ol.source.Vector({
+            features: [iconFeaturep82]
+        });
+        var vectorSourcep83 = new ol.source.Vector({
+            features: [iconFeaturep83]
+        });
+        //矢量标注图层
+        var vectorLayer = new ol.layer.Vector({
+            source: vectorSource
+        });
+        var vectorLayer1 = new ol.layer.Vector({
+            source: vectorSource1
+        });
+        var vectorLayerp2 = new ol.layer.Vector({
+            source: vectorSourcep2
+        });
+        var vectorLayerp3 = new ol.layer.Vector({
+            source: vectorSourcep3
+        });
+        var vectorLayerp4 = new ol.layer.Vector({
+            source: vectorSourcep4
+        });
+        var vectorLayerp6 = new ol.layer.Vector({
+            source: vectorSourcep6
+        });
+        var vectorLayerp7= new ol.layer.Vector({
+            source: vectorSourcep7
+        });
+        var vectorLayerp8 = new ol.layer.Vector({
+            source: vectorSourcep8
+        });
+        var vectorLayerp9 = new ol.layer.Vector({
+            source: vectorSourcep9
+        });
+        var vectorLayerp10 = new ol.layer.Vector({
+            source: vectorSourcep10
+        });
+        var vectorLayerp11 = new ol.layer.Vector({
+            source: vectorSourcep11
+        });
+        var vectorLayerp12 = new ol.layer.Vector({
+            source: vectorSourcep12
+        });
+        var vectorLayerp13 = new ol.layer.Vector({
+            source: vectorSourcep13
+        });
+        var vectorLayerp14 = new ol.layer.Vector({
+            source: vectorSourcep14
+        });
+        var vectorLayerp15 = new ol.layer.Vector({
+            source: vectorSourcep15
+        });
+        var vectorLayerp16 = new ol.layer.Vector({
+            source: vectorSourcep16
+        });
+        var vectorLayerp17 = new ol.layer.Vector({
+            source: vectorSourcep17
+        });
+        var vectorLayerp18 = new ol.layer.Vector({
+            source: vectorSourcep18
+        });
+        var vectorLayerp19 = new ol.layer.Vector({
+            source: vectorSourcep19
+        });
+        var vectorLayerp20 = new ol.layer.Vector({
+            source: vectorSourcep20
+        });
+        var vectorLayerp21 = new ol.layer.Vector({
+            source: vectorSourcep21
+        });
+        var vectorLayerp22 = new ol.layer.Vector({
+            source: vectorSourcep22
+        });
+        var vectorLayerp23 = new ol.layer.Vector({
+            source: vectorSourcep23
+        });
+        var vectorLayerp24 = new ol.layer.Vector({
+            source: vectorSourcep24
+        });
+        var vectorLayerp25 = new ol.layer.Vector({
+            source: vectorSourcep25
+        });
+        var vectorLayerp26 = new ol.layer.Vector({
+            source: vectorSourcep26
+        });
+        var vectorLayerp27 = new ol.layer.Vector({
+            source: vectorSourcep27
+        });
+        var vectorLayerp28 = new ol.layer.Vector({
+            source: vectorSourcep28
+        });
+        var vectorLayerp29 = new ol.layer.Vector({
+            source: vectorSourcep29
+        });
+        var vectorLayerp30 = new ol.layer.Vector({
+            source: vectorSourcep30
+        });
+        var vectorLayerp31 = new ol.layer.Vector({
+            source: vectorSourcep31
+        });
+        var vectorLayerp32 = new ol.layer.Vector({
+            source: vectorSourcep32
+        });
+        var vectorLayerp33 = new ol.layer.Vector({
+            source: vectorSourcep33
+        });
+        var vectorLayerp34 = new ol.layer.Vector({
+            source: vectorSourcep34
+        });
+        var vectorLayerp35 = new ol.layer.Vector({
+            source: vectorSourcep35
+        });
+        var vectorLayerp36 = new ol.layer.Vector({
+            source: vectorSourcep36
+        });
+        var vectorLayerp37 = new ol.layer.Vector({
+            source: vectorSourcep37
+        });
+        var vectorLayerp38 = new ol.layer.Vector({
+            source: vectorSourcep38
+        });
+        var vectorLayerp39 = new ol.layer.Vector({
+            source: vectorSourcep39
+        });
+        var vectorLayerp40 = new ol.layer.Vector({
+            source: vectorSourcep40
+        });
+        var vectorLayerp41 = new ol.layer.Vector({
+            source: vectorSourcep41
+        });
+        var vectorLayerp42 = new ol.layer.Vector({
+            source: vectorSourcep42
+        });
+        var vectorLayerp43 = new ol.layer.Vector({
+            source: vectorSourcep43
+        });
+        var vectorLayerp44 = new ol.layer.Vector({
+            source: vectorSourcep44
+        });
+        var vectorLayerp45 = new ol.layer.Vector({
+            source: vectorSourcep45
+        });
+        var vectorLayerp46 = new ol.layer.Vector({
+            source: vectorSourcep46
+        });
+        var vectorLayerp47 = new ol.layer.Vector({
+            source: vectorSourcep47
+        });
+        var vectorLayerp48 = new ol.layer.Vector({
+            source: vectorSourcep48
+        });
+        var vectorLayerp49 = new ol.layer.Vector({
+            source: vectorSourcep49
+        });
+        var vectorLayerp50 = new ol.layer.Vector({
+            source: vectorSourcep50
+        });
+        var vectorLayerp51 = new ol.layer.Vector({
+            source: vectorSourcep51
+        });
+        var vectorLayerp52 = new ol.layer.Vector({
+            source: vectorSourcep52
+        });
+        var vectorLayerp53 = new ol.layer.Vector({
+            source: vectorSourcep53
+        });
+        var vectorLayerp54 = new ol.layer.Vector({
+            source: vectorSourcep54
+        });
+        var vectorLayerp55 = new ol.layer.Vector({
+            source: vectorSourcep55
+        });
+        var vectorLayerp56 = new ol.layer.Vector({
+            source: vectorSourcep56
+        });
+        var vectorLayerp57 = new ol.layer.Vector({
+            source: vectorSourcep57
+        });
+        var vectorLayerp58 = new ol.layer.Vector({
+            source: vectorSourcep58
+        });
+        var vectorLayerp59 = new ol.layer.Vector({
+            source: vectorSourcep59
+        });
+        var vectorLayerp60 = new ol.layer.Vector({
+            source: vectorSourcep60
+        });
+        var vectorLayerp61 = new ol.layer.Vector({
+            source: vectorSourcep61
+        });
+        var vectorLayerp62 = new ol.layer.Vector({
+            source: vectorSourcep62
+        });
+        var vectorLayerp63 = new ol.layer.Vector({
+            source: vectorSourcep63
+        });
+        var vectorLayerp64 = new ol.layer.Vector({
+            source: vectorSourcep64
+        });
+        var vectorLayerp65 = new ol.layer.Vector({
+            source: vectorSourcep65
+        });
+        var vectorLayerp66 = new ol.layer.Vector({
+            source: vectorSourcep66
+        });
+        var vectorLayerp67 = new ol.layer.Vector({
+            source: vectorSourcep67
+        });
+        var vectorLayerp68 = new ol.layer.Vector({
+            source: vectorSourcep68
+        });
+        var vectorLayerp69 = new ol.layer.Vector({
+            source: vectorSourcep69
+        });
+        var vectorLayerp70 = new ol.layer.Vector({
+            source: vectorSourcep70
+        });
+        var vectorLayerp71 = new ol.layer.Vector({
+            source: vectorSourcep71
+        });
+        var vectorLayerp72 = new ol.layer.Vector({
+            source: vectorSourcep72
+        });
+        var vectorLayerp73 = new ol.layer.Vector({
+            source: vectorSourcep73
+        });
+        var vectorLayerp74 = new ol.layer.Vector({
+            source: vectorSourcep74
+        });
+        var vectorLayerp75 = new ol.layer.Vector({
+            source: vectorSourcep75
+        });
+        var vectorLayerp76 = new ol.layer.Vector({
+            source: vectorSourcep76
+        });
+        var vectorLayerp77 = new ol.layer.Vector({
+            source: vectorSourcep77
+        });
+        var vectorLayerp78 = new ol.layer.Vector({
+            source: vectorSourcep78
+        });
+        var vectorLayerp79 = new ol.layer.Vector({
+            source: vectorSourcep79
+        });
+        var vectorLayerp80 = new ol.layer.Vector({
+            source: vectorSourcep80
+        });
+        var vectorLayerp81 = new ol.layer.Vector({
+            source: vectorSourcep81
+        });
+        var vectorLayerp82 = new ol.layer.Vector({
+            source: vectorSourcep82
+        });
+        var vectorLayerp83 = new ol.layer.Vector({
+            source: vectorSourcep83
+        });
+        map.addLayer(vectorLayer);
+        map.addLayer(vectorLayer1);
+        map.addLayer(vectorLayerp2);
+        map.addLayer(vectorLayerp3);
+        map.addLayer(vectorLayerp4);
+        map.addLayer(vectorLayerp6);
+        map.addLayer(vectorLayerp7);
+        map.addLayer(vectorLayerp8);
+        map.addLayer(vectorLayerp9);
+        map.addLayer(vectorLayerp10);
+        map.addLayer(vectorLayerp11);
+        map.addLayer(vectorLayerp12);
+        map.addLayer(vectorLayerp13);
+        map.addLayer(vectorLayerp14);
+        map.addLayer(vectorLayerp15);
+        map.addLayer(vectorLayerp16);
+        map.addLayer(vectorLayerp17);
+        map.addLayer(vectorLayerp18);
+        map.addLayer(vectorLayerp19);
+        map.addLayer(vectorLayerp20);
+        map.addLayer(vectorLayerp21);
+        map.addLayer(vectorLayerp22);
+        map.addLayer(vectorLayerp23);
+        map.addLayer(vectorLayerp24);
+        map.addLayer(vectorLayerp25);
+        map.addLayer(vectorLayerp26);
+        map.addLayer(vectorLayerp27);
+        map.addLayer(vectorLayerp28);
+        map.addLayer(vectorLayerp29);
+        map.addLayer(vectorLayerp30);
+        map.addLayer(vectorLayerp31);
+        map.addLayer(vectorLayerp32);
+        map.addLayer(vectorLayerp33);
+        map.addLayer(vectorLayerp34);
+        map.addLayer(vectorLayerp35);
+        map.addLayer(vectorLayerp36);
+        map.addLayer(vectorLayerp37);
+        map.addLayer(vectorLayerp38);
+        map.addLayer(vectorLayerp39);
+        map.addLayer(vectorLayerp40);
+        map.addLayer(vectorLayerp41);
+        map.addLayer(vectorLayerp42);
+        map.addLayer(vectorLayerp43);
+        map.addLayer(vectorLayerp44);
+        map.addLayer(vectorLayerp45);
+        map.addLayer(vectorLayerp46);
+        map.addLayer(vectorLayerp47);
+        map.addLayer(vectorLayerp48);
+        map.addLayer(vectorLayerp49);
+        map.addLayer(vectorLayerp50);
+        map.addLayer(vectorLayerp51);
+        map.addLayer(vectorLayerp52);
+        map.addLayer(vectorLayerp53);
+        map.addLayer(vectorLayerp54);
+        map.addLayer(vectorLayerp55);
+        map.addLayer(vectorLayerp56);
+        map.addLayer(vectorLayerp57);
+        map.addLayer(vectorLayerp58);
+        map.addLayer(vectorLayerp59);
+        map.addLayer(vectorLayerp60);
+        map.addLayer(vectorLayerp61);
+        map.addLayer(vectorLayerp62);
+        map.addLayer(vectorLayerp63);
+        map.addLayer(vectorLayerp64);
+        map.addLayer(vectorLayerp65);
+        map.addLayer(vectorLayerp66);
+        map.addLayer(vectorLayerp67);
+        map.addLayer(vectorLayerp68);
+        map.addLayer(vectorLayerp69);
+        map.addLayer(vectorLayerp70);
+        map.addLayer(vectorLayerp71);
+        map.addLayer(vectorLayerp72);
+        map.addLayer(vectorLayerp73);
+        map.addLayer(vectorLayerp74);
+        map.addLayer(vectorLayerp75);
+        map.addLayer(vectorLayerp76);
+        map.addLayer(vectorLayerp77);
+        map.addLayer(vectorLayerp78);
+        map.addLayer(vectorLayerp79);
+        map.addLayer(vectorLayerp80);
+        map.addLayer(vectorLayerp81);
+        map.addLayer(vectorLayerp82);
+        map.addLayer(vectorLayerp83);
+        /**
+         * 实现popup的html元素
+         */
+        var container = document.getElementById('popup');
+        var content = document.getElementById('popup-content');
+        var closer = document.getElementById('popup-closer');
+    
+        /**
+         * 在地图容器中创建一个Overlay
+         */
+        var popup = new ol.Overlay({
+            //要转换成overlay的HTML元素
+            element: container,
+            //当前窗口可见
+            autoPan: true,
+            //Popup放置的位置
+            positioning: 'bottom-center',
+            //是否应该停止事件传播到地图窗口
+            stopEvent: false,
+            autoPanAnimation: {
+                //当Popup超出地图边界时，为了Popup全部可见，地图移动的速度
+                duration: 250
+            }
+        });
+        map.addOverlay(popup);
+    
+        /**
+         * 添加关闭按钮的单击事件（隐藏popup）
+         * @return {boolean} Don't follow the href.
+         */
+        closer.onclick = function () {
+            //未定义popup位置
+            popup.setPosition(undefined);
+            //失去焦点
+            closer.blur();
+            return false;
+        };
+    
+        /**
+         * 动态创建popup的具体内容
+         * @param {string} title
+         */
+        function addFeatrueInfo(info) {
+            //新增a元素
+            var elementA = document.createElement('a');
+            elementA.className = "markerInfo";
+            elementA.href = info.att.titleURL;
+            //elementA.innerText = info.att.title;
+            setInnerText(elementA, info.att.title);
+            // 新建的div元素添加a子节点
+            content.appendChild(elementA);
+            //新增div元素
+            var elementDiv = document.createElement('div');
+            elementDiv.className = "markerText";
+            //elementDiv.innerText = info.att.text;
+            setInnerText(elementDiv, info.att.text);
+            // 为content添加div子节点
+            content.appendChild(elementDiv);
+            //新增img元素
+            var elementImg = document.createElement('img');
+            elementImg.className = "markerImg";
+            elementImg.src = info.att.imgURL;
+            // 为content添加img子节点
+            content.appendChild(elementImg);
+        }
+        /**
+         * 动态设置元素文本内容（兼容）
+         */
+        function setInnerText(element, text) {
+            if (typeof element.textContent == "string") {
+                element.textContent = text;
+            } else {
+                element.innerText = text;
+            }
+        }
+    
+        /**
+         * 为map添加点击事件监听，渲染弹出popup
+         */
+        map.on('click', function (evt1) {
+            //判断当前单击处是否有要素，捕获到要素时弹出popup
+            var feature = map.forEachFeatureAtPixel(evt1.pixel, function (feature, layer) { return feature; });
+            if (feature) {
+                //清空popup的内容容器
+                var featureId = feature.getId();
+                content.innerHTML = '';
+                //在popup中加载当前要素的具体信息
+                switch (featureId) 
+                {
+                    case 'beibeiSamp':
+                   {addFeatrueInfo(featuerInfo);
+                     if (popup.getPosition() == undefined) 
+                     {
+                    //设置popup的位置
+                    popup.setPosition(bbSamp);
+                     }
+                   }
+                 break;
+                    case 'shapingbaSamp':
+                   {
+                addFeatrueInfo(featuerInfo1);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(spbSamp);
+                    }
+                  }
+               break;
+               case 'p2':
+                   {
+                addFeatrueInfo(featuerInfop2);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p2);
+                    }
+                  }
+               break;
+               case 'p3':
+                   {
+                addFeatrueInfo(featuerInfop3);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p3);
+                    }
+                  }
+               break;
+               case 'p4':
+                   {
+                addFeatrueInfo(featuerInfop4);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p4);
+                    }
+                  }
+               break;
+               case 'p5':
+                   {
+                addFeatrueInfo(featuerInfop5);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p5);
+                    }
+                  }
+               break;
+               case 'p6':
+                   {
+                addFeatrueInfo(featuerInfop6);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p6);
+                    }
+                  }
+               break;
+               case 'p6':
+                   {
+                addFeatrueInfo(featuerInfop7);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p7);
+                    }
+                  }
+               break;
+               case 'p8':
+                   {
+                addFeatrueInfo(featuerInfop8);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p8);
+                    }
+                  }
+               break;
+               case 'p9':
+                   {
+                addFeatrueInfo(featuerInfop9);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p9);
+                    }
+                  }
+               break;
+               case 'p10':
+                   {
+                addFeatrueInfo(featuerInfop10);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p10);
+                    }
+                  }
+               break;
+               case 'p11':
+                   {
+                addFeatrueInfo(featuerInfop11);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p11);
+                    }
+                  }
+               break;
+               case 'p12':
+                   {
+                addFeatrueInfo(featuerInfop12);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p12);
+                    }
+                  }
+               break;
+               case 'p13':
+                   {
+                addFeatrueInfo(featuerInfop13);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p13);
+                    }
+                  }
+               break;
+               case 'p14':
+                   {
+                addFeatrueInfo(featuerInfop14);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p14);
+                    }
+                  }
+               break;
+               case 'p15':
+                   {
+                addFeatrueInfo(featuerInfop15);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p15);
+                    }
+                  }
+               break;
+               case 'p16':
+                   {
+                addFeatrueInfo(featuerInfop16);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p16);
+                    }
+                  }
+               break;
+               case 'p17':
+                   {
+                addFeatrueInfo(featuerInfop17);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p17);
+                    }
+                  }
+               break;
+               case 'p18':
+                   {
+                addFeatrueInfo(featuerInfop18);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p18);
+                    }
+                  }
+               break;
+               case 'p19':
+                   {
+                addFeatrueInfo(featuerInfop19);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p19);
+                    }
+                  }
+               break;
+               case 'p20':
+                   {
+                addFeatrueInfo(featuerInfop20);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p20);
+                    }
+                  }
+               break;
+               case 'p21':
+                   {
+                addFeatrueInfo(featuerInfop21);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p21);
+                    }
+                  }
+               break;
+               case 'p22':
+                   {
+                addFeatrueInfo(featuerInfop22);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p22);
+                    }
+                  }
+               break;
+               case 'p23':
+                   {
+                addFeatrueInfo(featuerInfop23);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p23);
+                    }
+                  }
+               break;
+               case 'p24':
+                   {
+                addFeatrueInfo(featuerInfop24);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p24);
+                    }
+                  }
+               break;
+               case 'p25':
+                   {
+                addFeatrueInfo(featuerInfop25);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p25);
+                    }
+                  }
+               break;
+               case 'p26':
+                   {
+                addFeatrueInfo(featuerInfop26);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p26);
+                    }
+                  }
+               break;
+               case 'p27':
+                   {
+                addFeatrueInfo(featuerInfop27);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p27);
+                    }
+                  }
+               break;
+               case 'p28':
+                   {
+                addFeatrueInfo(featuerInfop28);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p28);
+                    }
+                  }
+               break;
+               case 'p29':
+                   {
+                addFeatrueInfo(featuerInfop29);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p29);
+                    }
+                  }
+               break;
+               case 'p30':
+                   {
+                addFeatrueInfo(featuerInfop30);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p30);
+                    }
+                  }
+               break;
+               case 'p31':
+                   {
+                addFeatrueInfo(featuerInfop31);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p31);
+                    }
+                  }
+               break;
+               case 'p32':
+                   {
+                addFeatrueInfo(featuerInfop32);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p32);
+                    }
+                  }
+               break;
+               case 'p33':
+                   {
+                addFeatrueInfo(featuerInfop33);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p33);
+                    }
+                  }
+               break;
+               case 'p34':
+                   {
+                addFeatrueInfo(featuerInfop34);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p34);
+                    }
+                  }
+               break;
+               case 'p35':
+                   {
+                addFeatrueInfo(featuerInfop35);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p35);
+                    }
+                  }
+               break;
+               case 'p36':
+                   {
+                addFeatrueInfo(featuerInfop36);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p36);
+                    }
+                  }
+               break;
+               case 'p37':
+                   {
+                addFeatrueInfo(featuerInfop37);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p37);
+                    }
+                  }
+               break;
+               case 'p38':
+                   {
+                addFeatrueInfo(featuerInfop38);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p38);
+                    }
+                  }
+               break;
+               case 'p39':
+                   {
+                addFeatrueInfo(featuerInfop39);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p39);
+                    }
+                  }
+               break;
+               case 'p40':
+                   {
+                addFeatrueInfo(featuerInfop40);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p40);
+                    }
+                  }
+               break;
+               case 'p41':
+                   {
+                addFeatrueInfo(featuerInfop41);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p41);
+                    }
+                  }
+               break;
+               case 'p42':
+                   {
+                addFeatrueInfo(featuerInfop42);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p42);
+                    }
+                  }
+               break;
+               case 'p43':
+                   {
+                addFeatrueInfo(featuerInfop43);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p43);
+                    }
+                  }
+               break;
+               case 'p44':
+                   {
+                addFeatrueInfo(featuerInfop44);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p44);
+                    }
+                  }
+               break;
+               case 'p45':
+                   {
+                addFeatrueInfo(featuerInfop45);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p45);
+                    }
+                  }
+               break;
+               case 'p46':
+                   {
+                addFeatrueInfo(featuerInfop46);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p46);
+                    }
+                  }
+               break;
+               case 'p47':
+                   {
+                addFeatrueInfo(featuerInfop47);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p47);
+                    }
+                  }
+               break;
+               case 'p48':
+                   {
+                addFeatrueInfo(featuerInfop48);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p48);
+                    }
+                  }
+               break;
+               case 'p49':
+                   {
+                addFeatrueInfo(featuerInfop49);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p49);
+                    }
+                  }
+               break;
+               case 'p50':
+                   {
+                addFeatrueInfo(featuerInfop50);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p50);
+                    }
+                  }
+               break;
+               case 'p51':
+                   {
+                addFeatrueInfo(featuerInfop51);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p51);
+                    }
+                  }
+               break;
+               case 'p52':
+                   {
+                addFeatrueInfo(featuerInfop52);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p52);
+                    }
+                  }
+               break;
+               case 'p53':
+                   {
+                addFeatrueInfo(featuerInfop53);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p53);
+                    }
+                  }
+               break;
+               case 'p54':
+                   {
+                addFeatrueInfo(featuerInfop54);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p54);
+                    }
+                  }
+               break;
+               case 'p55':
+                   {
+                addFeatrueInfo(featuerInfop55);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p55);
+                    }
+                  }
+               break;
+               case 'p56':
+                   {
+                addFeatrueInfo(featuerInfop56);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p56);
+                    }
+                  }
+               break;
+               case 'p57':
+                   {
+                addFeatrueInfo(featuerInfop57);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p57);
+                    }
+                  }
+               break;
+               case 'p58':
+                   {
+                addFeatrueInfo(featuerInfop58);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p58);
+                    }
+                  }
+               break;
+               case 'p59':
+                   {
+                addFeatrueInfo(featuerInfop59);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p59);
+                    }
+                  }
+               break;
+               case 'p60':
+                   {
+                addFeatrueInfo(featuerInfop60);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p60);
+                    }
+                  }
+               break;
+               case 'p61':
+                   {
+                addFeatrueInfo(featuerInfop61);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p61);
+                    }
+                  }
+               break;
+               case 'p62':
+                   {
+                addFeatrueInfo(featuerInfop62);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p62);
+                    }
+                  }
+               break;
+               case 'p63':
+                   {
+                addFeatrueInfo(featuerInfop63);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p63);
+                    }
+                  }
+               break;
+               case 'p64':
+                   {
+                addFeatrueInfo(featuerInfop64);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p64);
+                    }
+                  }
+               break;
+               case 'p65':
+                   {
+                addFeatrueInfo(featuerInfop65);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p65);
+                    }
+                  }
+               break;
+               case 'p66':
+                   {
+                addFeatrueInfo(featuerInfop66);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p66);
+                    }
+                  }
+               break;
+               case 'p67':
+                   {
+                addFeatrueInfo(featuerInfop67);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p67);
+                    }
+                  }
+               break;
+               case 'p68':
+                   {
+                addFeatrueInfo(featuerInfop68);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p68);
+                    }
+                  }
+               break;
+               case 'p69':
+                   {
+                addFeatrueInfo(featuerInfop69);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p69);
+                    }
+                  }
+               break;
+               case 'p70':
+                   {
+                addFeatrueInfo(featuerInfop70);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p70);
+                    }
+                  }
+               break;
+               case 'p71':
+                   {
+                addFeatrueInfo(featuerInfop71);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p71);
+                    }
+                  }
+               break;
+               case 'p72':
+                   {
+                addFeatrueInfo(featuerInfop72);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p72);
+                    }
+                  }
+               break;
+               case 'p73':
+                   {
+                addFeatrueInfo(featuerInfop73);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p73);
+                    }
+                  }
+               break;
+               case 'p74':
+                   {
+                addFeatrueInfo(featuerInfop74);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p74);
+                    }
+                  }
+               break;
+               case 'p75':
+                   {
+                addFeatrueInfo(featuerInfop75);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p75);
+                    }
+                  }
+               break;
+               case 'p76':
+                   {
+                addFeatrueInfo(featuerInfop77);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p77);
+                    }
+                  }
+               break;
+               case 'p78':
+                   {
+                addFeatrueInfo(featuerInfop78);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p78);
+                    }
+                  }
+               break;
+               case 'p79':
+                   {
+                addFeatrueInfo(featuerInfop79);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p79);
+                    }
+                  }
+               break;
+               case 'p80':
+                   {
+                addFeatrueInfo(featuerInfop80);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p80);
+                    }
+                  }
+               break;
+               case 'p81':
+                   {
+                addFeatrueInfo(featuerInfop81);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p81);
+                    }
+                  }
+               break;
+               case 'p82':
+                   {
+                addFeatrueInfo(featuerInfop82);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p82);
+                    }
+                  }
+               break;
+               case 'p83':
+                   {
+                addFeatrueInfo(featuerInfop83);
+                if (popup.getPosition() == undefined) 
+                    {
+                    //设置popup的位置
+                    popup.setPosition(p83);
+                    }
+                  }
+               break;
+            }
+         }
+        });
+        /**
+         * 为map添加鼠标移动事件监听，当指向标注时改变鼠标光标状态
+         */
+        map.on('pointermove', function (e) {
+            var pixel = map.getEventPixel(e.originalEvent);
+            var hit = map.hasFeatureAtPixel(pixel);
+            map.getTargetElement().style.cursor = hit ? 'pointer' : '';
+        });
+    </script>
+</body>
+</html>
