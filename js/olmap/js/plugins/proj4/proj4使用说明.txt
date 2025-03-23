@@ -1,0 +1,9 @@
+proj4预定义坐标系
+  1.使用定义示例，例如使ol3支持epsg2383坐标系，定义方式如下
+    proj4.defs("EPSG:2383","+proj=tmerc +lat_0=0 +lon_0=114 +k=1 +x_0=500000 +y_0=0 +a=6378140 +b=6356755.288157528 +units=m +no_defs");//Xian 1980 / 3-degree Gauss-Kruger CM 114E
+  2.获取proj4坐标系参数示例，例如获取epsg:2383参数
+    https://epsg.io/?format=json&q=2383
+  3.ol.geom.SimpleGeometry执行转化坐标示例：
+    proj4.defs("EPSG:2383","+proj=tmerc +lat_0=0 +lon_0=114 +k=1 +x_0=500000 +y_0=0 +a=6378140 +b=6356755.288157528 +units=m +no_defs");//Xian 1980 / 3-degree Gauss-Kruger CM 114E
+    var projTransform = ol.proj.getTransform('EPSG:4326', "EPSG:2383");
+    geom.applyTransform(projTransform);
