@@ -1,0 +1,598 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+  <Document id="TbuluKmlVersion2">
+    <name>2023-10-01 10:57重庆江津区</name>
+    <description><![CDATA[]]>
+    </description>
+    <snippet><![CDATA[通过“两步路”生成，http://www.2bulu.com]]>
+    </snippet>
+    <author>逐风_0388</author>
+    <ExtendedData>
+      <Data name="TrackId">
+        <value>47717960</value>
+      </Data>
+      <Data name="TrackTypeId">
+        <value>8</value>
+      </Data>
+      <Data name="TrackTags">
+        <value>徒步</value>
+      </Data>
+      <Data name="BeginTime">
+        <value>1696129025000</value>
+      </Data>
+      <Data name="EndTime">
+        <value>1696133503000</value>
+      </Data>
+      <Data name="TimeUsed">
+        <value>4478226</value>
+      </Data>
+      <Data name="PauseTime">
+        <value>893205</value>
+      </Data>
+      <Data name="PosStartName">
+        <value>鼎山湖(公交站)</value>
+      </Data>
+      <Data name="PosEndName">
+        <value>文仪亭</value>
+      </Data>
+      <Data name="ProductVersion">
+        <value>and_7.4.1</value>
+      </Data>
+      <Data name="StartDistrictId">
+        <value>20839</value>
+      </Data>
+      <Data name="EndDistrictId">
+        <value>20839</value>
+      </Data>
+      <Data name="CreaterId">
+        <value>10517767</value>
+      </Data>
+      <Data name="CreaterName">
+        <value>逐风_0388</value>
+      </Data>
+      <Data name="CreaterIcon">
+        <value>81758288</value>
+      </Data>
+      <Data name="ThumbnailId">
+        <value>0</value>
+      </Data>
+      <Data name="Privacy">
+        <value>0</value>
+      </Data>
+      <Data name="ContextInfo">
+        <value>region:CN;lan:zh;model:android;system:android29;app:2bulu-V7.4.1</value>
+      </Data>
+    </ExtendedData>
+    <Style id="TrackStyle_n">
+      <LineStyle>
+        <color>ff1034e8</color>
+        <width>5</width>
+      </LineStyle>
+      <IconStyle>
+        <Icon><![CDATA[http://files.2bulu.com/f/d1?downParams=BYohR0x5OLAr0OBxohfNOA%3D%3D%0A]]>
+        </Icon>
+      </IconStyle>
+    </Style>
+    <Style id="TrackStyle_h">
+      <LineStyle>
+        <color>ff1034e8</color>
+        <width>7</width>
+        <scale>1.1</scale>
+      </LineStyle>
+      <IconStyle>
+        <Icon><![CDATA[http://files.2bulu.com/f/d1?downParams=BYohR0x5OLAr0OBxohfNOA%3D%3D%0A]]>
+        </Icon>
+      </IconStyle>
+    </Style>
+    <StyleMap id="TrackStyle">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#TrackStyle_n</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#TrackStyle_h</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="LineStringStyle">
+      <LineStyle>
+        <color>ff1034e8</color>
+        <width>6</width>
+      </LineStyle>
+    </Style>
+    <Style id="startPointStyle">
+      <IconStyle>
+        <scale>1.1</scale>
+        <Icon><![CDATA[http://files.2bulu.com/f/d1?downParams=n%2BVE0NaFmzwndk%2BZ75NU9A%3D%3D%0A]]>
+        </Icon>
+      </IconStyle>
+    </Style>
+    <Style id="endPointStyle">
+      <IconStyle>
+        <scale>1.1</scale>
+        <Icon><![CDATA[http://files.2bulu.com/f/d1?downParams=0Q3GJ5o%2FHpsr0OBxohfNOA%3D%3D%0A]]>
+        </Icon>
+      </IconStyle>
+    </Style>
+    <Style id="MarkerStylePicture">
+      <LabelStyle>
+        <color>ff00ffff</color>
+        <colorMode>normal</colorMode>
+      </LabelStyle>
+      <IconStyle>
+        <scale>1.1</scale>
+        <Icon><![CDATA[http://files.2bulu.com/f/d1?downParams=vMzvc3dTBl0r0OBxohfNOA%3D%3D%0A]]>
+        </Icon>
+      </IconStyle>
+    </Style>
+    <Style id="MarkerStyleSound">
+      <LabelStyle>
+        <color>ff00ffff</color>
+        <colorMode>normal</colorMode>
+      </LabelStyle>
+      <IconStyle>
+        <scale>1.1</scale>
+        <Icon><![CDATA[http://files.2bulu.com/f/d1?downParams=poL0RfxWHTIr0OBxohfNOA%3D%3D%0A]]>
+        </Icon>
+      </IconStyle>
+    </Style>
+    <Style id="MarkerStyleVideo">
+      <LabelStyle>
+        <color>ff00ffff</color>
+        <colorMode>normal</colorMode>
+      </LabelStyle>
+      <IconStyle>
+        <scale>1.1</scale>
+        <Icon><![CDATA[http://files.2bulu.com/f/d1?downParams=vMzvc3dTBl0r0OBxohfNOA%3D%3D%0A]]>
+        </Icon>
+      </IconStyle>
+    </Style>
+    <Style id="MarkerStyleText">
+      <LabelStyle>
+        <color>ff00ffff</color>
+        <colorMode>normal</colorMode>
+      </LabelStyle>
+      <IconStyle>
+        <scale>1.1</scale>
+        <Icon><![CDATA[http://files.2bulu.com/f/d1?downParams=s2An6%2B3%2BIWUr0OBxohfNOA%3D%3D%0A]]>
+        </Icon>
+      </IconStyle>
+    </Style>
+    <Folder id="TbuluTrackFolder">
+      <name>轨迹</name>
+      <Placemark>
+        <name>轨迹片段1</name>
+        <description>
+          <div>通过“两步路”生成，http://www.2bulu.com</div>
+          <div>上传者:逐风_0388</div>
+          <div>开始时间:2023-10-01 10:57:08</div>
+          <div>结束时间:2023-10-01 12:09:31</div>
+          <div>轨迹点数:204</div>
+          <div>本段里程:1783.2717986497341米</div>
+          <div>最高海拔:298.8671260505176米</div>
+          <div>最低海拔:259.96420166468187米</div>
+          <div>累计爬升:40.83406981501565米</div>
+          <div>累计下降:20.07024586012767米</div>
+        </description>
+        <gx:Track>
+          <gx:coord>106.2718895 29.2612811 262.76</gx:coord>
+          <gx:coord>106.2718895 29.2612811 262.76</gx:coord>
+          <gx:coord>106.2719382 29.2613704 262.76</gx:coord>
+          <gx:coord>106.2719382 29.2613704 262.76</gx:coord>
+          <gx:coord>106.2719123 29.2614662 262.27</gx:coord>
+          <gx:coord>106.2719767 29.2615341 261.49</gx:coord>
+          <gx:coord>106.2720439 29.261614 260.73</gx:coord>
+          <gx:coord>106.2721182 29.2616924 259.96</gx:coord>
+          <gx:coord>106.2721997 29.2617675 260.79</gx:coord>
+          <gx:coord>106.2721946 29.2618499 262.01</gx:coord>
+          <gx:coord>106.2721269 29.261928 263.61</gx:coord>
+          <gx:coord>106.2720474 29.2620061 264.63</gx:coord>
+          <gx:coord>106.2720474 29.2620061 264.63</gx:coord>
+          <gx:coord>106.271947 29.2620684 265.16</gx:coord>
+          <gx:coord>106.271947 29.2620684 265.16</gx:coord>
+          <gx:coord>106.2719094 29.2621118 265.43</gx:coord>
+          <gx:coord>106.2718981 29.2622005 265.99</gx:coord>
+          <gx:coord>106.2719439 29.2622811 265.97</gx:coord>
+          <gx:coord>106.2720174 29.2622448 266.45</gx:coord>
+          <gx:coord>106.2720725 29.2621549 266.52</gx:coord>
+          <gx:coord>106.2721679 29.2620998 266.07</gx:coord>
+          <gx:coord>106.2722211 29.2620819 266.12</gx:coord>
+          <gx:coord>106.2722211 29.2620819 266.12</gx:coord>
+          <gx:coord>106.2722876 29.2620192 266.02</gx:coord>
+          <gx:coord>106.2722876 29.2620192 266.02</gx:coord>
+          <gx:coord>106.2723276 29.2619256 265.23</gx:coord>
+          <gx:coord>106.2723772 29.2618214 264.72</gx:coord>
+          <gx:coord>106.2724546 29.2617339 264.99</gx:coord>
+          <gx:coord>106.2725409 29.2616681 266.0</gx:coord>
+          <gx:coord>106.2726476 29.2616188 268.48</gx:coord>
+          <gx:coord>106.2727449 29.26164 270.11</gx:coord>
+          <gx:coord>106.2728554 29.2616588 271.32</gx:coord>
+          <gx:coord>106.2729483 29.2616928 272.16</gx:coord>
+          <gx:coord>106.2730351 29.2616625 272.39</gx:coord>
+          <gx:coord>106.2730841 29.2616314 274.09</gx:coord>
+          <gx:coord>106.2731715 29.2616182 275.16</gx:coord>
+          <gx:coord>106.2732975 29.2616194 275.24</gx:coord>
+          <gx:coord>106.2734425 29.2615971 278.14</gx:coord>
+          <gx:coord>106.2735656 29.2616007 281.1</gx:coord>
+          <gx:coord>106.2736722 29.261612 283.2</gx:coord>
+          <gx:coord>106.2736293 29.26158 284.36</gx:coord>
+          <gx:coord>106.2735152 29.2615771 284.42</gx:coord>
+          <gx:coord>106.2733878 29.2615944 284.39</gx:coord>
+          <gx:coord>106.2732613 29.2616238 284.26</gx:coord>
+          <gx:coord>106.2731313 29.2616686 284.13</gx:coord>
+          <gx:coord>106.2730093 29.2617126 282.48</gx:coord>
+          <gx:coord>106.2728983 29.2617034 281.24</gx:coord>
+          <gx:coord>106.2727904 29.261675 279.82</gx:coord>
+          <gx:coord>106.2726781 29.2616582 278.49</gx:coord>
+          <gx:coord>106.2725702 29.261633 276.68</gx:coord>
+          <gx:coord>106.272473 29.2616608 274.62</gx:coord>
+          <gx:coord>106.2723936 29.2617196 272.91</gx:coord>
+          <gx:coord>106.2723037 29.2617677 271.85</gx:coord>
+          <gx:coord>106.2722009 29.2617696 271.35</gx:coord>
+          <gx:coord>106.2721032 29.2617149 270.01</gx:coord>
+          <gx:coord>106.2720326 29.2616372 267.57</gx:coord>
+          <gx:coord>106.2719419 29.261624 264.67</gx:coord>
+          <gx:coord>106.271895 29.2616972 263.13</gx:coord>
+          <gx:coord>106.2719041 29.2618132 262.67</gx:coord>
+          <gx:coord>106.2719365 29.2619269 263.63</gx:coord>
+          <gx:coord>106.2719458 29.2620302 264.98</gx:coord>
+          <gx:coord>106.2718962 29.2621074 266.3</gx:coord>
+          <gx:coord>106.2718758 29.262201 267.76</gx:coord>
+          <gx:coord>106.2719197 29.2622882 268.55</gx:coord>
+          <gx:coord>106.2719633 29.2623871 268.33</gx:coord>
+          <gx:coord>106.2719751 29.2624375 268.54</gx:coord>
+          <gx:coord>106.2719376 29.262514 269.04</gx:coord>
+          <gx:coord>106.2719147 29.2625797 268.88</gx:coord>
+          <gx:coord>106.2719147 29.2625797 268.88</gx:coord>
+          <gx:coord>106.2719007 29.2626694 269.03</gx:coord>
+          <gx:coord>106.2719007 29.2626694 269.03</gx:coord>
+          <gx:coord>106.2718529 29.2627586 269.14</gx:coord>
+          <gx:coord>106.2717507 29.2627948 269.85</gx:coord>
+          <gx:coord>106.2716844 29.2628652 271.41</gx:coord>
+          <gx:coord>106.2715821 29.2629139 272.4</gx:coord>
+          <gx:coord>106.2714583 29.2628987 272.58</gx:coord>
+          <gx:coord>106.271355 29.2629447 271.75</gx:coord>
+          <gx:coord>106.2712855 29.2630187 270.23</gx:coord>
+          <gx:coord>106.2712228 29.2631061 268.26</gx:coord>
+          <gx:coord>106.2711554 29.2632016 266.39</gx:coord>
+          <gx:coord>106.2710738 29.2632677 265.22</gx:coord>
+          <gx:coord>106.2709776 29.2632594 264.43</gx:coord>
+          <gx:coord>106.2709776 29.2632594 264.43</gx:coord>
+          <gx:coord>106.2710859 29.2632576 263.28</gx:coord>
+          <gx:coord>106.2710859 29.2632576 263.28</gx:coord>
+          <gx:coord>106.2710467 29.2633599 262.37</gx:coord>
+          <gx:coord>106.2709866 29.2634358 261.89</gx:coord>
+          <gx:coord>106.2709419 29.2635274 261.87</gx:coord>
+          <gx:coord>106.270885 29.2636186 261.53</gx:coord>
+          <gx:coord>106.270885 29.2636186 261.53</gx:coord>
+          <gx:coord>106.270885 29.2636186 261.53</gx:coord>
+          <gx:coord>106.270885 29.2636186 261.53</gx:coord>
+          <gx:coord>106.2708373 29.2637205 261.2</gx:coord>
+          <gx:coord>106.2708373 29.2637205 261.2</gx:coord>
+          <gx:coord>106.2707644 29.2637944 262.46</gx:coord>
+          <gx:coord>106.2706935 29.2638615 263.03</gx:coord>
+          <gx:coord>106.2706189 29.2639339 263.16</gx:coord>
+          <gx:coord>106.2705469 29.264008 263.26</gx:coord>
+          <gx:coord>106.2704916 29.2640938 263.33</gx:coord>
+          <gx:coord>106.2704412 29.2641841 264.03</gx:coord>
+          <gx:coord>106.2703931 29.264268 265.2</gx:coord>
+          <gx:coord>106.2703505 29.2643595 266.42</gx:coord>
+          <gx:coord>106.270312 29.2644499 268.11</gx:coord>
+          <gx:coord>106.270251 29.264527 269.07</gx:coord>
+          <gx:coord>106.2701877 29.2646059 269.07</gx:coord>
+          <gx:coord>106.2701197 29.2646916 269.01</gx:coord>
+          <gx:coord>106.2700614 29.2647808 267.8</gx:coord>
+          <gx:coord>106.2700614 29.2647808 267.8</gx:coord>
+          <gx:coord>106.2699657 29.2648192 266.88</gx:coord>
+          <gx:coord>106.2699657 29.2648192 266.88</gx:coord>
+          <gx:coord>106.2698857 29.2648858 266.2</gx:coord>
+          <gx:coord>106.269842 29.2649699 267.86</gx:coord>
+          <gx:coord>106.2697957 29.265064 267.87</gx:coord>
+          <gx:coord>106.2697957 29.265064 267.87</gx:coord>
+          <gx:coord>106.2697375 29.2651588 268.41</gx:coord>
+          <gx:coord>106.2697375 29.2651588 268.41</gx:coord>
+          <gx:coord>106.2696865 29.2652436 268.86</gx:coord>
+          <gx:coord>106.2695951 29.265231 268.77</gx:coord>
+          <gx:coord>106.2695951 29.265231 268.77</gx:coord>
+          <gx:coord>106.2696374 29.2652868 268.49</gx:coord>
+          <gx:coord>106.2696374 29.2652868 268.49</gx:coord>
+          <gx:coord>106.2696451 29.2653719 268.38</gx:coord>
+          <gx:coord>106.2695852 29.265435 269.07</gx:coord>
+          <gx:coord>106.2695852 29.265435 269.07</gx:coord>
+          <gx:coord>106.2695985 29.265523 270.31</gx:coord>
+          <gx:coord>106.2695985 29.265523 270.31</gx:coord>
+          <gx:coord>106.2695255 29.2656026 271.41</gx:coord>
+          <gx:coord>106.2694869 29.2656949 271.5</gx:coord>
+          <gx:coord>106.269406 29.2657478 271.84</gx:coord>
+          <gx:coord>106.2693137 29.2657888 273.36</gx:coord>
+          <gx:coord>106.2692563 29.2658036 274.23</gx:coord>
+          <gx:coord>106.2692563 29.2658036 274.23</gx:coord>
+          <gx:coord>106.2691996 29.2658656 274.74</gx:coord>
+          <gx:coord>106.2691996 29.2658656 274.74</gx:coord>
+          <gx:coord>106.2690861 29.2658238 276.01</gx:coord>
+          <gx:coord>106.2690861 29.2658238 276.01</gx:coord>
+          <gx:coord>106.2690769 29.2659343 277.16</gx:coord>
+          <gx:coord>106.2690769 29.2659343 277.16</gx:coord>
+          <gx:coord>106.2690023 29.2659995 277.37</gx:coord>
+          <gx:coord>106.2689099 29.2660592 279.86</gx:coord>
+          <gx:coord>106.2688204 29.2661238 281.17</gx:coord>
+          <gx:coord>106.2687244 29.266169 282.06</gx:coord>
+          <gx:coord>106.2686346 29.2662185 281.42</gx:coord>
+          <gx:coord>106.2685307 29.2662596 280.92</gx:coord>
+          <gx:coord>106.2684284 29.2663155 280.38</gx:coord>
+          <gx:coord>106.2683495 29.2663863 280.01</gx:coord>
+          <gx:coord>106.2682892 29.2664759 280.21</gx:coord>
+          <gx:coord>106.2682268 29.266555 281.52</gx:coord>
+          <gx:coord>106.2681749 29.266641 281.85</gx:coord>
+          <gx:coord>106.2680961 29.266721 282.27</gx:coord>
+          <gx:coord>106.268023 29.2667987 282.03</gx:coord>
+          <gx:coord>106.2679472 29.2668743 282.9</gx:coord>
+          <gx:coord>106.2678351 29.2669 282.68</gx:coord>
+          <gx:coord>106.2677227 29.2668753 283.53</gx:coord>
+          <gx:coord>106.2676044 29.2668411 283.71</gx:coord>
+          <gx:coord>106.2675634 29.26675 283.61</gx:coord>
+          <gx:coord>106.2675296 29.2666535 283.49</gx:coord>
+          <gx:coord>106.2674632 29.2666736 282.9</gx:coord>
+          <gx:coord>106.2673849 29.2667314 281.29</gx:coord>
+          <gx:coord>106.2672878 29.2667865 280.85</gx:coord>
+          <gx:coord>106.267187 29.2668522 280.58</gx:coord>
+          <gx:coord>106.267083 29.2668879 280.45</gx:coord>
+          <gx:coord>106.267047 29.2668992 280.4</gx:coord>
+          <gx:coord>106.2669629 29.2669173 280.47</gx:coord>
+          <gx:coord>106.2668459 29.2669277 280.8</gx:coord>
+          <gx:coord>106.2667233 29.2669554 280.98</gx:coord>
+          <gx:coord>106.266615 29.2669926 282.25</gx:coord>
+          <gx:coord>106.2665138 29.2670442 284.11</gx:coord>
+          <gx:coord>106.2664152 29.2670849 286.24</gx:coord>
+          <gx:coord>106.2663091 29.2671231 288.3</gx:coord>
+          <gx:coord>106.2662105 29.2671692 290.13</gx:coord>
+          <gx:coord>106.266128 29.2672265 291.73</gx:coord>
+          <gx:coord>106.2660295 29.2672759 293.34</gx:coord>
+          <gx:coord>106.2659563 29.2673558 293.52</gx:coord>
+          <gx:coord>106.2659387 29.2674602 293.44</gx:coord>
+          <gx:coord>106.2659815 29.2675628 294.66</gx:coord>
+          <gx:coord>106.2659866 29.2675849 295.33</gx:coord>
+          <gx:coord>106.2660388 29.267642 296.03</gx:coord>
+          <gx:coord>106.2661257 29.2677056 295.64</gx:coord>
+          <gx:coord>106.2661964 29.2677939 294.0</gx:coord>
+          <gx:coord>106.2662747 29.2678689 292.09</gx:coord>
+          <gx:coord>106.2663333 29.2679511 290.6</gx:coord>
+          <gx:coord>106.2663376 29.2679753 289.36</gx:coord>
+          <gx:coord>106.266399 29.2680144 289.47</gx:coord>
+          <gx:coord>106.266462 29.2680807 290.19</gx:coord>
+          <gx:coord>106.2665315 29.2681351 290.4</gx:coord>
+          <gx:coord>106.2665441 29.2682173 291.69</gx:coord>
+          <gx:coord>106.2665492 29.2683196 293.01</gx:coord>
+          <gx:coord>106.2665826 29.2684242 293.29</gx:coord>
+          <gx:coord>106.2666333 29.2685268 293.31</gx:coord>
+          <gx:coord>106.2666701 29.2685967 293.78</gx:coord>
+          <gx:coord>106.2666955 29.2686797 294.4</gx:coord>
+          <gx:coord>106.2667364 29.2687666 294.81</gx:coord>
+          <gx:coord>106.2667499 29.2688303 295.2</gx:coord>
+          <gx:coord>106.2667499 29.2688303 295.2</gx:coord>
+          <gx:coord>106.2667499 29.2688303 295.2</gx:coord>
+          <gx:coord>106.2667499 29.2688303 295.2</gx:coord>
+          <gx:coord>106.2667499 29.2688303 295.2</gx:coord>
+          <gx:coord>106.2667499 29.2688303 295.2</gx:coord>
+          <gx:coord>106.2667456 29.2687186 295.82</gx:coord>
+          <gx:coord>106.2667456 29.2687186 295.82</gx:coord>
+          <gx:coord>106.2666802 29.2686348 297.28</gx:coord>
+          <gx:coord>106.2666128 29.2685533 298.87</gx:coord>
+          <gx:coord>106.2666128 29.2685533 298.87</gx:coord>
+          <when>2023-10-01T02:57:08Z</when>
+          <when>2023-10-01T02:57:38Z</when>
+          <when>2023-10-01T02:59:06Z</when>
+          <when>2023-10-01T02:59:44Z</when>
+          <when>2023-10-01T02:59:54Z</when>
+          <when>2023-10-01T03:00:06Z</when>
+          <when>2023-10-01T03:00:20Z</when>
+          <when>2023-10-01T03:00:30Z</when>
+          <when>2023-10-01T03:00:46Z</when>
+          <when>2023-10-01T03:00:56Z</when>
+          <when>2023-10-01T03:01:10Z</when>
+          <when>2023-10-01T03:01:20Z</when>
+          <when>2023-10-01T03:02:02Z</when>
+          <when>2023-10-01T03:03:06Z</when>
+          <when>2023-10-01T03:03:10Z</when>
+          <when>2023-10-01T03:03:24Z</when>
+          <when>2023-10-01T03:03:56Z</when>
+          <when>2023-10-01T03:04:18Z</when>
+          <when>2023-10-01T03:04:32Z</when>
+          <when>2023-10-01T03:04:40Z</when>
+          <when>2023-10-01T03:04:50Z</when>
+          <when>2023-10-01T03:05:02Z</when>
+          <when>2023-10-01T03:05:32Z</when>
+          <when>2023-10-01T03:05:44Z</when>
+          <when>2023-10-01T03:05:54Z</when>
+          <when>2023-10-01T03:06:04Z</when>
+          <when>2023-10-01T03:06:16Z</when>
+          <when>2023-10-01T03:07:30Z</when>
+          <when>2023-10-01T03:07:45Z</when>
+          <when>2023-10-01T03:08:07Z</when>
+          <when>2023-10-01T03:08:21Z</when>
+          <when>2023-10-01T03:08:37Z</when>
+          <when>2023-10-01T03:08:57Z</when>
+          <when>2023-10-01T03:09:51Z</when>
+          <when>2023-10-01T03:10:01Z</when>
+          <when>2023-10-01T03:10:23Z</when>
+          <when>2023-10-01T03:11:31Z</when>
+          <when>2023-10-01T03:11:47Z</when>
+          <when>2023-10-01T03:11:57Z</when>
+          <when>2023-10-01T03:12:07Z</when>
+          <when>2023-10-01T03:12:27Z</when>
+          <when>2023-10-01T03:12:37Z</when>
+          <when>2023-10-01T03:12:47Z</when>
+          <when>2023-10-01T03:12:57Z</when>
+          <when>2023-10-01T03:13:09Z</when>
+          <when>2023-10-01T03:13:19Z</when>
+          <when>2023-10-01T03:13:31Z</when>
+          <when>2023-10-01T03:13:41Z</when>
+          <when>2023-10-01T03:13:53Z</when>
+          <when>2023-10-01T03:14:07Z</when>
+          <when>2023-10-01T03:14:17Z</when>
+          <when>2023-10-01T03:14:33Z</when>
+          <when>2023-10-01T03:14:45Z</when>
+          <when>2023-10-01T03:15:01Z</when>
+          <when>2023-10-01T03:15:17Z</when>
+          <when>2023-10-01T03:15:29Z</when>
+          <when>2023-10-01T03:15:43Z</when>
+          <when>2023-10-01T03:16:03Z</when>
+          <when>2023-10-01T03:16:13Z</when>
+          <when>2023-10-01T03:16:23Z</when>
+          <when>2023-10-01T03:16:35Z</when>
+          <when>2023-10-01T03:16:49Z</when>
+          <when>2023-10-01T03:16:59Z</when>
+          <when>2023-10-01T03:17:13Z</when>
+          <when>2023-10-01T03:17:21Z</when>
+          <when>2023-10-01T03:17:33Z</when>
+          <when>2023-10-01T03:17:51Z</when>
+          <when>2023-10-01T03:18:01Z</when>
+          <when>2023-10-01T03:18:31Z</when>
+          <when>2023-10-01T03:18:33Z</when>
+          <when>2023-10-01T03:18:43Z</when>
+          <when>2023-10-01T03:18:51Z</when>
+          <when>2023-10-01T03:19:01Z</when>
+          <when>2023-10-01T03:19:13Z</when>
+          <when>2023-10-01T03:19:23Z</when>
+          <when>2023-10-01T03:19:35Z</when>
+          <when>2023-10-01T03:19:55Z</when>
+          <when>2023-10-01T03:20:03Z</when>
+          <when>2023-10-01T03:20:13Z</when>
+          <when>2023-10-01T03:20:23Z</when>
+          <when>2023-10-01T03:20:33Z</when>
+          <when>2023-10-01T03:20:43Z</when>
+          <when>2023-10-01T03:21:55Z</when>
+          <when>2023-10-01T03:23:05Z</when>
+          <when>2023-10-01T03:23:35Z</when>
+          <when>2023-10-01T03:23:47Z</when>
+          <when>2023-10-01T03:23:57Z</when>
+          <when>2023-10-01T03:24:07Z</when>
+          <when>2023-10-01T03:24:21Z</when>
+          <when>2023-10-01T03:25:59Z</when>
+          <when>2023-10-01T03:26:29Z</when>
+          <when>2023-10-01T03:27:05Z</when>
+          <when>2023-10-01T03:27:07Z</when>
+          <when>2023-10-01T03:27:29Z</when>
+          <when>2023-10-01T03:27:39Z</when>
+          <when>2023-10-01T03:27:49Z</when>
+          <when>2023-10-01T03:28:01Z</when>
+          <when>2023-10-01T03:28:11Z</when>
+          <when>2023-10-01T03:28:23Z</when>
+          <when>2023-10-01T03:28:35Z</when>
+          <when>2023-10-01T03:28:45Z</when>
+          <when>2023-10-01T03:29:51Z</when>
+          <when>2023-10-01T03:30:03Z</when>
+          <when>2023-10-01T03:30:21Z</when>
+          <when>2023-10-01T03:30:43Z</when>
+          <when>2023-10-01T03:30:59Z</when>
+          <when>2023-10-01T03:31:09Z</when>
+          <when>2023-10-01T03:32:15Z</when>
+          <when>2023-10-01T03:32:25Z</when>
+          <when>2023-10-01T03:32:27Z</when>
+          <when>2023-10-01T03:32:59Z</when>
+          <when>2023-10-01T03:33:15Z</when>
+          <when>2023-10-01T03:33:41Z</when>
+          <when>2023-10-01T03:34:33Z</when>
+          <when>2023-10-01T03:34:45Z</when>
+          <when>2023-10-01T03:34:57Z</when>
+          <when>2023-10-01T03:35:09Z</when>
+          <when>2023-10-01T03:35:29Z</when>
+          <when>2023-10-01T03:35:59Z</when>
+          <when>2023-10-01T03:36:09Z</when>
+          <when>2023-10-01T03:36:19Z</when>
+          <when>2023-10-01T03:36:33Z</when>
+          <when>2023-10-01T03:36:47Z</when>
+          <when>2023-10-01T03:37:33Z</when>
+          <when>2023-10-01T03:41:49Z</when>
+          <when>2023-10-01T03:42:21Z</when>
+          <when>2023-10-01T03:42:33Z</when>
+          <when>2023-10-01T03:42:47Z</when>
+          <when>2023-10-01T03:43:21Z</when>
+          <when>2023-10-01T03:43:33Z</when>
+          <when>2023-10-01T03:43:45Z</when>
+          <when>2023-10-01T03:44:45Z</when>
+          <when>2023-10-01T03:45:21Z</when>
+          <when>2023-10-01T03:45:33Z</when>
+          <when>2023-10-01T03:46:05Z</when>
+          <when>2023-10-01T03:46:41Z</when>
+          <when>2023-10-01T03:47:47Z</when>
+          <when>2023-10-01T03:48:05Z</when>
+          <when>2023-10-01T03:48:11Z</when>
+          <when>2023-10-01T03:48:27Z</when>
+          <when>2023-10-01T03:48:43Z</when>
+          <when>2023-10-01T03:48:55Z</when>
+          <when>2023-10-01T03:49:05Z</when>
+          <when>2023-10-01T03:49:15Z</when>
+          <when>2023-10-01T03:49:39Z</when>
+          <when>2023-10-01T03:49:53Z</when>
+          <when>2023-10-01T03:50:59Z</when>
+          <when>2023-10-01T03:51:37Z</when>
+          <when>2023-10-01T03:51:59Z</when>
+          <when>2023-10-01T03:52:39Z</when>
+          <when>2023-10-01T03:52:51Z</when>
+          <when>2023-10-01T03:53:05Z</when>
+          <when>2023-10-01T03:53:17Z</when>
+          <when>2023-10-01T03:53:31Z</when>
+          <when>2023-10-01T03:53:57Z</when>
+          <when>2023-10-01T03:54:27Z</when>
+          <when>2023-10-01T03:54:45Z</when>
+          <when>2023-10-01T03:55:07Z</when>
+          <when>2023-10-01T03:55:19Z</when>
+          <when>2023-10-01T03:55:31Z</when>
+          <when>2023-10-01T03:55:41Z</when>
+          <when>2023-10-01T03:55:51Z</when>
+          <when>2023-10-01T03:55:53Z</when>
+          <when>2023-10-01T03:56:05Z</when>
+          <when>2023-10-01T03:56:17Z</when>
+          <when>2023-10-01T03:56:29Z</when>
+          <when>2023-10-01T03:56:39Z</when>
+          <when>2023-10-01T03:56:55Z</when>
+          <when>2023-10-01T03:57:05Z</when>
+          <when>2023-10-01T03:57:17Z</when>
+          <when>2023-10-01T03:57:29Z</when>
+          <when>2023-10-01T03:57:47Z</when>
+          <when>2023-10-01T03:57:59Z</when>
+          <when>2023-10-01T03:58:11Z</when>
+          <when>2023-10-01T03:58:33Z</when>
+          <when>2023-10-01T03:58:43Z</when>
+          <when>2023-10-01T03:59:13Z</when>
+          <when>2023-10-01T03:59:35Z</when>
+          <when>2023-10-01T03:59:49Z</when>
+          <when>2023-10-01T04:00:17Z</when>
+          <when>2023-10-01T04:00:29Z</when>
+          <when>2023-10-01T04:00:37Z</when>
+          <when>2023-10-01T04:00:43Z</when>
+          <when>2023-10-01T04:00:53Z</when>
+          <when>2023-10-01T04:01:03Z</when>
+          <when>2023-10-01T04:01:11Z</when>
+          <when>2023-10-01T04:01:23Z</when>
+          <when>2023-10-01T04:01:41Z</when>
+          <when>2023-10-01T04:01:53Z</when>
+          <when>2023-10-01T04:02:03Z</when>
+          <when>2023-10-01T04:02:11Z</when>
+          <when>2023-10-01T04:02:41Z</when>
+          <when>2023-10-01T04:02:51Z</when>
+          <when>2023-10-01T04:03:01Z</when>
+          <when>2023-10-01T04:03:49Z</when>
+          <when>2023-10-01T04:04:11Z</when>
+          <when>2023-10-01T04:05:57Z</when>
+          <when>2023-10-01T04:07:15Z</when>
+          <when>2023-10-01T04:08:23Z</when>
+          <when>2023-10-01T04:08:23Z</when>
+          <when>2023-10-01T04:08:33Z</when>
+          <when>2023-10-01T04:08:45Z</when>
+          <when>2023-10-01T04:08:55Z</when>
+          <when>2023-10-01T04:09:31Z</when>
+          <ExtendedData>
+            <Data name="GxTrackExtendedData">
+              <value>0.0,3.0;0.0,3.0;0.62896,3.0;0.62896,3.0;0.9656021,3.0;0.566673,3.0;0.8643529,3.0;1.1797634,3.0;0.69073296,3.0;0.8437079,3.0;0.7296627,3.0;0.7864314,3.0;0.7864314,3.0;1.3089368,3.0;1.3089368,3.0;0.0,3.0;0.8772173,3.0;1.0661277,3.0;1.0640991,3.0;1.0925865,3.0;1.1753325,3.0;0.0,3.0;0.0,3.0;1.0642482,3.0;1.0642482,3.0;0.9894413,3.0;0.90875083,3.0;0.7002806,3.0;1.0531826,3.0;1.2262877,3.0;0.7808606,3.0;1.037139,3.0;0.0,3.0;1.1556296,3.0;0.0,3.0;0.6888706,3.0;0.8292894,3.0;0.9713695,3.0;0.75310284,3.0;0.9547195,3.0;0.7521518,3.0;0.72432536,3.0;0.5316256,3.0;0.7919701,3.0;1.3507524,3.0;0.9006215,3.0;0.8509332,3.0;0.34219518,3.0;1.3746169,3.0;1.3140707,3.0;1.2334609,3.0;0.5205323,3.0;0.26791206,3.0;0.94011545,3.0;1.3147562,3.0;0.52116764,3.0;0.8634531,3.0;0.9063014,3.0;1.4505184,3.0;1.0059264,3.0;0.97866035,3.0;0.68985885,3.0;0.78538835,3.0;1.2331574,3.0;1.1917516,3.0;0.0,3.0;1.0699928,3.0;0.0,3.0;0.0,3.0;0.8279244,3.2749848;0.8279244,3.2749848;0.7394164,3.1156619;1.0438282,3.2236032;1.1942995,3.0;0.9809039,3.0;0.83100003,3.0;0.76771295,3.0;1.0063962,3.0;1.0407755,3.0;1.194589,3.0;0.77900815,3.0;0.56201833,3.0;0.56201833,3.0;0.7933319,3.2244036;0.7933319,3.2244036;0.8991596,3.0;1.0533264,3.067365;0.7775949,3.0;0.84503865,3.0;0.84503865,3.0;0.84503865,3.0;0.84503865,3.0;0.7863543,3.8191826;0.7863543,3.8191826;1.1944013,3.0;0.73851687,3.0;0.7367958,3.0;0.83441406,3.0;0.82567644,3.0;0.99438137,3.0;0.96085006,3.0;0.7913369,3.0;0.6214715,3.0;0.34815687,3.0;0.8264406,3.0;0.5992391,3.6104054;0.881392,3.5715568;0.881392,3.5715568;0.5482171,3.6834154;0.5482171,3.6834154;0.46344185,3.474527;0.105429664,3.0;0.48166484,3.0;0.48166484,3.0;0.8689888,3.0;0.8689888,3.0;0.8511648,3.0;0.0,3.0;0.0,3.0;0.17529884,3.2410169;0.17529884,3.2410169;0.95252675,3.0;0.7629858,3.0;0.7629858,3.0;0.8307861,3.0;0.8307861,3.0;0.57500607,3.0;0.41213983,3.0;0.60211205,3.0;1.0394883,3.0;0.0,3.0;0.0,3.0;0.9527871,3.0;0.9527871,3.0;0.64315027,4.615739;0.64315027,4.615739;1.0005748,4.2639437;1.0005748,4.2639437;0.9404315,3.0;0.75811744,3.0;1.0699545,3.0;0.6578313,3.0;0.7555813,3.0;0.86397576,3.0;0.924395,3.0;0.8265713,3.0;0.35054946,4.617627;0.41861528,3.0;0.3477209,3.0;0.9960245,3.0;0.9728493,3.0;0.9982432,3.0;0.7646997,3.0;0.60711944,3.0;0.4385462,3.0;0.890006,3.0133867;0.4775778,3.0;1.1292952,3.0;0.714668,3.0;0.7787235,3.0;1.2532369,3.0;1.1546222,3.0;0.0,3.0;1.2254521,3.0;1.39909,3.0;1.051805,3.0;0.8383523,3.0;1.0317987,3.0;1.1257806,3.0;0.46063578,3.0;0.7337677,3.0;0.9611542,3.2069592;0.91742605,3.0;0.95172113,3.0;0.96846545,3.119392;1.0498797,3.0;0.0,3.0;0.991678,3.1201687;0.6820371,3.0;1.0814183,3.4677038;1.0192673,3.1068485;1.025255,3.5826812;0.0,3.1286957;0.4315841,3.1484272;1.1238843,3.2096581;0.0,3.0;1.2116747,3.0;0.89935046,3.0;0.85433686,3.0;1.2217928,3.0;0.0,3.0;0.8038112,3.0;1.1726075,3.0;0.0,3.0;0.0,3.0;0.0,3.0;0.0,3.0;0.0,3.0;0.0,3.0;1.6806891,3.0;1.6806891,3.0;0.94041085,3.0;0.9258312,3.0;0.9258312,3.0;</value>
+            </Data>
+            <Data name="PauseTimes">
+              <value>1696129058489:pause;1696129146509:resume;1696129322502:pause;1696129386502:resume;1696129532499:pause;1696129544518:resume;1696130311505:pause;1696130313512:resume;1696130515520:pause;1696130585492:resume;1696130759519:pause;1696130789535:resume;1696130825504:pause;1696130827519:resume;1696131135521:pause;1696131145484:resume;1696131273526:pause;1696131285470:resume;1696131359522:pause;1696131369544:resume;1696131453520:pause;1696131709466:resume;1696131885486:pause;1696131921521:resume;1696132001486:pause;1696132067517:resume;1696133029489:pause;1696133051449:resume;1696133157502:pause;1696133235520:resume;1696133303497:pause;1696133303563:resume;1696133371508:pause</value>
+            </Data>
+          </ExtendedData>
+        </gx:Track>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>

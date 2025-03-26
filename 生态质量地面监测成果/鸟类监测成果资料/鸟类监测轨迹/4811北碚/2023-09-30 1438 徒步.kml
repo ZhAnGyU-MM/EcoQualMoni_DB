@@ -1,0 +1,144 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+  <Document>
+    <name>2023-09-30 14:38 徒步</name>
+    <ExtendedData>
+      <Data name="Source">
+        <value>0</value>
+      </Data>
+      <Data name="BeginTime">
+        <value>1696055902000</value>
+      </Data>
+      <Data name="EndTime">
+        <value>1696057960000</value>
+      </Data>
+      <Data name="PauseTime">
+        <value>1593570</value>
+      </Data>
+      <Data name="SportTypeId">
+        <value>18</value>
+      </Data>
+      <Data name="ProductVersion">
+        <value>and_7.5.6</value>
+      </Data>
+      <Data name="CreaterId">
+        <value>20495109</value>
+      </Data>
+      <Data name="PosStartName">
+        <value></value>
+      </Data>
+      <Data name="PosEndName">
+        <value></value>
+      </Data>
+      <Data name="Mileage">
+        <value>1217.9064219187178</value>
+      </Data>
+      <Data name="Calorie">
+        <value>87.36</value>
+      </Data>
+    </ExtendedData>
+    <Folder id="TbuluTrackFolder">
+      <name>运动</name>
+      <Placemark>
+        <name>轨迹片段</name>
+        <gx:Track>
+          <gx:coord>106.4384648 29.8345876 175.0</gx:coord>
+          <gx:coord>106.4384648 29.8345876 175.0</gx:coord>
+          <gx:coord>106.4385089 29.8344916 175.0</gx:coord>
+          <gx:coord>106.4385089 29.8344916 175.0</gx:coord>
+          <gx:coord>106.4385336 29.8344856 176.0</gx:coord>
+          <gx:coord>106.4385455 29.8343992 177.0</gx:coord>
+          <gx:coord>106.4386043 29.8343274 177.0</gx:coord>
+          <gx:coord>106.4386074 29.8343326 179.0</gx:coord>
+          <gx:coord>106.4386074 29.8343326 179.0</gx:coord>
+          <gx:coord>106.4386074 29.8343326 179.0</gx:coord>
+          <gx:coord>106.4386074 29.8343326 179.0</gx:coord>
+          <gx:coord>106.4386907 29.8342934 180.0</gx:coord>
+          <gx:coord>106.4386907 29.8342934 180.0</gx:coord>
+          <gx:coord>106.4387681 29.8342232 180.0</gx:coord>
+          <gx:coord>106.4388706 29.834163 180.0</gx:coord>
+          <gx:coord>106.4389743 29.8341055 182.0</gx:coord>
+          <gx:coord>106.4390806 29.8340371 184.0</gx:coord>
+          <gx:coord>106.4391775 29.8339826 185.0</gx:coord>
+          <gx:coord>106.4392555 29.8339017 186.0</gx:coord>
+          <gx:coord>106.4393409 29.833818 188.0</gx:coord>
+          <gx:coord>106.4394226 29.8337367 190.0</gx:coord>
+          <gx:coord>106.439427 29.8336403 191.0</gx:coord>
+          <gx:coord>106.4394777 29.8335653 191.0</gx:coord>
+          <gx:coord>106.4395527 29.8335042 191.0</gx:coord>
+          <gx:coord>106.4396374 29.8334458 190.0</gx:coord>
+          <gx:coord>106.4397334 29.8334692 189.0</gx:coord>
+          <gx:coord>106.4398489 29.833511 188.0</gx:coord>
+          <gx:coord>106.4399592 29.8335024 186.0</gx:coord>
+          <gx:coord>106.4400499 29.8334324 185.0</gx:coord>
+          <gx:coord>106.440149 29.8333608 189.0</gx:coord>
+          <gx:coord>106.4402393 29.8332977 191.0</gx:coord>
+          <gx:coord>106.440345 29.8332316 193.0</gx:coord>
+          <gx:coord>106.4404306 29.8331651 196.0</gx:coord>
+          <gx:coord>106.440521 29.8330908 198.0</gx:coord>
+          <gx:coord>106.4406271 29.8330362 201.0</gx:coord>
+          <gx:coord>106.4407299 29.832993 200.0</gx:coord>
+          <gx:coord>106.4408255 29.8329436 202.0</gx:coord>
+          <gx:coord>106.4409228 29.8329047 201.0</gx:coord>
+          <gx:coord>106.4410211 29.8328537 199.0</gx:coord>
+          <gx:coord>106.4411056 29.8327826 197.0</gx:coord>
+          <gx:coord>106.4411709 29.8326908 196.0</gx:coord>
+          <gx:coord>106.4412409 29.8326408 194.0</gx:coord>
+          <gx:coord>106.4412705 29.832616 193.0</gx:coord>
+          <gx:coord>106.4412705 29.832616 193.0</gx:coord>
+          <gx:coord>106.4459449 29.8262189 173.0</gx:coord>
+          <when>2023-09-30T06:38:23Z</when>
+          <when>2023-09-30T06:39:26Z</when>
+          <when>2023-09-30T06:39:45Z</when>
+          <when>2023-09-30T06:39:49Z</when>
+          <when>2023-09-30T06:39:51Z</when>
+          <when>2023-09-30T06:40:05Z</when>
+          <when>2023-09-30T06:40:17Z</when>
+          <when>2023-09-30T06:40:19Z</when>
+          <when>2023-09-30T06:40:49Z</when>
+          <when>2023-09-30T06:41:37Z</when>
+          <when>2023-09-30T06:42:09Z</when>
+          <when>2023-09-30T06:42:29Z</when>
+          <when>2023-09-30T06:42:43Z</when>
+          <when>2023-09-30T06:42:51Z</when>
+          <when>2023-09-30T06:42:59Z</when>
+          <when>2023-09-30T06:43:07Z</when>
+          <when>2023-09-30T06:43:15Z</when>
+          <when>2023-09-30T06:43:23Z</when>
+          <when>2023-09-30T06:43:31Z</when>
+          <when>2023-09-30T06:43:39Z</when>
+          <when>2023-09-30T06:43:47Z</when>
+          <when>2023-09-30T06:43:55Z</when>
+          <when>2023-09-30T06:44:03Z</when>
+          <when>2023-09-30T06:44:11Z</when>
+          <when>2023-09-30T06:44:19Z</when>
+          <when>2023-09-30T06:44:27Z</when>
+          <when>2023-09-30T06:44:37Z</when>
+          <when>2023-09-30T06:44:45Z</when>
+          <when>2023-09-30T06:44:55Z</when>
+          <when>2023-09-30T06:45:03Z</when>
+          <when>2023-09-30T06:45:09Z</when>
+          <when>2023-09-30T06:45:17Z</when>
+          <when>2023-09-30T06:45:25Z</when>
+          <when>2023-09-30T06:45:33Z</when>
+          <when>2023-09-30T06:45:41Z</when>
+          <when>2023-09-30T06:45:49Z</when>
+          <when>2023-09-30T06:45:59Z</when>
+          <when>2023-09-30T06:46:07Z</when>
+          <when>2023-09-30T06:46:15Z</when>
+          <when>2023-09-30T06:46:23Z</when>
+          <when>2023-09-30T06:46:31Z</when>
+          <when>2023-09-30T06:46:37Z</when>
+          <when>2023-09-30T06:47:03Z</when>
+          <when>2023-09-30T06:47:07Z</when>
+          <when>2023-09-30T07:12:12Z</when>
+          <ExtendedData>
+            <Data name="GxTrackExtendedData">
+              <value>0.0,5.0;0.0,5.0;1.1,4.0;1.1,4.0;0.0,4.0;1.13,10.0;1.04,10.0;0.0,9.0;0.0,9.0;0.0,9.0;0.0,9.0;1.48,10.0;1.48,10.0;1.38,10.0;1.41,9.0;1.46,10.0;1.49,10.0;1.37,10.0;1.53,10.0;1.41,10.0;1.37,9.0;1.46,9.0;1.31,9.0;1.3,9.0;1.31,9.0;1.43,9.0;1.33,9.0;1.3,9.0;1.29,9.0;1.33,9.0;1.34,9.0;1.31,9.0;1.29,9.0;1.36,9.0;1.37,10.0;1.2,9.0;1.39,10.0;1.34,10.0;1.25,10.0;1.27,10.0;1.17,10.0;0.0,15.0;0.0,4.0;0.0,4.0;0.0,6.0;</value>
+            </Data>
+          </ExtendedData>
+        </gx:Track>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>
